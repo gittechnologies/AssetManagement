@@ -1,0 +1,147 @@
+/* Extra small devices (phones, 600px and down) */
+
+@media only screen and (max-width: 600px) {
+    .add-customer-ul li {
+        width: 100%;
+        overflow: hidden;
+    }
+    .add-lead-ul li {
+        width: 100%;
+        overflow: hidden;
+    }
+    #dynamicLi {
+        width: 100%;
+    }
+    .text-area {
+        width: 100% !important;
+        ;
+    }
+    .add-employee-ul li {
+        width: 100%;
+        overflow: hidden;
+    }
+    .add-vendor-ul li {
+        width: 100%;
+        overflow: hidden;
+    }
+    .create-assign-ul li {
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+
+@media only screen and (min-width: 600px) {
+    .add-customer-ul li {
+        width: 49.5%;
+        overflow: hidden;
+    }
+    .add-lead-ul li {
+        width: 49.5%;
+        overflow: hidden;
+    }
+    #dynamicLi {
+        width: 100%;
+    }
+    .add-employee-ul li {
+        width: 49.5%;
+        overflow: hidden;
+    }
+    .add-vendor-ul li {
+        width: 49.5%;
+        overflow: hidden;
+    }
+    .create-assign-ul li {
+        width: 49.5%;
+        overflow: hidden;
+    }
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+
+@media only screen and (min-width: 768px) {
+    .add-customer-ul li {
+        width: 33%;
+        overflow: hidden;
+    }
+    .add-lead-ul li {
+        width: 33%;
+        overflow: hidden;
+    }
+    #dynamicLi {
+        width: 100%;
+    }
+    .add-employee-ul li {
+        width: 33%;
+        overflow: hidden;
+    }
+    .add-vendor-ul li {
+        width: 33%;
+        overflow: hidden;
+    }
+    .create-assign-ul li {
+        width: 49.5%;
+        overflow: hidden;
+    }
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+
+@media only screen and (min-width: 992px) {
+    .add-customer-ul li {
+        width: 33%;
+        overflow: hidden;
+    }
+    .add-lead-ul li {
+        width: 33%;
+        overflow: hidden;
+    }
+    #dynamicLi {
+        width: 100%;
+    }
+    .add-employee-ul li {
+        width: 33%;
+        overflow: hidden;
+    }
+    .add-vendor-ul li {
+        width: 33%;
+        overflow: hidden;
+    }
+    .create-assign-ul li {
+        width: 49.5%;
+        overflow: hidden;
+    }
+}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+
+@media only screen and (min-width: 1200px) {
+    .add-customer-ul li {
+        width: 33%;
+        overflow: hidden;
+    }
+    .add-lead-ul li {
+        width: 33%;
+        overflow: hidden;
+    }
+    #dynamicLi {
+        width: 100%;
+    }
+    .add-employee-ul li {
+        width: 33%;
+        overflow: hidden;
+    }
+    .add-vendor-ul li {
+        width: 33%;
+        overflow: hidden;
+    }
+    .create-assign-ul li {
+        width: 49.5%;
+        overflow: hidden;
+    }
+}
