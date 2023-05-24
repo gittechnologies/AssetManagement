@@ -5,7 +5,7 @@
 	$v_property_id=$_POST['property_id'];
 	$v_p_name=$_POST['property_name'];
 	$v_p_type=$_POST['property_type'];
-	$v_owner_id=$_POST['owner_name'];
+	// $v_owner_id=$_POST['owner_name'];
 	$v_p_sub_type=0;
 	if ($v_p_type == 'R')
 	{
@@ -43,7 +43,7 @@
 		$v_open_parking = 0;
 	}
 
-$sql = "UPDATE det_property SET property_name='$v_p_name', property_type='$v_p_type', property_sub_type='$v_p_sub_type', owner_id='$v_owner_id', flat_no='$v_flatno', address='$v_address', landmark='$v_landmark',location='$v_location', state_id='$v_state', city_id='$v_city',pincode='$v_pincode',buildup_area='$v_buildup_area',carpet_area='$v_carpet_area',covered_parking='$v_covered_parking',open_parking='$v_open_parking',age_of_property='$v_age_of_property', elec_meter_no='$v_elec_meter_no', last_modification_date=CURRENT_TIMESTAMP(), Update_by = '$v_update_by' 
+$sql = "UPDATE det_property SET property_name='$v_p_name', property_type='$v_p_type', property_sub_type='$v_p_sub_type', flat_no='$v_flatno', address='$v_address', landmark='$v_landmark',location='$v_location', state_id='$v_state', city_id='$v_city',pincode='$v_pincode',buildup_area='$v_buildup_area',carpet_area='$v_carpet_area',covered_parking='$v_covered_parking',open_parking='$v_open_parking',age_of_property='$v_age_of_property', elec_meter_no='$v_elec_meter_no', last_modification_date=CURRENT_TIMESTAMP(), Update_by = '$v_update_by' 
 	WHERE property_id='$v_property_id' ";
 
  $query = $dbConn->prepare($sql);

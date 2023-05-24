@@ -357,7 +357,7 @@ onsubmit="return myfunction()">
 
                     <!----------Covered Parking------------->
 
-<li class="parking">
+<li class="parking <?php echo ($v_property_type == 'C') ?'parking-hide':'';?>">
  <div class="form-group">
   <label for="exampleInputEmail1">Covered Parking</label><br>
    <div id="div0">
@@ -390,7 +390,7 @@ onsubmit="return myfunction()">
 
                 <!----------Open Parking------------->
 
-<li class="parking">
+<li class="parking <?php echo ($v_property_type == 'C') ?'parking-hide':'';?>">
  <div class="form-group">
   <label for="exampleInputEmail1">Open Parking</label><br>
    <div id="div0">
@@ -421,7 +421,6 @@ onsubmit="return myfunction()">
      <span class="text-danger"></span>
  </div>
 </li>
-
 <li><input type="hidden"  name="status"  value="status"></li>
 <li><input type="hidden"  name="creation_date"  value="creation_date"></li>
 <li><input type="hidden"  name="last_modification_date" value="last_modification_date"></li>
@@ -445,28 +444,7 @@ onsubmit="return myfunction()">
 <script>
 $(document).ready(function(){
 
-$('#property_type').on('change', function(){
-        var id = $(this).val();
 
-        if (id == "C") {
-          $(".parking").hide();
-        } else {
-          $(".parking").show();
-        }
-
-        if(id){
-            $.ajax({
-                type:'POST',
-                url:'../ajaxData.php',
-                data:'prop_type_id='+id,
-                success:function(html){
-                    $('#p_subType').html(html);
-                }
-            }); 
-        }else{
-            $('#p_subType').html('<option value="">Select Property Type first</option>');
-        }
-    });
 
 $('#state').on('change', function(){
         var stateID = $(this).val();
@@ -486,6 +464,31 @@ $('#state').on('change', function(){
 
     
 });
+$(document).on('change','#property_type',function(){
+// $(').on('change', function(){
+        var id = $(this).val();
+        console.log(id)
+
+        $(".parking").toggleClass("parking-hide");
+        // if (id == "C") {
+        //   $(".parking").hide();
+        // } else {
+        //   $(".parking").show();
+        // }
+
+        if(id){
+            $.ajax({
+                type:'POST',
+                url:'../ajaxData.php',
+                data:'prop_type_id='+id,
+                success:function(html){
+                    $('#p_subType').html(html);
+                }
+            }); 
+        }else{
+            $('#p_subType').html('<option value="">Select Property Type first</option>');
+        }
+    });
 </script>
 
 <?php include '../footer.php';?> 

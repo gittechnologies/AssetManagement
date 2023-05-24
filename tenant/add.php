@@ -33,7 +33,7 @@ session_start();
 
 	//      <------------------------Alert---------------------->
 
- echo "<script>alert('Data successfully added!'); window.location='tenant.php'</script>";
+ echo "<script>alert('Data successfully added!'); window.location='manage.php'</script>";
 
 ?>
 

@@ -56,7 +56,7 @@ from det_owner o where o.owner_id =
 (select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_contact,
  DATE_FORMAT(r.rent_date, '%b-%Y') AS period, r.rent_amount, r.other_charges_desc, r.other_charges_amount, 
  r.gst_status, r.gst_amount, r.total_amount
- FROM asset_management.det_rent r where rent_id='$id'");
+ FROM det_rent r where rent_id='$id'");
 $result->execute();
 while($row = $result->fetch(PDO::FETCH_ASSOC))
 {

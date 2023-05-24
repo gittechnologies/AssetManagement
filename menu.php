@@ -181,12 +181,12 @@ echo ' '.$_SESSION["UserName"].'';
 
 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
  <div class="dropdown-divider"></div>
-  <a href="/pms/reset-password.php" class="dropdown-item">
+  <a href="/<?php echo FOLDER_NAME ?>/reset-password.php" class="dropdown-item">
    <i class="fa fa-lock  mr-2"></i>Reset Password
   </a>
 
 <div class="dropdown-divider"></div>
- <a href="/pms/logout.php" class="dropdown-item">
+ <a href="/<?php echo FOLDER_NAME ?>/logout.php" class="dropdown-item">
   <i class="fa fa-share-square mr-2"></i> Logout
  </a>
     </li>
@@ -205,7 +205,7 @@ echo ' '.$_SESSION["UserName"].'';
         <!----------Dashboard------------->
 
   <li class="nav-item menu-open">
-   <a href="/pms/dashboard/dashboard.php" class="nav-link">
+   <a href="/<?php echo FOLDER_NAME ?>/dashboard/dashboard.php" class="nav-link">
     <i class="fa fa-tachometer" aria-hidden="true"></i>
      <p> Dashboard </p>
    </a>
@@ -219,14 +219,14 @@ echo ' '.$_SESSION["UserName"].'';
 
 <ul class="nav nav-treeview">
  <li class="nav-item">
-  <a href="/pms/property/property.php" class="nav-link nav-tree active">
+  <a href="/<?php echo FOLDER_NAME ?>/property/property.php" class="nav-link nav-tree active">
    <i class="fa fa-circle-o" aria-hidden="true"></i>
     <p>Add Propert</p>
    </a>
  </li>
 
 <li class="nav-item">
- <a href="/pms/property/manage.php" class="nav-link nav-tree">
+ <a href="/<?php echo FOLDER_NAME ?>/property/manage.php" class="nav-link nav-tree">
   <i class="fa fa-circle-o" aria-hidden="true"></i>
    <p>Property Details</p>
  </a>
@@ -243,14 +243,14 @@ echo ' '.$_SESSION["UserName"].'';
 
 <ul class="nav nav-treeview">
  <li class="nav-item">
-  <a href="/pms/owner/owner.php" class="nav-link nav-tree active">
+  <a href="/<?php echo FOLDER_NAME ?>/owner/owner.php" class="nav-link nav-tree active">
    <i class="fa fa-circle-o" aria-hidden="true"></i>
     <p>Add Owner</p>
    </a>
  </li>
 
 <li class="nav-item">
- <a href="/pms/owner/manage.php" class="nav-link nav-tree">
+ <a href="/<?php echo FOLDER_NAME ?>/owner/manage.php" class="nav-link nav-tree">
   <i class="fa fa-circle-o" aria-hidden="true"></i>
    <p>Owner Details</p>
  </a>
@@ -265,14 +265,14 @@ echo ' '.$_SESSION["UserName"].'';
  </a>
  <ul class="nav nav-treeview">
  <li class="nav-item">
-  <a href="/pms/tenant/tenant.php" class="nav-link nav-tree active">
+  <a href="/<?php echo FOLDER_NAME ?>/tenant/tenant.php" class="nav-link nav-tree active">
    <i class="fa fa-circle-o" aria-hidden="true"></i>
     <p>Add Tenant</p>
    </a>
  </li>
 
 <li class="nav-item">
- <a href="/pms/tenant/manage.php" class="nav-link nav-tree">
+ <a href="/<?php echo FOLDER_NAME ?>/tenant/manage.php" class="nav-link nav-tree">
   <i class="fa fa-circle-o" aria-hidden="true"></i>
    <p>Tenant Details</p>
  </a>
@@ -290,14 +290,14 @@ echo ' '.$_SESSION["UserName"].'';
  </a>
  <ul class="nav nav-treeview">
  <li class="nav-item">
-  <a href="/pms/manager/manager.php" class="nav-link nav-tree active">
+  <a href="/<?php echo FOLDER_NAME ?>/manager/manager.php" class="nav-link nav-tree active">
    <i class="fa fa-circle-o" aria-hidden="true"></i>
     <p>Add Commission Agent</p>
    </a>
  </li>
 
 <li class="nav-item">
- <a href="/pms/manager/manage.php" class="nav-link nav-tree">
+ <a href="/<?php echo FOLDER_NAME ?>/manager/manage.php" class="nav-link nav-tree">
   <i class="fa fa-circle-o" aria-hidden="true"></i>
    <p>Commission Agent Details</p>
  </a>
@@ -313,14 +313,14 @@ echo ' '.$_SESSION["UserName"].'';
  </a>
  <ul class="nav nav-treeview">
  <li class="nav-item">
-  <a href="/pms/agreement/agreement.php" class="nav-link nav-tree active">
+  <a href="/<?php echo FOLDER_NAME ?>/agreement/agreement.php" class="nav-link nav-tree active">
    <i class="fa fa-circle-o" aria-hidden="true"></i>
     <p>Add Agreement</p>
    </a>
  </li>
 
 <li class="nav-item">
- <a href="/pms/agreement/manage.php" class="nav-link nav-tree">
+ <a href="/<?php echo FOLDER_NAME ?>/agreement/manage.php" class="nav-link nav-tree">
   <i class="fa fa-circle-o" aria-hidden="true"></i>
    <p>Agreement Details</p>
  </a>
@@ -336,14 +336,14 @@ echo ' '.$_SESSION["UserName"].'';
  </a>
  <ul class="nav nav-treeview">
  <li class="nav-item">
-  <a href="/pms/rent/rent.php" class="nav-link nav-tree active">
+  <a href="/<?php echo FOLDER_NAME ?>/rent/rent.php" class="nav-link nav-tree active">
    <i class="fa fa-circle-o" aria-hidden="true"></i>
     <p>Add Rent</p>
    </a>
  </li>
 
 <li class="nav-item">
- <a href="/pms/rent/manage.php" class="nav-link nav-tree">
+ <a href="/<?php echo FOLDER_NAME ?>/rent/manage.php" class="nav-link nav-tree">
   <i class="fa fa-circle-o" aria-hidden="true"></i>
    <p>Rent Details</p>
  </a>
@@ -363,21 +363,21 @@ echo ' '.$_SESSION["UserName"].'';
 
 <ul class="nav nav-treeview">
  <li class="nav-item">
-  <a href="/pms/reports/propertyReports.php" class="nav-link nav-tree active">
+  <a href="/<?php echo FOLDER_NAME ?>/reports/propertyReports.php" class="nav-link nav-tree active">
    <i class="fa fa-circle-o" aria-hidden="true"></i>
     <p>Property Report</p>
    </a>
  </li>
 
 <li class="nav-item">
- <a href="/pms/reports/tenantReports.php" class="nav-link nav-tree">
+ <a href="/<?php echo FOLDER_NAME ?>/reports/tenantReports.php" class="nav-link nav-tree">
   <i class="fa fa-circle-o" aria-hidden="true"></i>
    <p>Tenant Report</p>
  </a>
 </li>
 
 <li class="nav-item">
- <a href="/pms/reports/agreementReports.php" class="nav-link nav-tree">
+ <a href="/<?php echo FOLDER_NAME ?>/reports/agreementReports.php" class="nav-link nav-tree">
   <i class="fa fa-circle-o" aria-hidden="true"></i>
    <p>Agreement Report</p>
  </a>

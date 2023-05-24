@@ -370,7 +370,8 @@ onsubmit="return myfunction()">
 </li>
 
                     <!----------Covered Parking------------->
-
+<?php if ($v_property_type == "R") { 
+  ?>
 <li>
  <div class="form-group">
   <label for="exampleInputEmail1">Covered Parking</label><br>
@@ -426,7 +427,7 @@ onsubmit="return myfunction()">
      <span class="text-danger"></span>
  </div>
 </li>
-
+<?php } ?>
 </ul>
  <div class="card-footer">
 <button type="button" name="close" id="close-button" class="btn btn-primary">Close</button>

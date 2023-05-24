@@ -22,7 +22,7 @@ session_start();
 
      // <------------------- Insert Query------------------------->
 
-	$sql = "INSERT INTO det_manager (manager_name,address,location,state,city,pincode,contact_no,email,gst_status,gst_no,company_name,status,creation_date,last_modification_date,Added_by,Updated_by) VALUES ('$v_manager_name','$v_address','$v_location','$v_state','$v_city','$v_pincode','$v_contact_no','$v_email','$v_status_gst','$v_gst_no','$v_company_name','$v_status',CURRENT_TIMESTAMP(),'$v_last_modification_date','$v_AddedBy','$v_UpdatedBy')";
+	$sql = "INSERT INTO det_manager (manager_name,address,location,state_id,city_id,pincode,contact_number,email_id,gst_status,gst_no,company_name,status,creation_date,last_modification_date,Added_by,Updated_by) VALUES ('$v_manager_name','$v_address','$v_location','$v_state','$v_city','$v_pincode','$v_contact_no','$v_email','$v_status_gst','$v_gst_no','$v_company_name','$v_status',CURRENT_TIMESTAMP(),'$v_last_modification_date','$v_AddedBy','$v_UpdatedBy')";
     $query = $dbConn->prepare($sql);
 	$dbConn->exec($sql);
 

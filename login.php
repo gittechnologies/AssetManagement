@@ -1,7 +1,9 @@
 <?php  
- 
+
 session_start();  
 include_once ('conn.php');
+include_once ('path.php');
+
 if(isset($_POST["login"]))  
 {  
 if(empty($_POST["Email"]) || empty($_POST["Password"]))  
@@ -21,7 +23,7 @@ if($row = $result->fetch(PDO::FETCH_ASSOC))
    $_SESSION["Email"] = $row['Email']; 
    $_SESSION["id"] = $row['id']; 
    $_SESSION["UserName"] = $row['UserName']; 
-   header("location: /pms/dashboard/dashboard.php");  
+   header("location: /".FOLDER_NAME."/dashboard/dashboard.php");  
 }
 else  
 {  

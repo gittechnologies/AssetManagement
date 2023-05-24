@@ -11,7 +11,7 @@ if($row = $sqlInv->fetch(PDO::FETCH_ASSOC))
 
     }else{
 $v_status='InActive';
-$sql = "UPDATE det_manager SET status='$v_status' WHERE Id='$id' ";
+$sql = "UPDATE det_manager SET status='$v_status' WHERE manager_id ='$id' ";
 $query = $dbConn->prepare($sql);
 $dbConn->exec($sql);
 }

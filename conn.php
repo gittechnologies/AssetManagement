@@ -1,7 +1,7 @@
 <?php
 
 $databaseHost = 'localhost';
-$databaseName = 'asset_management';
+$databaseName = 'pms';
 $databaseUsername = 'git_assets';
 $password = 'git_assets@321';
 $message="";

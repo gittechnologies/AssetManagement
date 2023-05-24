@@ -329,7 +329,7 @@ onsubmit="return myfunction()" >
     id="gstStatus"/>
   </label>
    <input type="text" class="form-control form-control-sm" placeholder="GST Amount" 
-   id="gstAmt" name="gstAmt" value="">
+   id="gstAmt" name="gstAmt" value="" readonly>
     <span class="text-danger"></span>
  </div>
 </li>                   

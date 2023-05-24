@@ -320,3 +320,7 @@ legend.scheduler-border {
 .menu_card {
     background: #03376A;
 }
+
+.add-lead-ul .parking-hide {
+    display: none;
+}
