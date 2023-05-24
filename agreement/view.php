@@ -1,4 +1,6 @@
- <?php define('URL', 'http://localhost/pms/'); ?>
+ <?php 
+  include_once ('../path.php');
+ ?>
  <!DOCTYPE html>
  <html>
 <?php
