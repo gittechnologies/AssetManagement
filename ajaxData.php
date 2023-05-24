@@ -98,7 +98,7 @@ if(!empty($_POST["owner_property_id"])){
     $property_id = $_POST["owner_property_id"];
     
     
-    $result = $dbConn->query("SELECT op.id ,o.owner_id,o.owner_name,o.city_id ,op.property_id  FROM det_owner_property op JOIN det_owner o ON op.owner_id = o.owner_id  where op.property_id = '$property_id'");
+    $result = $dbConn->query("SELECT op.id ,o.owner_id,o.owner_name,op.unitNo ,op.property_id  FROM det_owner_property op JOIN det_owner o ON op.owner_id = o.owner_id  where op.property_id = '$property_id'");
         $result->execute();
         // $row = $result->fetch(PDO::FETCH_ASSOC);
          
@@ -106,7 +106,7 @@ if(!empty($_POST["owner_property_id"])){
         if($result->rowCount() > 0){ 
             echo '<option value="">Select Owner Name</option>'; 
             while($row = $result->fetch(PDO::FETCH_ASSOC)){  
-                echo '<option value="'.$row['owner_id'].'">'.$row['owner_name'].' '.$row['city_id'].'</option>'; 
+                echo '<option value="'.$row['owner_id'].'">'.$row['owner_name'].' - '.$row['unitNo'].'</option>'; 
             } 
         }else{ 
             echo 'false';

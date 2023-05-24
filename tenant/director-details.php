@@ -80,7 +80,7 @@ div class.content-wrapper
 <li>
  <div class="form-group">
   <label>Director Name <span>* </span><span class="nameError" ></span></label>
-   <input type="text" class="form-control form-control-sm" placeholder="Build-Up Area" name="directorName" id="directorName" onkeyup="this.value= this.value.replace(/[^'a-zA-Z0-9]+$/, '')" required>
+   <input type="text" class="form-control form-control-sm" placeholder="Director Name" name="directorName" id="directorName" onkeyup="this.value= this.value.replace(/[^'a-zA-Z0-9]+$/, '')" required>
   <span class="text-danger"></span>
  </div>
 </li>

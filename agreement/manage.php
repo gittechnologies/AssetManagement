@@ -126,7 +126,7 @@ FROM det_agreement a where status ='Active' ORDER BY agreement_id desc;
    
    <?php
         echo "<td><input type='radio' name='property' id=".$row['agreement_id']." value=".$row['agreement_id']." ' onclick='showCount()'/></td>";
-        echo "<td>".$row['property_name']."</td>";
+        echo "<td class='w-25'>".$row['property_name']."</td>";
         echo "<td>".$row['tenant_name']."</td>";
         echo "<td>".$row['property_type']."</td>";
         //echo "<td>".$row['property_location'].", ".$row['city']."</td>";

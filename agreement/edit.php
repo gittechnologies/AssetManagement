@@ -9,14 +9,15 @@
  include_once ('../conn.php');
   
 $id = $_GET['id'];
-$result = $dbConn->query("SELECT agreement_id, property_id, tenant_id, agreement_date, agreement_from, agreement_to, possession_date, locking_period, deposit_amount, 
-  deposit_date, rent_per_month, gst_applicable, gst_amount, maintainance_charges, manager_id, charges_paidby_tenant, status FROM det_agreement 
+$result = $dbConn->query("SELECT agreement_id, property_id,owner_id,brokerage, tenant_id, agreement_date, agreement_from, agreement_to, possession_date, locking_period, deposit_amount, 
+  deposit_date, rent_per_month, gst_applicable, gst_amount, maintainance_charges, manager_id, charges_paidby_tenant,	loading_charges,amc_tenant,remark, status FROM det_agreement 
   WHERE agreement_id='$id' ");
 $result->execute();
 while($row = $result->fetch(PDO::FETCH_ASSOC))
 {
     $v_agreement_id=$row['agreement_id'];
     $v_property_name=$row['property_id'];
+    $v_owner_id=$row['owner_id'];
     $v_tenant_id=$row['tenant_id'];
     
     $v_agreement_date=$row['agreement_date'];
@@ -34,13 +35,18 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
 
     $v_maintainance_charges=$row['maintainance_charges'];
     $v_manager_id=$row['manager_id'];
+    $v_brokerage=$row['brokerage'];
+    $v_loading_charges=$row['loading_charges'];
+    $v_amc_tenant=$row['amc_tenant'];
+    $v_remark=$row['remark'];
 
-   $v_charges=$row['charges_paidby_tenant'];     
+
+
+  //  $v_charges=$row['charges_paidby_tenant'];     
     //$v_other_charges=$row['other_charges_desc'];
     //$v_charges=$row['oth_charges_amt'];
     
 }
-
 ?>
 
 
@@ -93,32 +99,52 @@ onsubmit="return myfunction()" >
 
                  <!----------Property Name------------->
 
+
+
 <li>
  <div class="form-group">
   <label>Property Name<span>*</span></label>
-    <select class="form-control form-control-sm" id = "propertyName" 
-    name="propertyName" required>
-     <option value="0"> Select Property </option>
-      <?php 
-       $result = $dbConn->query("SELECT property_id, concat(property_name,' - ',flat_no,', ', city_id, ' - ',pincode) as property_name  FROM det_property  ");
-       $result->execute();
+   <select class="form-control form-control-sm" id ="propertyName" name="propertyName" required>
+    <option value="0"> Select Property </option>
+     <?php 
+     $result = $dbConn->query("SELECT dp.property_id, dp.property_name, dp.flat_no, dp.city_id, dp.pincode ,c.name FROM det_property dp join cities c on dp.city_id = c.id ");
+      // $result = $dbConn->query("SELECT p.property_id, p.property_name,p.flat_no, p.city_id,p.pincode, c.name FROM det_property p join cities c on p.city_id=c.id WHERE NOT EXISTS (SELECT property_id FROM det_agreement AS a WHERE a.property_id=p.property_id AND a.status='Active')");
+      $result->execute();
         while($row = $result->fetch(PDO::FETCH_ASSOC))
-         {
-          $pid=$row['property_id'];
-          $pname=$row['property_name'];
-        ?>
-     <option value="<?php echo $pid;?>" 
-      <?php      
-        if($pid=="$v_property_name")  
         {
-         echo " selected";
-        }
-      ?>
-      >
-      <?php echo $pname;?></option>
-       <?php  }?>
-    </select>  
-  </div>
+         $propertyName=$row['property_name'];
+         $id=$row['property_id'];   
+     ?>
+    <option value="<?php echo $id;?>" <?php  echo ($id == $v_property_name )?" selected":'' ?>>
+                   <?php echo $propertyName . " - " . $row['flat_no'] . " - " . $row['name']." - ".$row['pincode'];?>
+    </option>
+     <?php  }
+     ?>
+   </select>  
+ </div>
+</li>
+
+                      <!----------owner Name------------->
+
+<li>
+ <div class="form-group">
+  <label>Owner Name<span>*</span></label>
+   <select class="form-control form-control-sm" id="ownerName" name="ownerName" required>
+    <option value="0"> Select Owner </option>
+     <?php 
+     $result = $dbConn->query("SELECT op.id ,o.owner_id,o.owner_name,op.unitNo ,op.property_id  FROM det_owner_property op JOIN det_owner o ON op.owner_id = o.owner_id  where op.property_id = '$v_property_name'");
+      // $result = $dbConn->query("SELECT property_id, concat(property_name,' - ',flat_no,', ', unitNo, ' - ',pincode) as property_name FROM det_property AS p WHERE NOT EXISTS (SELECT property_id  FROM det_agreement AS a WHERE a.property_id=p.property_id AND a.status='Active')");
+      $result->execute();
+        while($row = $result->fetch(PDO::FETCH_ASSOC))
+        {
+     ?>
+
+    <option value="<?php echo  $row['owner_id']?>" <?php  echo ($v_owner_id == $row['owner_id'] )?" selected":'' ?>><?php echo $row['owner_name'].' - '.$row['unitNo']?>
+    </option> 
+     <?php  }
+     ?>
+   </select>  
+ </div>
 </li>
 
                       <!----------Tenant Name------------->
@@ -153,38 +179,6 @@ onsubmit="return myfunction()" >
   </div>
 </li>
 
-                 <!----------Owner Name------------->
-
-<li>
- <div class="form-group">
-  <label>Owner Name<span>*</span></label>
-    <select class="form-control form-control-sm" id = "OwnerName" 
-    name="OwnerName" required>
-     <option value="0"> Select Property </option>
-      <?php 
-       $result = $dbConn->query("SELECT op.id ,o.owner_id,o.owner_name,o.city_id ,op.property_id  FROM det_owner_property op JOIN det_owner o ON op.owner_id = o.owner_id  where op.property_id = '$v_property_name'");
-      //  print_r($result);
-       $result->execute();
-        while($row = $result->fetch(PDO::FETCH_ASSOC))
-         {
-          $pid=$row['property_id'];
-          // $pname=$row['property_name'];
-          
-        ?>
-        <option value="<?php echo $row['owner_id']?>"><?php echo $row['owner_name'].' '.$row['city_id']?></option>
-     <!-- <option value="<?php echo $pid;?>" 
-      <?php      
-        // if($pid=="$v_property_name")  
-        // {
-        //  echo " selected";
-        // }
-      ?> -->
-      <!-- >
-      <?php echo $pname;?></option> -->
-       <?php  }?>
-    </select>  
-  </div>
-</li>
 
 <!----------Agreement Date------------->
 
@@ -360,10 +354,10 @@ onsubmit="return myfunction()" >
   <div class="appending_div row">
    <div class="col-md-6">
      <input type="text" name="otherChargesDesc" class="form-control form-control-sm" 
-     placeholder="Charges Description" value="<?php echo $v_other_charges;?>">     
+     placeholder="Charges Description" value="<?php //echo $v_other_charges;?>">     
   </div>
    <div class="col-md-6">
-    <input type="text" name="otherChargesAmt" class="form-control form-control-sm" placeholder="Charges Amount" value="<?php echo $v_charges;?>" onkeypress="return /[0-9]/i.test(event.key)"> 
+    <input type="text" name="otherChargesAmt" class="form-control form-control-sm" placeholder="Charges Amount" value="<?php// echo $v_charges;?>" onkeypress="return /[0-9]/i.test(event.key)"> 
    </div>
  </div>
 </div>
@@ -382,6 +376,37 @@ onsubmit="return myfunction()" >
    <button type="button" name="rentdetails" id="rentdetails" class="btn btn-success" >
    View/ Update Rents</button>
 </li>-->
+
+                   <!----------Loading/Unloading charges------------->
+
+<li>
+ <div class="form-group">
+  <label>Loading/Unloading Charges </label>
+   <input type="text" class="form-control form-control-sm" placeholder="Loading/Unloading charges" name="loadingCharges" onkeypress="return /[0-9]/i.test(event.key)" value="<?php echo $v_loading_charges;?>">
+    <span class="text-danger"></span>
+ </div>
+</li>
+
+                      <!----------AMC-Tenant------------->
+
+<li>
+   <div class="form-group">
+  <label>AMC-Tenant<span>*</span></label>
+   <input type="text" class="form-control form-control-sm" placeholder="AMC-Tenant" name="AmcTenant" onkeyup="this.value= this.value.replace(/[^'a-zA-Z0-9]+$/, '')" value="<?php echo $v_amc_tenant;?>" required>
+    <span class="text-danger"></span>
+ </div>
+</li>
+
+                        <!----------Remark------------->
+
+<li>
+ <div class="form-group">
+  <label>Remark</label>
+   <input type="text" class="form-control form-control-sm" placeholder="Remark" name="remark" value="<?php echo $v_remark;?>">
+    <span class="text-danger"></span>
+ </div>
+</li>
+
 </ul>
 </div>
 
@@ -443,7 +468,34 @@ onsubmit="return myfunction()" >
           
       });
 
+
 });
 
+$(document).on("change","#propertyName",function(){
+  // $("#propertyName").on('change', function(){
+    console.log("list item selected");
+    var property_id = $(this).val();
 
+    if(property_id){
+        $.ajax({
+            type:'POST',
+            url:'../ajaxData.php',
+            data:'owner_property_id='+property_id,
+            success:function(html){
+
+              if (html.trim() ==="false") {
+                alert("Please add owner First");
+                document.getElementById('propertyName').value= " Select Property ";
+                window.location='../property/add-owner.php?id='+property_id;
+              } else {
+                console.log(html);
+
+                $('#ownerName').html(html);
+              }
+            }
+        }); 
+    }else{
+        $('#ownerName').html('<option value="">Select Property first</option>'); 
+    }
+  });
 </script>

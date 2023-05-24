@@ -152,15 +152,15 @@ onsubmit="return myfunction()" >
    <select class="form-control form-control-sm" id = "propertyName" name="propertyName" required>
     <option value="0"> Select Property </option>
      <?php 
-      $result = $dbConn->query("SELECT property_id, concat(property_name,' - ',flat_no,', ', city_id, ' - ',pincode) as property_name FROM det_property AS p WHERE NOT EXISTS (SELECT property_id  FROM det_agreement AS a WHERE a.property_id=p.property_id AND a.status='Active')");
+      $result = $dbConn->query("SELECT p.property_id, p.property_name,p.flat_no, p.city_id,p.pincode, c.name FROM det_property p join cities c on p.city_id=c.id WHERE NOT EXISTS (SELECT property_id FROM det_agreement AS a WHERE a.property_id=p.property_id AND a.status='Active')");
       $result->execute();
         while($row = $result->fetch(PDO::FETCH_ASSOC))
         {
          $propertyName=$row['property_name'];
          $id=$row['property_id'];   
      ?>
-    <option value="<?php echo $id;?>">
-                   <?php echo $propertyName;?>
+   <option value="<?php echo $id;?>"><?php echo $propertyName . " - " . $row['flat_no'] . " - " . $row['name']." - ".$row['pincode'];?>
+    </option>
     </option>
      <?php  }
      ?>
