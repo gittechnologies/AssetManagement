@@ -63,7 +63,7 @@
       <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-                <a href="javascript:" onclick="addOwner();" title="Add Owner" data-toggle="modal" data-target="#owner" class="float-right btn btn-primary btn-sm" style="margin:-15px 4px 4px 4px;"><i class="fa fa-plus"></i> Add Owner</a>
+                <a href="javascript:" onclick="addOwner();" title="Unit Details" data-toggle="modal" data-target="#owner" class="float-right btn btn-primary btn-sm" style="margin:-15px 4px 4px 4px;"><i class="fa fa-plus"></i> Unit Details</a>
                 
                 <a href="javascript:" onclick="addAction();" data-toggle="modal" data-target="#add-property" class="float-right btn btn-primary btn-sm" style="margin:-15px 4px 4px 4px;"><i class="fa fa-plus"></i> Add Property</a>              
             </div>

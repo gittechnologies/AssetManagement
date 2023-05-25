@@ -332,20 +332,20 @@ echo ' '.$_SESSION["UserName"].'';
 <li class="nav-item menu-is-opening">
  <a href="#" class="nav-link active ">
   <i class="nav-icon fa fa-rupee"></i>
-   <p>Rent<i class="fa fa-angle-left right"></i></p>
+   <p>Rental Payment<i class="fa fa-angle-left right"></i></p>
  </a>
  <ul class="nav nav-treeview">
  <li class="nav-item">
   <a href="/<?php echo FOLDER_NAME ?>/rent/rent.php" class="nav-link nav-tree active">
    <i class="fa fa-circle-o" aria-hidden="true"></i>
-    <p>Add Rent</p>
+    <p>Rent Payment</p>
    </a>
  </li>
 
 <li class="nav-item">
  <a href="/<?php echo FOLDER_NAME ?>/rent/manage.php" class="nav-link nav-tree">
   <i class="fa fa-circle-o" aria-hidden="true"></i>
-   <p>Rent Details</p>
+   <p>Payment Details</p>
  </a>
 </li>
 </ul>
