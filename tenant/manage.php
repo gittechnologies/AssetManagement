@@ -65,7 +65,7 @@
 <div class="card-body">
     <div class="row">
             <div class="col-lg-12">
-                <a href="javascript:" onclick="addDirectors();" title="Add Directors" data-toggle="modal" data-target="#directors" class="float-right btn btn-primary btn-sm" style="margin:-15px 4px 4px 4px;"><i class="fa fa-plus"></i> Add Directors</a>
+                <a href="javascript:" onclick="addDirectors();" title="Add Directors" data-toggle="modal" data-target="#directors" id="directors-btn" class="float-right btn btn-primary btn-sm" style="margin:-15px 4px 4px 4px;"><i class="fa fa-plus"></i> Add Directors</a>
                 <a href="javascript:" onclick="addAction();" data-toggle="modal" data-target="#add-tenant" class="float-right btn btn-primary btn-sm" style="margin:-15px 4px 4px 4px;"><i class="fa fa-plus"></i> Add Tenant</a>              
             </div>
         </div>
@@ -74,6 +74,7 @@
  <thead>
   <tr>
     <th scope="col">#</th>
+    <th scope="col">Tenant Type</th>
     <th scope="col">Tenant Name</th>
     <th scope="col">City</th>
     <th scope="col">Contact Number</th> 
@@ -83,17 +84,25 @@
   </thead>
 <tbody>
 <?php   
-  $result = $dbConn->query("SELECT t.tenant_id, t.tenant_name, 
+  $result = $dbConn->query("SELECT t.tenant_id, t.tenant_name, t.tenantType,
 (select c.name from cities c where c.id = t.city_id) as city, t.contact_number, t.email_id 
 FROM det_tenant t where status = 'Active'");
   $result->execute();
-  while($row = $result->fetch(PDO::FETCH_ASSOC)) {    
+  while($row = $result->fetch(PDO::FETCH_ASSOC)) {   
+    $tenantType = '';
+    if ($row['tenantType']=='I') {
+        $tenantType = 'Individual';
+    }   elseif ($row['tenantType']=='NI')
+    {
+        $tenantType = 'Non Individual'; 
+    }
 ?>
-<tr>
+<tr class="tenant-row">
     
  
 <?php
     echo "<td><input type='radio' name='tenant_id' id=".$row['tenant_id']." value=".$row['tenant_id']." '/></td>";
+    echo "<td class='tenant-type'>".$tenantType."</td>";
     echo "<td>".$row['tenant_name']."</td>";
     echo "<td>".$row['city']."</td>";
     echo "<td>".$row['contact_number']."</td>";
@@ -211,15 +220,34 @@ function addDirectors()
     
     let id = $('input[name="tenant_id"]:checked').val();
     if(id != null || id =='')
-    {
-        var url = 'director-details.php?id='+encodeURIComponent(id);
-        window.location = url;
+    {   
+        let tenant_type = $('#tenant-active .tenant-type').text();
+        console.log(tenant_type);
+
+        if (tenant_type == 'Non Individual')  {
+            var url = 'director-details.php?id='+encodeURIComponent(id);
+            window.location = url;
+        }   else {
+            alert("This applicable only for Non Individual tenant type");
+        }
     }
     else
     {
         alert("Please select one of the tenant!");
     }
 }
+
+$(document).on('change','input[name="tenant_id"]',function (){
+    $('#manageTenant .tenant-row').removeAttr('id');
+    $("#directors-btn").removeClass("disabled");
+
+    $(this).closest('tr').attr('id', 'tenant-active');
+    let tenant_type = $('#tenant-active .tenant-type').text();
+
+    if (tenant_type != 'Non Individual')  {
+        $("#directors-btn").addClass("disabled");
+    }   
+});
 
 </script>  
 

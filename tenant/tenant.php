@@ -61,6 +61,21 @@
  </div>
 </li>
 
+                    <!----------Tenant Type------------->
+<li>
+ <div class="form-group">
+  <label>Tenant Type <span>*</span></label><br>
+
+<div id="div0">
+    <select class="form-control form-control-sm" id="tenantType" name="tenantType" required>
+     <option value=""> Select Tenant Type </option>
+     <option value="I">Individual</option>
+      <option value="NI">Non Individual</option>
+    </select>  
+  </div>
+ </div> 
+</li>
+
                     <!----------Gender------------->
 <li>
  <div class="form-group">
@@ -189,7 +204,7 @@
 </li>
 
                     <!----------Power Of Attorney------------->
-<li>
+<li id="power_of_attorney">
  <div class="form-group">
   <label>Power Of Attorney</label><br>
 
@@ -288,38 +303,47 @@ $('#state').on('change', function(){
         }
     });
 
+    $('#tenantType').on('change', function(){
+    var id = $(this).val();
+        console.log(id);
+    if (id == "NI") {
+        $("#power_of_attorney").hide();
+    } else {
+        $("#power_of_attorney").show();
+    }
+    });
     
 });
 
 
 $(document).ready(function(){
-$("#gstStatus").click(function (){
-     if ($(this).is(":checked")){
+    $("#gstStatus").click(function (){
+        if ($(this).is(":checked")){
 
-        $("#lblGST").show();
-        $("#gstNo").show();
-        $("#gstNo").focus();
-        $("#gstNo").attr('required',true);
+            $("#lblGST").show();
+            $("#gstNo").show();
+            $("#gstNo").focus();
+            $("#gstNo").attr('required',true);
 
-        $("#company").show();
-        $("#companyName").show();
+            $("#company").show();
+            $("#companyName").show();
 
-        $("#company_email").show();
-        $("#companyEmail").show();
-    }
-    else{
-        $("#lblGST").hide();
-         $("#gstNo").hide();
-          $("#gstNo").removeAttr("required");
+            $("#company_email").show();
+            $("#companyEmail").show();
+        }
+        else{
+            $("#lblGST").hide();
+            $("#gstNo").hide();
+            $("#gstNo").removeAttr("required");
 
-          $("#company").hide();
-        $("#companyName").hide();
+            $("#company").hide();
+            $("#companyName").hide();
 
-        $("#company_email").hide();
-        $("#companyEmail").hide();
-    }
+            $("#company_email").hide();
+            $("#companyEmail").hide();
+        }
 
-});
+    });
 });
 
 </script>

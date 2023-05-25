@@ -11,7 +11,16 @@
  $id=$_GET['id'];
 
  //echo "<script>alert(' $id')</script>";
+ $result = $dbConn->query("SELECT t.tenantType FROM det_tenant t WHERE t.tenant_id='$id'");
+ $result->execute();
+ while($row = $result->fetch(PDO::FETCH_ASSOC))
+ {
+	$v_tenant_type=$row['tenantType'];
+ }
 
+ if ($v_tenant_type != 'NI') {
+	header("location: manage.php");
+ }
  ?>
 
 <style>

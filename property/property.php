@@ -335,27 +335,27 @@
 $(document).ready(function(){
 
 $('#prop_type').on('change', function(){
-        var id = $(this).val();
-        console.log(id);
-        if (id == "C") {
-          $(".parking").hide();
-        } else {
-          $(".parking").show();
-        }
+  var id = $(this).val();
 
-        if(id){
-            $.ajax({
-                type:'POST',
-                url:'../ajaxData.php',
-                data:'prop_type_id='+id,
-                success:function(html){
-                    $('#p_subType').html(html);
-                }
-            }); 
-        }else{
-            $('#p_subType').html('<option value="">Select Property Type first</option>');
-        }
-    });
+  if (id == "C") {
+    $(".parking").hide();
+  } else {
+    $(".parking").show();
+  }
+
+  if(id){
+      $.ajax({
+          type:'POST',
+          url:'../ajaxData.php',
+          data:'prop_type_id='+id,
+          success:function(html){
+              $('#p_subType').html(html);
+          }
+      }); 
+  }else{
+      $('#p_subType').html('<option value="">Select Property Type first</option>');
+  }
+});
 
 $('#state').on('change', function(){
   var stateID = $(this).val();

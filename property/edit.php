@@ -357,7 +357,7 @@ onsubmit="return myfunction()">
 
                     <!----------Covered Parking------------->
 
-<li class="parking <?php echo ($v_property_type == 'C') ?'parking-hide':'';?>">
+<li class="parking <?php echo ($v_property_type == 'C') ?'hide':'';?>">
  <div class="form-group">
   <label for="exampleInputEmail1">Covered Parking</label><br>
    <div id="div0">
@@ -390,7 +390,7 @@ onsubmit="return myfunction()">
 
                 <!----------Open Parking------------->
 
-<li class="parking <?php echo ($v_property_type == 'C') ?'parking-hide':'';?>">
+<li class="parking <?php echo ($v_property_type == 'C') ?'hide':'';?>">
  <div class="form-group">
   <label for="exampleInputEmail1">Open Parking</label><br>
    <div id="div0">
@@ -465,30 +465,23 @@ $('#state').on('change', function(){
     
 });
 $(document).on('change','#property_type',function(){
-// $(').on('change', function(){
-        var id = $(this).val();
-        console.log(id)
+    var id = $(this).val();
 
-        $(".parking").toggleClass("parking-hide");
-        // if (id == "C") {
-        //   $(".parking").hide();
-        // } else {
-        //   $(".parking").show();
-        // }
+    $(".parking").toggleClass("hide");
 
-        if(id){
-            $.ajax({
-                type:'POST',
-                url:'../ajaxData.php',
-                data:'prop_type_id='+id,
-                success:function(html){
-                    $('#p_subType').html(html);
-                }
-            }); 
-        }else{
-            $('#p_subType').html('<option value="">Select Property Type first</option>');
-        }
-    });
+    if(id){
+        $.ajax({
+            type:'POST',
+            url:'../ajaxData.php',
+            data:'prop_type_id='+id,
+            success:function(html){
+                $('#p_subType').html(html);
+            }
+        }); 
+    }else{
+        $('#p_subType').html('<option value="">Select Property Type first</option>');
+    }
+});
 </script>
 
 <?php include '../footer.php';?> 

@@ -9,13 +9,14 @@
  include_once ('../conn.php');
  
  $id = $_GET['id'];
-$result = $dbConn->query("SELECT t.tenant_id, t.tenant_name, t.gender, t.dob, t.address, t.state_id,
+$result = $dbConn->query("SELECT t.tenant_id, t.tenant_name, t.gender,t.tenantType, t.dob, t.address, t.state_id,
 t.city_id, t.pincode, t.contact_number, t.email_id, t.pan_no, t.occupation, t.gst_status, t.gst_no, t.company_name, t.company_email,t.power_of_attorney
 FROM det_tenant t WHERE t.tenant_id='$id'");
 $result->execute();
 while($row = $result->fetch(PDO::FETCH_ASSOC))
 {
     $v_tenant_id=$row['tenant_id'];
+    $v_tenant_type=$row['tenantType'];
     $v_tenant_name=$row['tenant_name'];
     $v_address=$row['address'];
     $v_gender=$row['gender'];
@@ -86,6 +87,21 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
  </div>
 </li>
 
+                    <!----------Tenant Type------------->
+ <li>
+ <div class="form-group">
+  <label>Tenant Type <span>*</span></label><br>
+
+<div id="div0">
+    <select class="form-control form-control-sm" id="tenantType" name="tenantType" required>
+     <option value="" > Tenant Type </option>
+     <option value="I" <?php if($v_tenant_type=="I") echo 'selected'; ?>>Individual</option>
+      <option value="NI" <?php if($v_tenant_type=="NI") echo 'selected'; ?>>Non Individual</option>
+    </select>  
+  </div>
+
+ </div> 
+</li>
 
                     <!----------Gender------------->
 <li>
@@ -233,13 +249,13 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
  </div>
 </li>
                     <!----------Power Of Attorney------------->
-<li>
+<li id="power_of_attorney" class=" <?php echo ($v_tenant_type == 'NI') ?'hide':'';?>">
  <div class="form-group">
   <label>Power Of Attorney</label><br>
 
     <div id="div0">
-    <select class="form-control form-control-sm" id="power_of_attorney" name="power_of_attorney">
-     <option value="0" > Select Power Of Attorney </option>
+    <select class="form-control form-control-sm"  name="power_of_attorney">
+     <option value="0"> Select Power Of Attorney </option>
      <option value="0" <?php if($v_power_of_attorney=="0") echo 'selected'; ?>>No</option>
      <option value="1" <?php if($v_power_of_attorney=="1") echo 'selected'; ?>>Yes</option>
     </select>  
@@ -348,6 +364,12 @@ $("#gstStatus").click(function (){
     }
 
 });
+});
+
+$(document).on('change','#tenantType',function(){
+    var id = $(this).val();
+
+    $("#power_of_attorney").toggleClass("hide");
 });
 </script>
 
