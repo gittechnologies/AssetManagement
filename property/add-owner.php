@@ -73,6 +73,8 @@ div class.content-wrapper
 <form action="owner-upload.php" method="post" >   
 <input type="hidden" name="_token" value="eEifbbuEEsdQtKP6KyzLrtGiJ0E7ZF8L41w0BdEr"> 
 <input type="hidden" id="property_id" name="property_id" value="<?php echo $id;?>"> 
+<input type="hidden" id="form_type" name="form_type" value="add"> 
+<input type="hidden" id="ownerPropId" name="ownerPropId" value=""> 
 <div class="card-primary2">
 
 <ul class="add-lead-ul">
@@ -127,8 +129,8 @@ div class.content-wrapper
 </form>
 
  <div class="card-footer" align="center">
-	<button type="button" id= "addOwner" name="addOwner" 
-	class="btn btn-primary">Save & Add</button>
+	<button type="button" id="addOwner" name="addOwner" 
+	class="btn btn-primary save-button">Save</button>
 	<button type="button" id= "cancel" name="cancel" onclick="window.location='manage.php'" class="btn btn-primary">Cancel</button>
  </div>
 
@@ -165,7 +167,7 @@ div class.content-wrapper
 		echo "<td>".$row['buildup_area']."</td>"; 
 		echo "<td>".$row['property_tax']."</td>"; 
 		echo "<td>"; ?>
-		<button type="button" onclick="" class="l-1 btn-ext-small btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+		<button type="button" onclick="docUpdate(<?php echo $row['id']; ?>)" class="l-1 btn-ext-small btn btn-sm btn-primary update-button"><i class="fas fa-edit"></i></button>
 		<button type="button" onclick="docDelete(<?php echo $row['id']; ?>)" class="ml-1 btn-ext-small btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
 <?php echo"</td>";
 
@@ -204,27 +206,53 @@ if(fileName!=null || fileName!=''){
 
 <script type="text/javascript">
 
-function docDelete(id) {
+	function docDelete(id) {
 
 		var form_data = new FormData();                  
 		form_data.append('id', id);
-												 
+													
 		$.ajax({
-				url: 'delete-owner.php', // <-- point to server-side PHP script 
-				dataType: 'text',  // <-- what to expect back from the PHP script, if anything
-				cache: false,
-				contentType: false,
-				processData: false,
-				data: form_data,                         
-				type: 'post',
-				success: function(php_script_response){
-						alert(php_script_response); // <-- display response from the PHP script, if any
-						setTimeout(function(){// wait for 5 secs(2)
-						location.reload(); // then reload the page.(3)
-						}, 3000); 
-				}
-		 });
-		
+			url: 'delete-owner.php', // <-- point to server-side PHP script 
+			dataType: 'text',  // <-- what to expect back from the PHP script, if anything
+			cache: false,
+			contentType: false,
+			processData: false,
+			data: form_data,                         
+			type: 'post',
+			success: function(php_script_response){
+					alert(php_script_response); // <-- display response from the PHP script, if any
+					setTimeout(function(){// wait for 5 secs(2)
+					location.reload(); // then reload the page.(3)
+					}, 3000); 
+			}
+		});
+	}
+
+	function docUpdate(id) {
+		let owner_prop_id = id										
+
+		$.ajax({
+          type:'POST',
+          url:'../ajaxData.php',
+		  dataType: "json",
+          data:'owner_prop_id='+owner_prop_id,
+          success:function(response){
+			if (response.success) {
+				data = response.data;
+
+				$("#owner_name").val(data.owner_id).change();
+				$("#unitNo").val(data.unitNo);
+                 $("#property_tax").val(data.property_tax); 
+                 $("#property_id").val(data.property_id);
+                 $("#buildUpArea").val(data.buildup_area);
+                 $("#ownerPropId").val(data.id);
+                 $("#form_type").val('update');
+
+			}	else {
+				alert("Something went wrong, please try again.")
+			}
+          }
+		});
 	}
 
 	$(document).ready(function() {
@@ -243,6 +271,8 @@ function docDelete(id) {
 			var property_tax = document.getElementById("property_tax").value;
 			var property_id = document.getElementById("property_id").value;
 			var buildUpArea = document.getElementById("buildUpArea").value;
+			var ownerPropId = document.getElementById("ownerPropId").value;
+			var form_type = document.getElementById("form_type").value;
 
 			
 			var form_data = new FormData();                  
@@ -251,7 +281,8 @@ function docDelete(id) {
 			form_data.append('property_tax', property_tax);
 			form_data.append('property_id', property_id);
 			form_data.append('buildUpArea', buildUpArea);
-
+			form_data.append('ownerPropId', ownerPropId);
+			form_data.append('form_type', form_type);
 
 			$.ajax({
 					url: 'owner-upload.php', // <-- point to server-side PHP script 

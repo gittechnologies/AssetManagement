@@ -1,6 +1,5 @@
 <?php 
 // Include the database config file 
-
 session_start();
  if(!isset($_SESSION['Email']))
         {
@@ -94,14 +93,13 @@ if(!empty($_POST["property_id"])){
 }
 
 if(!empty($_POST["owner_property_id"])){ 
-
+    ob_clean();
     $property_id = $_POST["owner_property_id"];
     
     
     $result = $dbConn->query("SELECT op.id ,o.owner_id,o.owner_name,op.unitNo ,op.property_id  FROM det_owner_property op JOIN det_owner o ON op.owner_id = o.owner_id  where op.property_id = '$property_id'");
         $result->execute();
         // $row = $result->fetch(PDO::FETCH_ASSOC);
-         
         // Generate HTML of state options list 
         if($result->rowCount() > 0){ 
             echo '<option value="">Select Owner Name</option>'; 
@@ -114,4 +112,15 @@ if(!empty($_POST["owner_property_id"])){
 }
 
 
-?>
+if(!empty($_POST["owner_prop_id"])){ 
+
+    $id = $_POST["owner_prop_id"];
+    $result = $dbConn->query("SELECT * FROM det_owner_property where id = '$id'");
+        $result->execute();
+        if($result->rowCount() > 0){
+            $response_array = $result->fetch(PDO::FETCH_ASSOC);
+            echo json_encode(['success'=>true ,'data'=>$response_array]); 
+        }else{ 
+            echo json_encode(['success'=>false,'error'=>$result->errorInfo()]);
+        } 
+}
