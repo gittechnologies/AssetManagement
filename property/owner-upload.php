@@ -17,6 +17,10 @@ if (empty($v_owner_id)) {
   echo "Add buildup area";
 }
 
+if (empty($v_unit_no)) {
+  $v_unit_no = 0;
+}
+
 if ($v_form_type == "add") {
   if (isset($v_property_id) && isset($v_owner_id) && isset($v_unit_no) && isset($v_property_tax) && !empty($v_owner_id) && !empty($v_build_up_area)) {
     $sql= "INSERT INTO det_owner_property (property_id, owner_id, unitNo, property_tax,buildup_area,status) 
