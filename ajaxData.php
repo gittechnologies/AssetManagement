@@ -93,10 +93,8 @@ if(!empty($_POST["property_id"])){
 }
 
 if(!empty($_POST["owner_property_id"])){ 
-    ob_clean();
     $property_id = $_POST["owner_property_id"];
-    
-    
+
     $result = $dbConn->query("SELECT op.id ,o.owner_id,o.owner_name,op.unitNo ,op.property_id  FROM det_owner_property op JOIN det_owner o ON op.owner_id = o.owner_id  where op.property_id = '$property_id'");
         $result->execute();
         // $row = $result->fetch(PDO::FETCH_ASSOC);
