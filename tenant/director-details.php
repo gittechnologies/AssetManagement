@@ -82,6 +82,8 @@ div class.content-wrapper
 <form action="add-director-details.php" method="post" enctype="multipart/form-data">   
 <input type="hidden" name="_token" value="eEifbbuEEsdQtKP6KyzLrtGiJ0E7ZF8L41w0BdEr"> 
 <input type="hidden" id="tenant_id" name="tenant_id" value="<?php echo $id;?>"> 
+<input type="hidden" id="director_id" name="director_id" value=""> 
+<input type="hidden" id="form_type" name="form_type" value="add">
 <div class="card-primary2">
 
 <ul class="add-lead-ul">
@@ -136,7 +138,7 @@ div class.content-wrapper
 
  <div class="card-footer" align="center">
 	<button type="button"  name="addDirectors" 
-	class="btn btn-primary" id="addDirectors" >Save & Add</button>
+	class="btn btn-primary" id="addDirectors" >Save</button>
 	<button type="button" id= "cancel" name="cancel" onclick="window.location='manage.php'" class="btn btn-primary">Cancel</button>
  </div>
 
@@ -192,7 +194,7 @@ div class.content-wrapper
 		echo "<td>".$row['uploaded_on']."</td>";
 		echo "<td>"; ?>
 		<!-- <button type="button" onclick="docDelete(<?php echo $row['id']; ?>)" class="btn btn-danger">Delete</button> -->
-		<button type="button" onclick="" class="l-1 btn-ext-small btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+		<button type="button" onclick="docUpdate(<?php echo $row['id']; ?>)" class="l-1 btn-ext-small btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
 		<button type="button" onclick="docDelete(<?php echo $row['id']; ?>)" class="ml-1 btn-ext-small btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
 <?php echo"</td>";
 
@@ -230,6 +232,34 @@ if(fileName!=null || fileName!=''){
 </script>
 
 <script type="text/javascript">
+
+function docUpdate(id) {
+	let director_id = id										
+
+	$.ajax({
+		type:'POST',
+		url:'../ajaxData.php',
+		dataType: "json",
+		data:'director_id='+director_id,
+		success:function(response){
+		if (response.success) {
+			data = response.data;
+
+			$("#fileDesc").val(data.file_desc);
+			$("#directorName").val(data.name); 
+			$("#address").val(data.address);
+			$("#panNo").val(data.pan_no);
+			$("#cinLlp").val(data.cin_llp);
+			$("#tenant_id").val(data.tenant_id);
+			$("#director_id").val(data.id);
+			$("#form_type").val('update');
+
+		}	else {
+			alert("Something went wrong, please try again.")
+		}
+		}
+	});
+}
 
 function docDelete(id) {
 
@@ -274,6 +304,8 @@ function docDelete(id) {
 			var panNo = document.getElementById("panNo").value;
 			var cinLlp = document.getElementById("cinLlp").value;
 			var tenant_id = document.getElementById("tenant_id").value;
+			var director_id = document.getElementById("director_id").value;
+			var form_type = document.getElementById("form_type").value;
 			
 				
 			if (!$('#directorName').val()) {
@@ -302,7 +334,8 @@ function docDelete(id) {
 				form_data.append('panNo', panNo);
 				form_data.append('cinLlp', cinLlp);
 				form_data.append('tenant_id', tenant_id);
-
+				form_data.append('director_id', director_id);
+				form_data.append('form_type', form_type);
 
 				$.ajax({
 						url: 'add-director-details.php', // <-- point to server-side PHP script 

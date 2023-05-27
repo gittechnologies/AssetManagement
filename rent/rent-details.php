@@ -100,6 +100,8 @@ div class.content-wrapper
 <input type="hidden" name="_token" value="eEifbbuEEsdQtKP6KyzLrtGiJ0E7ZF8L41w0BdEr"> 
 <input type="hidden" id="agreement_id" name="agreement_id" value="<?php echo $v_agreement_id;?>">
 <input type="hidden" id="rent_id" name="rent_id" value="<?php echo $v_rent_id;?>"> 
+<input type="hidden" id="rent_details_id" name="rent_details_id" value=""> 
+<input type="hidden" id="form_type" name="form_type" value="add">
 <div class="card-primary2">
 
 <ul class="add-lead-ul">
@@ -267,7 +269,7 @@ $outstanding =$outstanding+$row['amount_paid'];
 		echo "<td>".$row['uploaded_on']."</td>";
 		echo "<td>"; ?>
 		
-		<button type="button" onclick="" class="l-1 btn-ext-small btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
+		<button type="button" onclick="docUpdate(<?php echo $row['rent_details_id']; ?>)" class="l-1 btn-ext-small btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
 		<button type="button" onclick="docDelete(<?php echo $row['rent_details_id']; ?>)" class="ml-1 btn-ext-small btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
 <?php echo"</td>";
 
@@ -305,6 +307,34 @@ if(fileName!=null || fileName!=''){
 </script>
 
 <script type="text/javascript">
+
+function docUpdate(id) {
+	let rent_details_id = id										
+console.log(rent_details_id);
+	$.ajax({
+		type:'POST',
+		url:'../ajaxData.php',
+		dataType: "json",
+		data:'rent_details_id='+rent_details_id,
+		success:function(response){
+			console.log(response)
+
+		if (response.success) {
+			data = response.data;
+			$("#rent_id").val(data.rent_id);
+			$("#amountPaid").val(data.amount_paid); 
+			$("#paymentDate").val(data.payment_date);
+			$("#mode").val(data.payment_mode).change();
+			$("#fileName").val(data.file_desc);
+			$("#rent_details_id").val(data.rent_details_id);
+			$("#form_type").val('update');
+
+		}	else {
+			alert("Something went wrong, please try again.")
+		}
+		}
+	});
+}
 
 function docDelete(id) {
 
@@ -353,6 +383,8 @@ function docDelete(id) {
 			var payment_mode = mode.options[mode.selectedIndex].value;
 
 			var fileName = document.getElementById("fileName").value;
+			var rent_details_id = document.getElementById("rent_details_id").value;
+			var form_type = document.getElementById("form_type").value;
 
 			if (!$('#amountPaid').val()) {
 				$(".amountPaidError").text("Please Enter Amount");
@@ -381,6 +413,8 @@ function docDelete(id) {
 				form_data.append('totalDue', totalDue);
 				form_data.append('payment_mode', payment_mode);
 				form_data.append('fileName', fileName);
+				form_data.append('rent_details_id', rent_details_id);
+				form_data.append('form_type', form_type);
 														
 				$.ajax({
 						url: 'rent-upload.php', // <-- point to server-side PHP script 

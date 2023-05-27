@@ -122,3 +122,51 @@ if(!empty($_POST["owner_prop_id"])){
             echo json_encode(['success'=>false,'error'=>$result->errorInfo()]);
         } 
 }
+
+if(!empty($_POST["doc_id"])){ 
+    try {
+        $id = $_POST["doc_id"];
+        $result = $dbConn->query("SELECT * FROM det_file_upload where doc_id = '$id'");
+        $result->execute();
+        if($result->rowCount() > 0){
+            $response_array = $result->fetch(PDO::FETCH_ASSOC);
+            echo json_encode(['success'=>true ,'data'=>$response_array]); 
+        }else{ 
+            echo json_encode(['success'=>false,'error'=>$result->errorInfo()]);
+        } 
+    }   catch(PDOException $e) {
+        echo json_encode(['success'=>false,'error'=>$e->getMessage()]);
+    }
+}
+
+if(!empty($_POST["director_id"])){ 
+    try {
+        $id = $_POST["director_id"];
+        $result = $dbConn->query("SELECT * FROM det_director where id = '$id'");
+        $result->execute();
+        if($result->rowCount() > 0){
+            $response_array = $result->fetch(PDO::FETCH_ASSOC);
+            echo json_encode(['success'=>true ,'data'=>$response_array]); 
+        }else{ 
+            echo json_encode(['success'=>false,'error'=>$result->errorInfo()]);
+        } 
+    }   catch(PDOException $e) {
+        echo json_encode(['success'=>false,'error'=>$e->getMessage()]);
+    }
+}
+
+if(!empty($_POST["rent_details_id"])){ 
+    try {
+        $id = $_POST["rent_details_id"];
+        $result = $dbConn->query("SELECT * FROM det_rent_details where rent_details_id = '$id'");
+        $result->execute();
+        if($result->rowCount() > 0){
+            $response_array = $result->fetch(PDO::FETCH_ASSOC);
+            echo json_encode(['success'=>true ,'data'=>$response_array]); 
+        }else{ 
+            echo json_encode(['success'=>false,'error'=>$result->errorInfo()]);
+        } 
+    }   catch(PDOException $e) {
+        echo json_encode(['success'=>false,'error'=>$e->getMessage()]);
+    }
+}
