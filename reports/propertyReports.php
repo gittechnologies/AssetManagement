@@ -197,9 +197,8 @@ include '../menu.php';
             p.location,
             concat((select c.name from cities c where c.id=p.city_id), ' - ',p.pincode, ', ',(select s.name from states s where s.id=p.state_id)) as property_city,
             concat(CASE p.property_type WHEN 'R' THEN 'Residential' WHEN 'C' THEN 'Commercial' ELSE 'Industrial' END,' :: ',(select prop_sub_type from m_property_type AS pr where pr.id=p.property_sub_type)) as property_type,
-            (select concat(o.owner_name,' - ',o.pan_no) from det_owner o where o.owner_id = p.owner_id) as owner_name, 
-            IFNULL((select CASE a.status WHEN 'Active' THEN 'Occupied' WHEN 'InActive' THEN 'Vacant' ELSE 'Vacant' END from det_agreement a where a.property_id = p.property_id),'Vacant') as property_status
-            FROM det_property AS p where p.status='Active'";
+            (select concat(o.owner_name,' - ',o.pan_no) from det_owner o where o.owner_id = p.owner_id) as owner_name, IFNULL((CASE a.status WHEN 'Active' THEN 'Occupied' WHEN 'InActive' THEN 'Vacant' ELSE 'Vacant' END ),'Vacant') as property_status
+            FROM det_property AS p  JOIN det_agreement a ON a.property_id = p.property_id where p.status='Active'";
                         $result = $dbConn->prepare($strsql);
                         $result->execute();
                         $srNumber = 0;
@@ -234,16 +233,16 @@ include '../menu.php';
             concat((select c.name from cities c where c.id=p.city_id), ' - ',p.pincode, ', ',(select s.name from states s where s.id=p.state_id)) as property_city,
             concat(CASE p.property_type WHEN 'R' THEN 'Residential' WHEN 'C' THEN 'Commercial' ELSE 'Industrial' END,' :: ',(select prop_sub_type from m_property_type AS pr where pr.id=p.property_sub_type)) as property_type,
             (select concat(o.owner_name,' - ',o.pan_no) from det_owner o where o.owner_id = p.owner_id) as owner_name, 
-            IFNULL((select CASE a.status WHEN 'Active' THEN 'Occupied' WHEN 'InActive' THEN 'Vacant' ELSE 'Vacant' END from det_agreement a where a.property_id = p.property_id),'Vacant') as property_status
-            FROM det_property AS p where p.status='Active'";
+            IFNULL((CASE a.status WHEN 'Active' THEN 'Occupied' WHEN 'InActive' THEN 'Vacant' ELSE 'Vacant' END ),'Vacant') as property_status
+            FROM det_property AS p JOIN det_agreement a ON a.property_id = p.property_id  where p.status='Active'";
         }else{
              $strsql = "SELECT p.property_id, p.property_name, p.location,
             concat(p.flat_no,', ', p.address,', ',p.landmark) as property_address,
             concat((select c.name from cities c where c.id=p.city_id), ' - ',p.pincode, ', ',(select s.name from states s where s.id=p.state_id)) as property_city,
             concat(CASE p.property_type WHEN 'R' THEN 'Residential' WHEN 'C' THEN 'Commercial' ELSE 'Industrial' END,' :: ',(select prop_sub_type from m_property_type AS pr where pr.id=p.property_sub_type)) as property_type,
             (select concat(o.owner_name,' - ',o.pan_no) from det_owner o where o.owner_id = p.owner_id) as owner_name, 
-            IFNULL((select CASE a.status WHEN 'Active' THEN 'Occupied' WHEN 'InActive' THEN 'Vacant' ELSE 'Vacant' END from det_agreement a where a.property_id = p.property_id),'Vacant') as property_status
-            FROM det_property AS p where p.status='Active' and p.location='$v_location'";
+            IFNULL((CASE a.status WHEN 'Active' THEN 'Occupied' WHEN 'InActive' THEN 'Vacant' ELSE 'Vacant' END ),'Vacant') as property_status
+            FROM det_property AS p JOIN det_agreement a ON a.property_id = p.property_id  where p.status='Active' and p.location='$v_location'";
         }
               $result = $dbConn->prepare($strsql);
               $result->execute();
@@ -279,8 +278,8 @@ include '../menu.php';
             (select s.name from states s where s.id=p.state_id) as state_name,
             concat(CASE p.property_type WHEN 'R' THEN 'Residential' WHEN 'C' THEN 'Commercial' ELSE 'Industrial' END,' :: ',(select prop_sub_type from m_property_type AS pr where pr.id=p.property_sub_type)) as property_type,
             (select concat(o.owner_name,' - ',o.pan_no) from det_owner o where o.owner_id = p.owner_id) as owner_name, 
-            IFNULL((select CASE a.status WHEN 'Active' THEN 'Occupied' WHEN 'InActive' THEN 'Vacant' ELSE 'Vacant' END from det_agreement a where a.property_id = p.property_id),'Vacant') as property_status
-            FROM det_property AS p where p.status='Active'";
+            IFNULL((CASE a.status WHEN 'Active' THEN 'Occupied' WHEN 'InActive' THEN 'Vacant' ELSE 'Vacant' END ),'Vacant') as property_status
+            FROM det_property AS p JOIN det_agreement a ON a.property_id = p.property_id where p.status='Active'";
         }else{
             $strsql = "SELECT p.property_id, p.property_name, p.location,
             (select c.name from cities c where c.id=p.city_id) as city_name,
@@ -288,8 +287,8 @@ include '../menu.php';
             (select s.name from states s where s.id=p.state_id) as state_name,
             concat(CASE p.property_type WHEN 'R' THEN 'Residential' WHEN 'C' THEN 'Commercial' ELSE 'Industrial' END,' :: ',(select prop_sub_type from m_property_type AS pr where pr.id=p.property_sub_type)) as property_type,
             (select concat(o.owner_name,' - ',o.pan_no) from det_owner o where o.owner_id = p.owner_id) as owner_name, 
-            IFNULL((select CASE a.status WHEN 'Active' THEN 'Occupied' WHEN 'InActive' THEN 'Vacant' ELSE 'Vacant' END from det_agreement a where a.property_id = p.property_id),'Vacant') as property_status
-            FROM det_property AS p where p.status='Active' and p.city_id='$v_city'";
+            IFNULL((CASE a.status WHEN 'Active' THEN 'Occupied' WHEN 'InActive' THEN 'Vacant' ELSE 'Vacant' END ),'Vacant') as property_status
+            FROM det_property AS p JOIN det_agreement a ON a.property_id = p.property_id where p.status='Active' and p.city_id='$v_city'";
         }
               $result = $dbConn->prepare($strsql);
               $result->execute();
