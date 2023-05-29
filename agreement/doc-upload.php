@@ -15,7 +15,7 @@ if (!empty($_FILES)) {
 
   $v_file_name = basename($_FILES["file"]["name"],'.'.end($temp));
   $v_file_name = str_replace(' ', '_',$v_file_name);
-  $v_file_name = preg_replace('/[^A-Za-z\-]/', '', $v_file_name);
+  // $v_file_name = preg_replace('/[^A-Za-z\-]/', '', $v_file_name);
 
   $newfilename = $v_file_name.'_'.round(microtime(true)) . '.' . end($temp);
   
@@ -53,6 +53,17 @@ $v_legal_fee=$_POST['legalFee'];
 $v_doc_id=$_POST['doc_id'];
 $v_form_type=$_POST['form_type'];
 
+if (empty($v_registration_fee)) {
+  $v_registration_fee = 0;
+}
+
+if (empty($v_legal_fee)) {
+  $v_legal_fee = 0;
+}
+
+if (empty($v_stamp_duty_charge)) {
+  $v_stamp_duty_charge = 0;
+}
 
 $uploadOk = 1;
 

@@ -15,7 +15,7 @@ if (!empty($_FILES)) {
 
   $v_file_name = basename($_FILES["file"]["name"],'.'.end($temp));
   $v_file_name = str_replace(' ', '_',$v_file_name);
-  $v_file_name = preg_replace('/[^A-Za-z\-]/', '', $v_file_name);
+  // $v_file_name = preg_replace('/[^A-Za-z\-]/', '', $v_file_name);
 
   $newfilename = $v_file_name.'_'.round(microtime(true)) . '.' . end($temp);
   

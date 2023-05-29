@@ -14,7 +14,7 @@ if (!empty($_FILES)) {
   $temp = explode(".", $_FILES["file"]["name"]);
 
   $v_file_name = basename($_FILES["file"]["name"],'.'.end($temp));
-  // $v_file_name = str_replace(' ', '_',$v_file_name);
+  $v_file_name = str_replace(' ', '_',$v_file_name);
   // $v_file_name = preg_replace('/[^A-Za-z\-]/', '', $v_file_name);
 
   $newfilename = $v_file_name.'_'.round(microtime(true)) . '.' . end($temp);
@@ -56,6 +56,10 @@ $v_tenant_id=$_POST['tenant_id'];
 $v_status = 1;
 $v_director_id=$_POST['director_id'];
 $v_form_type=$_POST['form_type'];
+
+if (empty($v_cin_llp)) {
+  $v_cin_llp = 0;
+}
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
