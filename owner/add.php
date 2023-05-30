@@ -12,7 +12,7 @@ session_start();
 	$v_contact_number=$_POST['contactNumber'];
 	$v_email=$_POST['emailId'];
 	$v_pan_no=$_POST['panNo'];
-	$v_status_gst=$_POST['gstStatus'];
+	$v_status_gst= isset($_POST['gstStatus']) ?$_POST['gstStatus'] : '';
 	$v_gst=$_POST['gstNo'];
 	$v_company=$_POST['companyName'];
     $v_status='Active';
