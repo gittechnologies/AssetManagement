@@ -325,7 +325,12 @@ function docUpdate(id) {
 		type:'POST',
 		url:'../ajaxData.php',
 		dataType: "json",
-		data:'doc_id='+doc_id,
+		data:{
+			function_name: 'getData', 
+			table_name: 'det_file_upload',
+			col_name:'doc_id',
+			col_val:doc_id
+		},
 		success:function(response){
 		if (response.success) {
 			data = response.data;

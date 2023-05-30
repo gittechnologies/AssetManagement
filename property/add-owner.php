@@ -235,7 +235,12 @@ if(fileName!=null || fileName!=''){
           type:'POST',
           url:'../ajaxData.php',
 		  dataType: "json",
-          data:'owner_prop_id='+owner_prop_id,
+		  data:{
+			function_name: 'getData', 
+			table_name: 'det_owner_property',
+			col_name:'id',
+			col_val:owner_prop_id
+			},
           success:function(response){
 			if (response.success) {
 				data = response.data;

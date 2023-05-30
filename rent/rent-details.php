@@ -315,23 +315,26 @@ console.log(rent_details_id);
 		type:'POST',
 		url:'../ajaxData.php',
 		dataType: "json",
-		data:'rent_details_id='+rent_details_id,
+		data:{
+			function_name: 'getData', 
+			table_name: 'det_rent_details',
+			col_name:'rent_details_id',
+			col_val:rent_details_id
+		},
 		success:function(response){
-			console.log(response)
+			if (response.success) {
+				data = response.data;
+				$("#rent_id").val(data.rent_id);
+				$("#amountPaid").val(data.amount_paid); 
+				$("#paymentDate").val(data.payment_date);
+				$("#mode").val(data.payment_mode).change();
+				$("#fileName").val(data.file_desc);
+				$("#rent_details_id").val(data.rent_details_id);
+				$("#form_type").val('update');
 
-		if (response.success) {
-			data = response.data;
-			$("#rent_id").val(data.rent_id);
-			$("#amountPaid").val(data.amount_paid); 
-			$("#paymentDate").val(data.payment_date);
-			$("#mode").val(data.payment_mode).change();
-			$("#fileName").val(data.file_desc);
-			$("#rent_details_id").val(data.rent_details_id);
-			$("#form_type").val('update');
-
-		}	else {
-			alert("Something went wrong, please try again.")
-		}
+			}	else {
+				alert("Something went wrong, please try again.")
+			}
 		}
 	});
 }

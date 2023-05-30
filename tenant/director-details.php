@@ -240,7 +240,12 @@ function docUpdate(id) {
 		type:'POST',
 		url:'../ajaxData.php',
 		dataType: "json",
-		data:'director_id='+director_id,
+		data:{
+			function_name: 'getData', 
+			table_name: 'det_director',
+			col_name:'id',
+			col_val:director_id
+		},
 		success:function(response){
 		if (response.success) {
 			data = response.data;
