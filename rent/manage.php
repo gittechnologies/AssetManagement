@@ -8,10 +8,12 @@
  include_once ('../conn.php');
  include '../menu.php';
 
+$agreement_id = null;
+$allRentIds = [];
+
 if (isset($_GET['id'])) {
     $agreement_id = $_GET['id'];
 }
-
  ?>
 <script src="../js/ModalPopupWindow.js" type="text/javascript"></script>
 <style>
@@ -68,18 +70,29 @@ if (isset($_GET['id'])) {
 
 <div class="card-body">
     <div class="row">
-            <div class="col-lg-12">
-                <a href="javascript:" onclick="rentDetails();" title="Rent Payment" data-toggle="modal" data-target="#payment-rent" class="float-right btn btn-primary btn-sm" style="margin:-15px 4px 4px 4px;"><i class="fa fa-rupee"></i> Payment</a>  
+            <div class="col-4"> 
+                <div class="input-group" style="margin:0px 4px 12px 4px">
+                    <input type="text" placeholder="Search here..." aria-describedby="button-addon5" class="form-control global_filter">  
 
-                <a href="javascript:" onclick="rentInvoice();" title="Generate Invoice" data-toggle="modal" data-target="#invocie-rent" class="float-right btn btn-primary btn-sm" style="margin:-15px 4px 4px 4px;"><i class="fa fa-rupee"></i> Invoice</a>  
+                    <!-- <div class="input-group-append">
+                        <button id="button-addon5" type="submit" class="btn btn-primary search-button"> 
+                            <i class="fa fa-search"> </i> 
+                        </button> 
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-8">
+                
+                <a href="javascript:" onclick="rentDetails();" title="Rent Payment" data-toggle="modal" data-target="#payment-rent" class="float-right btn btn-primary btn-sm" style="margin:0px 4px 12px 4px;"><i class="fa fa-rupee"></i> Payment</a>  
 
-                <a href="javascript:" onclick="addAction();" title="Add Agreement"  data-toggle="modal" data-target="#add-lease" class="float-right btn btn-primary btn-sm" style="margin:-15px 4px 4px 4px;"><i class="fa fa-plus"></i> Add</a> 
+                <a href="javascript:" onclick="rentInvoice();" title="Generate Invoice" data-toggle="modal" data-target="#invocie-rent" class="float-right btn btn-primary btn-sm" style="0px 4px 12px 4px"><i class="fa fa-rupee"></i> Invoice</a>  
+
+                <a href="javascript:" onclick="addAction();" title="Add Agreement"  data-toggle="modal" data-target="#add-lease" class="float-right btn btn-primary btn-sm" style="margin:0px 4px 12px 4px;"><i class="fa fa-plus"></i> Add</a> 
 
           
             </div>
             
         </div>
-
  <div class="">
 <table id="manageAgreement" class="table table-bordered table-hover small display nowrap">
  <thead>
@@ -102,7 +115,7 @@ if (isset($_GET['id'])) {
     $subQuery = '';
 
     if (isset($agreement_id)) {
-        $subQuery = " where r.agreement_id='".$agreement_id."'"; 
+        $subQuery = " and r.agreement_id='".$agreement_id."'"; 
     }
 
     $result = $dbConn->query("SELECT r.rent_id, r.agreement_id, r.invoice_no, r.creation_date as invoice_date,
@@ -112,18 +125,18 @@ if (isset($_GET['id'])) {
   from det_property p where p.property_id = 
   (select a.property_id from det_agreement a where a.agreement_id = r.agreement_id)) as property_name,
    DATE_FORMAT(r.rent_date, '%b-%Y') AS period, r.total_amount
-   FROM det_rent r".$subQuery);
+   FROM det_rent r where r.rent_status <> 'PAID' ".$subQuery . " ORDER BY r.rent_id DESC");
 
     $result->execute();
 
     if($result->rowCount() > 0){ 
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {    
-
+        $allRentIds[] = $row['rent_id'];
   ?>
 <tr>
    
    <?php
-        echo "<td><input type='radio' name='rent' id=".$row['rent_id']." 
+        echo "<td><input type='radio' name='rent' class='rent_id' id=".$row['rent_id']." 
         value=".$row['rent_id']." '/></td>";
         echo "<td>".$row['invoice_no']."</td>";
         echo "<td>".$row['invoice_date']."</td>";
@@ -258,7 +271,6 @@ function addAction()
 }
 function viewAction(id)
 {
-
     var url = 'view.php?id='+encodeURIComponent(id);
     modalWin.ShowURL(url,700,1000,'Property Details',null,null,true)
     //popupWindow = window.open(url,'_blank',
@@ -286,7 +298,46 @@ function deleteAction(id)
 function HideModalWindow() {
     modalWin.HideModalPopUp();
 }
+
 </script>  
+<script>
+$(document).ready(function(){
+    $('.search-button').on("click", function(){
+
+        let search = $('.search-box input[type="text"]').val();
+        let agreement_id =  "<?= ($agreement_id)? $agreement_id :''; ?>";
+        var allRentIds = <?php echo json_encode($allRentIds); ?>;
+            
+        if( search.length === 0 ) {
+            location.reload(true);
+        }  
+
+        $.ajax({
+            type:'POST',
+            url:'../ajaxData.php',
+            dataType: "json",
+            data:{
+                function_name: 'searchPendingRent', 
+                search: search,
+                agreement_id:agreement_id,
+            },
+            success:function(response){
+                if (response.success) {
+                    
+                    rentIds = response.data.rent_ids;
+                    filterRentIds = allRentIds.filter((el) => !rentIds.includes(el));
+                    $('tr').removeClass("d-none");
+                    filterRentIds.forEach(rent_id => $('#'+rent_id).parents('tr').addClass('d-none'));
+
+                }	else {
+                    alert("No matching records found");
+                }
+            }
+	    });
+    });
+    
+});
+</script>
   
    <?php include '../footer.php';?> 
 

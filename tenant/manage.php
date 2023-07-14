@@ -65,6 +65,7 @@
 <div class="card-body">
     <div class="row">
             <div class="col-lg-12">
+                <a href="javascript:" onclick="addDocuments();" title="Add Documents" data-toggle="modal" data-target="#documents" id="documents-btn" class="float-right btn btn-primary btn-sm" style="margin:-15px 4px 4px 4px;"><i class="fa fa-plus"></i> Add Documents</a>
                 <a href="javascript:" onclick="addDirectors();" title="Add Directors" data-toggle="modal" data-target="#directors" id="directors-btn" class="float-right btn btn-primary btn-sm" style="margin:-15px 4px 4px 4px;"><i class="fa fa-plus"></i> Add Directors</a>
                 <a href="javascript:" onclick="addAction();" data-toggle="modal" data-target="#add-tenant" class="float-right btn btn-primary btn-sm" style="margin:-15px 4px 4px 4px;"><i class="fa fa-plus"></i> Add Tenant</a>              
             </div>
@@ -217,12 +218,10 @@ function HideModalWindow() {
 
 function addDirectors()
 {
-    
     let id = $('input[name="tenant_id"]:checked').val();
     if(id != null || id =='')
     {   
         let tenant_type = $('#tenant-active .tenant-type').text();
-        console.log(tenant_type);
 
         if (tenant_type == 'Non Individual')  {
             var url = 'director-details.php?id='+encodeURIComponent(id);
@@ -230,6 +229,20 @@ function addDirectors()
         }   else {
             alert("This applicable only for Non Individual tenant type");
         }
+    }
+    else
+    {
+        alert("Please select one of the tenant!");
+    }
+}
+
+function addDocuments()
+{
+    let id = $('input[name="tenant_id"]:checked').val();
+    if(id != null || id =='')
+    {   
+        var url = 'document-upload.php?id='+encodeURIComponent(id);
+        window.location = url;
     }
     else
     {

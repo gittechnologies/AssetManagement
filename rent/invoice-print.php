@@ -294,7 +294,11 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
 <!-- ./wrapper -->
 <!-- Page specific script -->
 <script>
-  window.addEventListener("load", window.print());
+  // window.addEventListener("load", window.print());
+  window.onload = function () {
+    window.print();
+    setTimeout(function(){window.close();}, 1);
+  }
 </script>
 </body>
 </html>

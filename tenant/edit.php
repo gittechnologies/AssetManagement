@@ -10,7 +10,7 @@
  
  $id = $_GET['id'];
 $result = $dbConn->query("SELECT t.tenant_id, t.tenant_name, t.gender,t.tenantType, t.dob, t.address, t.state_id,
-t.city_id, t.pincode, t.contact_number, t.email_id, t.pan_no, t.occupation, t.gst_status, t.gst_no, t.company_name, t.company_email,t.power_of_attorney
+t.city_id, t.pincode, t.contact_number, t.email_id, t.pan_no, t.occupation, t.gst_status, t.gst_no, t.company_name, t.company_email,t.power_of_attorney , t.partner_name , t.partner_address , t.partner_pan_no, t.partner_aadhar_card_no
 FROM det_tenant t WHERE t.tenant_id='$id'");
 $result->execute();
 while($row = $result->fetch(PDO::FETCH_ASSOC))
@@ -39,6 +39,11 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
     $v_company=$row['company_name'];
     $v_company_email=$row['company_email'];
     $v_power_of_attorney=$row['power_of_attorney'];
+    $v_partner_name=$row['partner_name'];
+    $v_partner_address=$row['partner_address'];
+    $v_partner_pan_no=$row['partner_pan_no'];
+    $v_partner_aadhar_card_no=$row['partner_aadhar_card_no'];
+
 }
 
 ?>
@@ -264,6 +269,34 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
  </div> 
 </li>
 <li>
+   <div class="form-group">
+  <label>Partner Name <span>*</span></label>
+   <input type="text" class="form-control form-control-sm" placeholder="Partner Name" name="partnerName" value="<?php echo $v_partner_name;?>" onkeyup="this.value= this.value.replace(/[^'a-zA-Z0-9]+$/, '')" required>
+    <span class="text-danger"></span>
+ </div>
+</li>
+<li>
+ <div class="form-group">
+  <label>Partner Address <span>*</span></label>
+  <input type="text" id="partnerAddress" class="form-control form-control-sm" placeholder="Partner Address" name="partnerAddress" value="<?php echo $v_partner_address;?>" required>
+    <span class="text-danger"></span>
+ </div>
+</li>
+<li>
+ <div class="form-group">
+  <label>Partner Pan No.<span>*</span></label>
+   <input type="text" class="form-control form-control-sm" placeholder="Pan No" name="partnerPanNo" value="<?php echo $v_partner_pan_no;?>" onkeyup="this.value= this.value.replace(/[^'a-zA-Z0-9]+$/, '')" required>
+    <span class="text-danger"></span>
+ </div>
+</li>
+<li>
+ <div class="form-group">
+  <label>Partner Aadhar No.<span>*</span></label>
+   <input type="text" class="form-control form-control-sm" placeholder="Partner Aadhar No" name="partnerAadharNo" value="<?php echo $v_partner_aadhar_card_no;?>" required>
+    <span class="text-danger"></span>
+ </div>
+</li>
+<li>
  <div class="form-group">
   <label>GST No.<span id="lblGST" style="display:none;">*</span> (Is Applicable) <input type="checkbox" name="gstStatus" id="gstStatus" <?php echo $v_status_gst?> /></label>
    <input type="text" class="form-control form-control-sm" style="display:none;" placeholder="GST No" id="gstNo" name="gstNo" value="<?php echo $v_gst_no;?>">
@@ -337,40 +370,66 @@ if($("#gstStatus").is(':checked') == true){
 }
 
 $(document).ready(function(){
-$("#gstStatus").click(function (){
-     if ($(this).is(":checked")){
+  $("#gstStatus").click(function (){
+    if ($(this).is(":checked")){
 
-        $("#lblGST").show();
-        $("#gstNo").show();
-        $("#gstNo").focus();
-        $("#gstNo").attr('required',true);
+      $("#lblGST").show();
+      $("#gstNo").show();
+      $("#gstNo").focus();
+      $("#gstNo").attr('required',true);
 
-        $("#company").show();
-        $("#companyName").show();
+      $("#company").show();
+      $("#companyName").show();
 
-        $("#company_email").show();
-        $("#companyEmail").show();
+      $("#company_email").show();
+      $("#companyEmail").show();
     }
     else{
-        $("#lblGST").hide();
-         $("#gstNo").hide();
-          $("#gstNo").removeAttr("required");
+      $("#lblGST").hide();
+      $("#gstNo").hide();
+      $("#gstNo").removeAttr("required");
 
-          $("#company").hide();
-        $("#companyName").hide();
+      $("#company").hide();
+      $("#companyName").hide();
 
-        $("#company_email").hide();
-        $("#companyEmail").hide();
+      $("#company_email").hide();
+      $("#companyEmail").hide();
     }
+  });
 
-});
-});
-
-$(document).on('change','#tenantType',function(){
+  $('#tenantType').on('change', function(){
     var id = $(this).val();
+      console.log(id);
+    if (id == "NI") {
+      $("#power_of_attorney").hide();
+      $("#gstStatus").prop("checked", true);
+      $("#lblGST").hide();
+      $("#gstNo").show();
+      $("#gstNo").focus();
+      $("#gstNo").attr('required',false);
 
-    $("#power_of_attorney").toggleClass("hide");
+      $("#company").show();
+      $("#companyName").show();
+
+      $("#company_email").show();
+      $("#companyEmail").show();
+
+    } else {
+      $("#gstStatus").prop("checked", false);
+      $("#power_of_attorney").show();
+      $("#lblGST").hide();
+      $("#gstNo").hide();
+      $("#gstNo").removeAttr("required");
+
+      $("#company").hide();
+      $("#companyName").hide();
+
+      $("#company_email").hide();
+      $("#companyEmail").hide();
+    }
+  });
 });
+
 </script>
 
 <?php include '../footer.php';?> 

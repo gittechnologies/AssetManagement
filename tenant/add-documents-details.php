@@ -19,12 +19,11 @@ if (!empty($_FILES)) {
 
   $newfilename = $v_file_name.'_'.round(microtime(true)) . '.' . end($temp);
   
-  $target_dir = UPLOADED_DOC .RENT .'/'.$_SESSION["id"];
+  $target_dir = UPLOADED_DOC .TENANTDOC .'/'.$_SESSION["id"];
   $target_file =  $target_dir .'/'.$newfilename;
 
   $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-  
   // Check if file already exists
   if (!file_exists($target_dir)) {
     echo "Inside directory not exist";
@@ -43,58 +42,28 @@ if (!empty($_FILES)) {
     echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
     $uploadOk = 0;
   }
-
-  $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
 }
 
-$v_agreement_id=$_POST['agreement_id'];
-$v_rent_id=$_POST['rent_id'];
-$v_tot_due=$_POST['totalDue'];
-$v_invoice_amount=$_POST['invoiceAmount'];
-$v_amount_paid=$_POST['amountPaid'];
-$v_payment_date=$_POST['paymentDate'];
-$v_mode=$_POST['payment_mode'];
-$v_file_desc=$_POST['fileName'];
-$v_rent_details_id=$_POST['rent_details_id'];
-$v_form_type=$_POST['form_type'];
-
-$v_total_rent = 0;
-$rent_status = 'UNPAID';
-
-if($v_tot_due > 0 && $v_tot_due < $v_invoice_amount)
-{
-  $rent_status = 'PART_PAID';
-}
-
-if($v_tot_due = 0)
-{
-  $rent_status = 'PAID';
-}
+$v_file_desc=$_POST['fileDesc'];
 
 $uploadOk = 1;
 
-
+$v_tenant_id=$_POST['tenant_id'];
+$v_status = 1;
+$v_document_id=$_POST['document_id'];
+$v_form_type=$_POST['form_type'];
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
   echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
-
-  if ($v_form_type == "add") { 
-    $sql= "INSERT INTO det_rent_details (rent_id, amount_paid, payment_date, payment_mode, file_name, file_path , file_desc, uploaded_by, uploaded_on, status) 
-    VALUES ('$v_rent_id', '$v_amount_paid','$v_payment_date','$v_mode', '$v_file_name', '$newfilename', '$v_file_desc', '$v_uploaded_by',CURRENT_TIMESTAMP(),'1') ";
+  if ($v_form_type == "add") {
+    $sql= "INSERT INTO det_tenant_document (tenant_id, status,file_name, file_path,  uploaded_by, file_desc) 
+    VALUES ('$v_tenant_id', '$v_status', '$v_file_name', '$newfilename','$v_uploaded_by','$v_file_desc') ";
     $query = $dbConn->prepare($sql);
-    $insert_result = $dbConn->exec($sql);
+    $dbConn->exec($sql);
 
-    $sqlUpd= "update det_rent set rent_status = '$rent_status' 
-    where rent_id = '$v_rent_id' ";
-    $query = $dbConn->prepare($sqlUpd);
-    $dbConn->exec($sqlUpd);
-
-    echo "Data successfully added!";
-    
     if (!empty($_FILES)) {
       if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
         echo "The file ". htmlspecialchars( basename( $_FILES["file"]["name"])). " has been uploaded.";
@@ -102,9 +71,9 @@ if ($uploadOk == 0) {
         echo "Sorry, there was an error uploading your file.";
       }
     } 
-  } elseif ($v_form_type == "update" && isset($v_rent_details_id)) {
+  } elseif ($v_form_type == "update" && isset($v_document_id)) {
 
-    $result = $dbConn->query("SELECT * FROM det_rent_details where rent_id = '$v_rent_id' AND rent_details_id ='$v_rent_details_id'");
+    $result = $dbConn->query("SELECT * FROM det_tenant_document where tenant_id = '$v_tenant_id' AND id ='$v_document_id'");
     $result->execute();
     if($result->rowCount() > 0){
       $row = $result->fetch(PDO::FETCH_ASSOC);
@@ -122,30 +91,21 @@ if ($uploadOk == 0) {
         $sql_sub_string = " , file_name='$v_file_name' ,file_path='$newfilename' ";
       }
 
-      $sql = "UPDATE det_rent_details SET rent_id='$v_rent_id', file_desc='$v_file_desc', amount_paid='$v_amount_paid',payment_date='$v_payment_date',payment_mode='$v_mode',file_desc ='$v_file_desc', uploaded_by ='$v_uploaded_by', uploaded_on=CURRENT_TIMESTAMP(), status='1'  $sql_sub_string WHERE rent_details_id='$v_rent_details_id' ";
+      $sql = "UPDATE det_tenant_document SET tenant_id='$v_tenant_id',status='$v_status', uploaded_by='$v_uploaded_by', file_desc= '$v_file_desc' $sql_sub_string WHERE id='$v_document_id' ";
     
       $query = $dbConn->prepare($sql);
       $dbConn->exec($sql);
-      
-      $sqlUpd= "update det_rent set rent_status = '$rent_status' 
-      where rent_id = '$v_rent_id' ";
-      $query = $dbConn->prepare($sqlUpd);
-      $dbConn->exec($sqlUpd);
-
+    
       echo "Data successfully updated!";
     
     }else{ 
         echo "Something went wrong, please try again later.";
     } 
   }
-
   // if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
 
   //   $query = $dbConn->prepare($sql);
   //   $dbConn->exec($sql);
-
-  //   $query = $dbConn->prepare($sqlUpd);
-  //   $dbConn->exec($sqlUpd);
 
   //   echo "The file ". htmlspecialchars( basename( $_FILES["file"]["name"])). " has been uploaded.";
   // } else {

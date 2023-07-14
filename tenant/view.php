@@ -16,7 +16,7 @@
 $result = $dbConn->query("SELECT t.tenant_id, t.tenant_name, t.gender, t.dob, t.address, t.state_id as state_id,
 t.city_id as city_id, t.pincode, t.contact_number, t.email_id, t.pan_no, 
 t.occupation, t.gst_status, t.gst_no, t.company_name, t.company_email,
-t.power_of_attorney FROM det_tenant t WHERE t.tenant_id='$id';");
+t.power_of_attorney, t.partner_name , t.partner_address , t.partner_pan_no, t.partner_aadhar_card_no FROM det_tenant t WHERE t.tenant_id='$id';");
 $result->execute();
   while($row = $result->fetch(PDO::FETCH_ASSOC))
 {
@@ -45,6 +45,10 @@ $result->execute();
     $v_company=$row['company_name'];
     $v_official_email=$row['company_email'];
     $v_power_of_attorney=$row['power_of_attorney'];
+    $v_partner_name=$row['partner_name'];
+    $v_partner_address=$row['partner_address'];
+    $v_partner_pan_no=$row['partner_pan_no'];
+    $v_partner_aadhar_card_no=$row['partner_aadhar_card_no'];
 }
 
 ?>
@@ -251,6 +255,30 @@ div class.content-wrapper
    <div class="form-group">
   <label>Power Of Attorney </label>
   <label class="form-control form-control-sm"><?php echo $v_power_of_attorney;?> </label>
+ </div>
+</li>
+<li>
+ <div class="form-group">
+  <label>Partner Name<span>*</span></label>
+  <label class="form-control form-control-sm"><?php echo $v_partner_name;?> </label>
+ </div>
+</li>
+<li>
+ <div class="form-group">
+  <label>Partner Address<span>*</span></label>
+  <label class="form-control form-control-sm"><?php echo $v_partner_address;?> </label>
+ </div>
+</li>
+<li>
+ <div class="form-group">
+  <label>Partner Pan No.<span>*</span></label>
+  <label class="form-control form-control-sm"><?php echo $v_partner_pan_no;?> </label>
+ </div>
+</li>
+<li>
+ <div class="form-group">
+  <label>Partner Aadhar No.<span>*</span></label>
+  <label class="form-control form-control-sm"><?php echo $v_partner_aadhar_card_no;?> </label>
  </div>
 </li>
 <li>

@@ -218,6 +218,45 @@
 
  </div> 
 </li>
+
+                    <!----------director /partner Name------------->
+                    <li>
+ <div class="form-group">
+  <label>Partner Name<span>*</span></label>
+   <input type="text" class="form-control form-control-sm" placeholder="Director/ Partner Name" name="partnerName" required>
+    <span class="text-danger"></span>
+ </div>
+</li>
+
+                              <!----------partner Address------------->
+<li>
+ <div class="form-group">
+  <label>Partner Address</label>
+   <input type="text" class="form-control form-control-sm" placeholder="Partner Address" name="partnerAddress" value="">
+    <span class="text-danger"></span>
+ </div>
+</li>
+
+                            <!----------partner Pan No.------------->
+
+<li>
+ <div class="form-group">
+  <label>Partner Pan No.<span>*</span></label>
+   <input type="text" class="form-control form-control-sm" placeholder="Partner Pan No" name="partnerPanNo" onkeyup="this.value= this.value.replace(/[^'a-zA-Z0-9]+$/, '')" required>
+    <span class="text-danger"></span>
+ </div>
+</li>
+
+                            <!----------partner Pan No.------------->
+
+<li>
+ <div class="form-group">
+  <label>Partner Aadhar No.<span>*</span></label>
+   <input type="text" class="form-control form-control-sm" placeholder="Partner Aadhar No" name="partnerAadharNo" required>
+    <span class="text-danger"></span>
+ </div>
+</li>
+
                             <!----------GST No------------->
 
 <li>
@@ -304,13 +343,35 @@ $('#state').on('change', function(){
     });
 
     $('#tenantType').on('change', function(){
-    var id = $(this).val();
-        console.log(id);
-    if (id == "NI") {
-        $("#power_of_attorney").hide();
-    } else {
-        $("#power_of_attorney").show();
-    }
+        var id = $(this).val();
+            console.log(id);
+        if (id == "NI") {
+            $("#power_of_attorney").hide();
+            $("#gstStatus").prop("checked", true);
+            $("#lblGST").hide();
+            $("#gstNo").show();
+            $("#gstNo").focus();
+            $("#gstNo").attr('required',false);
+
+            $("#company").show();
+            $("#companyName").show();
+
+            $("#company_email").show();
+            $("#companyEmail").show();
+
+        } else {
+            $("#gstStatus").prop("checked", false);
+            $("#power_of_attorney").show();
+            $("#lblGST").hide();
+            $("#gstNo").hide();
+            $("#gstNo").removeAttr("required");
+
+            $("#company").hide();
+            $("#companyName").hide();
+
+            $("#company_email").hide();
+            $("#companyEmail").hide();
+        }
     });
     
 });

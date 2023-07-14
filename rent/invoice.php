@@ -35,6 +35,15 @@ $result = $dbConn->query("SELECT r.rent_id, r.agreement_id, r.invoice_no, date_f
 (select o.owner_name from det_owner o where o.owner_id = 
 (select p.owner_id from det_property p where p.property_id = 
 (select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_name,
+(select concat(o.bank_name,'-',o.branch_name)  from det_owner o where o.owner_id = 
+(select p.owner_id from det_property p where p.property_id = 
+(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_bank_details,
+(select o.account_no  from det_owner o where o.owner_id = 
+(select p.owner_id from det_property p where p.property_id = 
+(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_account_no,
+(select o.ifsc  from det_owner o where o.owner_id = 
+(select p.owner_id from det_property p where p.property_id = 
+(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_ifsc_no,
 (select o.company_name from det_owner o where o.owner_id = 
 (select p.owner_id from det_property p where p.property_id = 
 (select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_company_name,
@@ -96,7 +105,9 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
    //echo "<script>alert(' $v_gst_status')</script>";
     $v_gst_amount = $row['gst_amount'];
     $v_total_amount = $row['total_amount'];
-    
+    $v_owner_bank_details = $row['owner_bank_details'];
+    $v_owner_account_no = $row['owner_account_no'];
+    $v_owner_ifsc_no = $row['owner_ifsc_no'];
 }
 
 ?>
@@ -153,7 +164,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
 
 
             <!-- Main content -->
-            <div class="invoice p-3 mb-3" id="generatePdf">
+            <div class="invoice p-3 mb-3" id="generatePDF">
               <!-- title row -->
               <div class="row">
                 <div class="col-12">
@@ -186,7 +197,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
                     <strong><?php echo $v_tenant_company;?></strong><br>
                     <strong><?php echo $v_tenant_name;?></strong><br>
                     <?php echo $v_tenant_address;?><br/>
-                    <?php echo $v_tenant_address1;?><br/>
+                    <?php echo $v_tenant_address1;?><br/><br>
                     <b>GST No.:</b> <?php echo $v_tenant_gst;?><br/>
                     <b>Phone:</b> <?php echo $v_tenant_contact;?><br/>          
                     <b>Email:</b> <a href="<?php echo $v_tenant_company_email;?>"><?php echo $v_tenant_company_email;?></a>
@@ -201,8 +212,14 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
                   $v_due_date=strtotime($v_invoice_date);
                   $v_due_date = strtotime($v_due_date. ' + 7 days');
                   echo date('d/m/Y', $v_due_date);
-            ?><br>
-                  <b>Account:</b> 
+            ?><br><br>
+                  <b>Bank Details:</b> <br>
+                  <b>Bank Name:</b> 
+                  <?php echo $v_owner_bank_details;?><br/>
+                  <b>Account Number:</b> 
+                  <?php echo $v_owner_account_no;?><br/>
+                  <b>IFSC Number:</b> 
+                  <?php echo $v_owner_ifsc_no;?><br/>
                 </div>
                 <!-- /.col -->
               </div>
@@ -336,10 +353,13 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
                 </div>
                 <!-- /.col -->
               </div>
+              
               <!-- /.row -->
-
-              <!-- this row will not appear when printing -->
-              <div class="row no-print">
+            </div>
+            <!-- /.invoice -->
+          </div><!-- /.col -->
+           <!-- this row will not appear when printing -->
+           <div class="row no-print">
                 <div class="col-12">
                   <a href="invoice-print.php?id=<?php echo $v_rent_id;?>" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                   <button type="button" class="btn btn-success float-right" onclick="window.location='manage.php'"><i class="fa fa-window-close"></i> Cancel</button>
@@ -348,9 +368,6 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
                     <i class="fas fa-download"></i> Generate PDF</button>
                 </div>
               </div>
-            </div>
-            <!-- /.invoice -->
-          </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
@@ -365,7 +382,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
          var mywindow = window.open("", "PRINT", "height=800,width=1000");
          mywindow.document.write(makepdf.innerHTML);
          mywindow.document.close();
-         mywindow.focus();
+        //  mywindow.focus();
          mywindow.print();
          return true;
       });

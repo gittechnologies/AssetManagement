@@ -348,6 +348,12 @@ echo ' '.$_SESSION["UserName"].'';
    <p>Payment Details</p>
  </a>
 </li>
+<li class="nav-item">
+ <a href="/<?php echo FOLDER_NAME ?>/rent/paid-invoice.php" class="nav-link nav-tree">
+  <i class="fa fa-circle-o" aria-hidden="true"></i>
+   <p>Paid Invoice</p>
+ </a>
+</li>
 </ul>
 </li>      
 

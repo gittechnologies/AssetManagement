@@ -120,6 +120,12 @@ if(!empty($_POST['function_name'])) {
 
             echo getData($table_name,$col_name,$col_val,$dbConn);
             break;
+        case 'searchPendingRent':
+            $search = $_POST['search'];
+            $agreement_id = $_POST['agreement_id'];
+
+            echo searchPendingRent($search,$dbConn,$agreement_id);
+            break;
         default:
             echo json_encode([
                 'success'=>false,
@@ -147,5 +153,31 @@ function getData($table_name,$col_name,$col_val,$dbConn)
         }
     }   else {
         return json_encode(['success'=>false,'error'=>"Something Went Wrong.Please try again"]);
+    }
+}
+
+function searchPendingRent($search,$dbConn,$agreement_id=null)
+{   
+    $subQuery = '';
+
+    if (isset($agreement_id) && !empty($agreement_id)) {
+        $subQuery = " and r.agreement_id='".$agreement_id."' "; 
+    }
+
+    try {
+        $result = $dbConn->query("SELECT r.rent_id FROM `det_tenant` t left JOIN det_agreement a ON t.tenant_id= a.tenant_id left JOIN det_rent r ON a.agreement_id= r.agreement_id LEFT JOIN det_agreement da ON da.agreement_id= r.agreement_id LEFT JOIN det_property p ON p.property_id=da.property_id where r.rent_status <> 'PAID' ".$subQuery . " AND (DATE_FORMAT(r.rent_date, '%b-%Y') LIKE '%".$search."%' OR p.property_name LIKE '%".$search."%' OR t.tenant_name LIKE '%".$search."%') ORDER BY r.rent_id DESC");
+        $result->execute();
+
+        if($result->rowCount() > 0){
+            $response_array = $result->fetchAll(PDO::FETCH_ASSOC);
+
+            $rent_ids = array_column($response_array, 'rent_id');
+
+            return json_encode(['success'=>true ,'data'=> ['rent_ids' => $rent_ids]]); 
+        }else{ 
+            return json_encode(['success'=>false,'error'=>$result->errorInfo()]);
+        } 
+    }   catch(PDOException $e) {
+        return json_encode(['success'=>false,'error'=>$e->getMessage()]);
     }
 }

@@ -16,5 +16,6 @@ define('FOLDER_NAME', $folder_name);
 define('UPLOADED_DOC', $upload_file_name);
 define('AGREEMENT', 'agreement');
 define('TENANT', 'tenant');
+define('TENANTDOC', 'tenant/tenantDoc');
 define('RENT', 'rent');
 ?>

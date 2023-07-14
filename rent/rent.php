@@ -405,7 +405,6 @@ $("#myField").on('change paste input', '.txtField', function(){
 }); 
 
 </script>
-
                       <!----------Footer------------->
 
 <?php include '../footer.php';?> 

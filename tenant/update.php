@@ -13,6 +13,10 @@
     $v_pan_no=$_POST['panNo'];
     $v_occupation=$_POST['Occupation'];
     $v_status_gst=$_POST['gstStatus'];    
+    $v_partner_address=$_POST['partnerAddress'];
+    $v_partner_pan_no=$_POST['partnerPanNo'];
+    $v_partner_aadhar_no=$_POST['partnerAadharNo'];
+    $v_partner_name=$_POST['partnerName'];
 
     if ($v_status_gst)
     {
@@ -38,7 +42,7 @@
     }
     
 
-    $sql = "UPDATE det_tenant SET tenant_name='$v_tenant_name', address='$v_address',state_id='$v_state', city_id='$v_city', pincode='$v_pincode',contact_number='$v_contact_number', email_id='$v_email',pan_no='$v_pan_no', occupation='$v_occupation', gst_status='$v_status_gst', gst_no='$v_gst_no',company_name='$v_company', company_email='$v_company_email', 	tenantType='$v_tenant_type', updated_by='$v_UpdatedBy', power_of_attorney ='$v_power_of_attorney',last_modification_date=CURRENT_TIMESTAMP() WHERE tenant_id='$v_tenant_id' ";
+    $sql = "UPDATE det_tenant SET tenant_name='$v_tenant_name', address='$v_address',state_id='$v_state', city_id='$v_city', pincode='$v_pincode',contact_number='$v_contact_number', email_id='$v_email',pan_no='$v_pan_no', occupation='$v_occupation', gst_status='$v_status_gst', gst_no='$v_gst_no',company_name='$v_company', company_email='$v_company_email', 	tenantType='$v_tenant_type', updated_by='$v_UpdatedBy', power_of_attorney ='$v_power_of_attorney',partner_name ='$v_partner_name',partner_address ='$v_partner_address', partner_pan_no ='$v_partner_pan_no', partner_aadhar_card_no ='$v_partner_aadhar_no', last_modification_date=CURRENT_TIMESTAMP() WHERE tenant_id='$v_tenant_id' ";
  $query = $dbConn->prepare($sql);
  $dbConn->exec($sql);
 
