@@ -141,7 +141,7 @@ if (isset($_GET['id'])) {
         echo "<td>".$row['invoice_no']."</td>";
         echo "<td>".$row['invoice_date']."</td>";
         echo "<td>".$row['tenant_name']."</td>";
-        echo "<td>".$row['property_name']."</td>"; 
+        echo "<td class='text-wrap'>".$row['property_name']."</td>"; 
         echo "<td>".$row['period']."</td>";      
         echo "<td>".$row['total_amount']."</td>"; 
         echo '<td>
