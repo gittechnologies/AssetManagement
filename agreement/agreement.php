@@ -342,7 +342,7 @@ onsubmit="return myfunction()" >
   <select class="form-control form-control-sm" id = "managerName" name="managerName" required>
     <option value="0"> Select Commission Agent </option>
      <?php 
-      $result = $dbConn->query("SELECT manager_id, concat(manager_name,' - ',pan_no) as manager_name FROM det_manager 
+      $result = $dbConn->query("SELECT manager_id, concat(manager_name,' - ',COALESCE(pan_no,'')) as manager_name FROM det_manager 
         where status='Active'");
       $result->execute();
        while($row = $result->fetch(PDO::FETCH_ASSOC))

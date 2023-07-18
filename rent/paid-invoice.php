@@ -84,7 +84,7 @@
 <tbody>
   <?php   
 
-    $result = $dbConn->query("SELECT r.rent_id, r.agreement_id, r.invoice_no, r.creation_date as invoice_date,
+    $result = $dbConn->query("SELECT r.rent_id, r.agreement_id, r.invoice_no,DATE_FORMAT( r.creation_date,'%d-%m-%Y')  as invoice_date,
   (select t.tenant_name from det_tenant t where t.tenant_id = 
   (select a.tenant_id from det_agreement a where a.agreement_id = r.agreement_id)) as tenant_name,
   (select concat(p.property_name,' - ',p.flat_no,', ', nvl(p.location,''), ',', nvl((select c.name from cities c where c.id = p.city_id),'')) 
