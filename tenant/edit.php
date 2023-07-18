@@ -131,7 +131,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
 <li>
    <div class="form-group">
   <label>Date of Birth <span>*</span></label>
-   <input type="date" class="form-control form-control-sm" placeholder="date of birth" name="dob" value="<?php echo $v_dob;?>" required>
+   <input type="text" class="form-control form-control-sm dates" placeholder="date of birth" name="dob" value="<?php echo $v_dob;?>" required>
     <span class="text-danger"></span>
  </div>
 </li>
@@ -334,6 +334,13 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
 
 
 <script>
+
+  $(document).ready(function () {
+    $('input[class$=dates]').datepicker({
+      dateFormat: 'dd-mm-yy'			// Date Format "dd-mm-yy"
+    });
+  });
+
 $(document).ready(function(){
 
 $('#state').on('change', function(){

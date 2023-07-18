@@ -7,7 +7,7 @@
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
    <title>Asset Management</title>
-
+   <link rel="stylesheet" href="../plugins/jquery-ui/jquery-ui.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
  <!-- Google Font: Source Sans Pro -->
@@ -24,8 +24,6 @@
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.min.css">
   <!-- daterange picker -->
@@ -114,8 +112,7 @@ for (key in a.zarazData.tracks.push(e), t) a.zarazData["z_" + key] = t[key]
 
 
 
-</script>
-
+</script>   
 <link rel="stylesheet" href="<?php echo URL ?>css/style.css">
 <link rel="stylesheet" href="<?php echo URL ?>css/responsive.css">
 <link rel="stylesheet" href="<?php echo URL ?>css/font-awesome.css">

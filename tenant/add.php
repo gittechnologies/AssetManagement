@@ -7,7 +7,7 @@ session_start();
 	$v_tenant_name=$_POST['tenantName'];
 	$v_tenant_type=$_POST['tenantType'];
 	$v_gender=$_POST['gender'];
-	$v_dob=$_POST['dob'];
+	$v_dob=date("Y-m-d", strtotime($_POST['dob']));
 	$v_address=$_POST['address'];
 	$v_state=$_POST['state'];
     $v_city=$_POST['city'];

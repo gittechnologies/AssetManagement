@@ -71,7 +71,7 @@
 
 <script src="<?php echo URL ?>js/custom.js"></script>
 <script src="<?php echo URL ?>js/dropzone.js"></script>
-<script type="text/javascript" src="http://w3web.net/wp-includes/js/jquery-1.7.1.min.js"></script>
+<!-- <script type="text/javascript" src="http://w3web.net/wp-includes/js/jquery-1.7.1.min.js"></script> -->
 <!--<script src="js/ModalPopupWindow.js"></script>-->
 <script src="<?php echo URL ?>js/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="<?php echo URL ?>js/select2.min.js"></script>
@@ -244,6 +244,8 @@
     myDropzone.removeAllFiles(true)
   }
   // DropzoneJS Demo Code End
+
+
 </script>
  </body>
 </html>

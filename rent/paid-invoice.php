@@ -111,7 +111,7 @@
         echo '<td>
     <a data-toggle="modal" data-target="#display-property" href="javascript:void(0);" 
         onclick="viewAction('.$row['rent_id'].');" title="View Property" 
-        class="display-property ml-1 btn-ext-small btn btn-sm btn-info" data-propertyid="">
+        class="display-property ml-1 btn-ext-small btn btn-xs btn-info" data-propertyid="">
         <i class="fas fa-eye"></i>
     </a>
         

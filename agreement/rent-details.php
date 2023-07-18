@@ -173,7 +173,7 @@ div class.content-wrapper
 <li>
  <div class="form-group">
   <label>Next Due Date</label>
-   <input type="date" class="form-control form-control-sm" placeholder="Next Due Date" name="nextDueDate" id="nextDueDate"  value="">
+   <input type="text" class="form-control form-control-sm dates" placeholder="Next Due Date" name="nextDueDate" id="nextDueDate"  value="">
     <span class="text-danger"></span>
  </div>
 </li>
@@ -305,7 +305,13 @@ div class.content-wrapper
 <?php include '../footer.php';?> 
 
 <script type="text/javascript">
-	
+
+$(document).ready(function () {
+  $('input[class$=dates]').datepicker({
+    dateFormat: 'dd-mm-yy'			// Date Format "dd-mm-yy"
+  });
+});
+
 $(document).ready(function(){
 $('#fileToUpload').change(function(e){
 var fileName = e.target.files[0].name;

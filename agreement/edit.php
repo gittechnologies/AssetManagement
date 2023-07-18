@@ -186,7 +186,7 @@ onsubmit="return myfunction()" >
 <li>
    <div class="form-group">
   <label>Agreement Date <span>*</span></label>
-   <input type="date" class="form-control form-control-sm" placeholder="agreement Date" name="agreementDate" value="<?php echo $v_agreement_from;?>" required>
+   <input type="text" class="form-control form-control-sm dates" placeholder="agreement Date" name="agreementDate" value="<?php echo $v_agreement_from;?>" required>
     <span class="text-danger"></span>
  </div>
 </li>
@@ -196,7 +196,7 @@ onsubmit="return myfunction()" >
 <li>
  <div class="form-group">
   <label>Agreement Starting Date <span>*</span></label>
-   <input type="date" class="form-control form-control-sm" placeholder="Agreement From" name="agreementFrom" value="<?php echo $v_agreement_from;?>" required>
+   <input type="text" class="form-control form-control-sm dates" placeholder="Agreement From" name="agreementFrom" value="<?php echo $v_agreement_from;?>" required>
     <span class="text-danger"></span>
  </div>
 </li>
@@ -206,7 +206,7 @@ onsubmit="return myfunction()" >
 <li>
  <div class="form-group">
   <label>Agreement End Date <span>*</span></label>
-   <input type="date" class="form-control form-control-sm" placeholder="Agreement To" name="agreementTo" value="<?php echo $v_agreement_to;?>" required>
+   <input type="text" class="form-control form-control-sm dates" placeholder="Agreement To" name="agreementTo" value="<?php echo $v_agreement_to;?>" required>
     <span class="text-danger"></span>
  </div>
 </li>
@@ -217,7 +217,7 @@ onsubmit="return myfunction()" >
 <li>
  <div class="form-group">
   <label>Possession Date</label>
-   <input type="date" class="form-control form-control-sm" placeholder="Possession Date" 
+   <input type="text" class="form-control form-control-sm dates" placeholder="Possession Date" 
    name="possessionDate" value="<?php echo $v_possession_date;?>" >
     <span class="text-danger"></span>
  </div>
@@ -247,7 +247,7 @@ onsubmit="return myfunction()" >
 <li>
  <div class="form-group">
   <label>Deposit Date<span>*</span></label>
-   <input type="date" class="form-control form-control-sm" placeholder="Deposit Date" 
+   <input type="text" class="form-control form-control-sm dates" placeholder="Deposit Date" 
    name="depositDate" value="<?php echo $v_deposit_date;?>" required>
     <span class="text-danger"></span>
  </div>
@@ -429,6 +429,12 @@ onsubmit="return myfunction()" >
 <?php include '../footer.php';?> 
 
 <script type="text/javascript">
+  $(document).ready(function () {
+    $('input[class$=dates]').datepicker({
+      dateFormat: 'dd-mm-yy'			// Date Format "dd-mm-yy"
+    });
+  });
+
   $(document).ready(function() {
   
 

@@ -10,14 +10,15 @@
     $v_owner_id = $_POST['ownerName'];
     $v_tenanty_Id=$_POST['tenantyName'];
     $v_brokerage=$_POST['Brokerage'];
-    $v_agreementDate=$_POST['agreementDate'];
-    $v_agreementFrom=$_POST['agreementFrom'];
-    $v_agreementTo=$_POST['agreementTo'];
-    $v_possessionDate=$_POST['possessionDate'];
+
+    $v_agreementDate=date("Y-m-d", strtotime($_POST['agreementDate']));
+	$v_agreementFrom=date("Y-m-d", strtotime($_POST['agreementFrom']));
+	$v_agreementTo=date("Y-m-d", strtotime($_POST['agreementTo']));
+	$v_possessionDate=date("Y-m-d", strtotime($_POST['possessionDate']));
+	$v_depositDate=date("Y-m-d", strtotime($_POST['depositDate']));
 
     $v_lockingPeriod=$_POST['lockingPeriod'];
     $v_depositAmount=$_POST['depositAmount'];
-    $v_depositDate=$_POST['depositDate'];
     $v_baseRent=$_POST['baseRent'];
     $v_loading_charges=$_POST['loadingCharges'];
 	$v_amc_tenant=$_POST['AmcTenant'];

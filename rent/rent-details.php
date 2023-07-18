@@ -109,7 +109,7 @@ div class.content-wrapper
 <li>
  <div class="form-group">
 	<label for="exampleInputEmail1">Invoice Date</label>
-	<input type="date" class="form-control form-control-sm" placeholder="Invoice Date" name="invoiceDate" id="invoiceDate"  value="<?php echo $v_invoice_date;?>">
+	<input type="text" class="form-control form-control-sm dates" placeholder="Invoice Date" name="invoiceDate" id="invoiceDate"  value="<?php echo $v_invoice_date;?>">
     <span class="text-danger"></span>
  </div>
 </li>
@@ -142,7 +142,7 @@ div class.content-wrapper
 <li>
  <div class="form-group">
   <label>Payment Date</label>
-   <input type="date" class="form-control form-control-sm" placeholder="Payment Date" name="paymentDate" id="paymentDate"  value="">
+   <input type="text" class="form-control form-control-sm dates" placeholder="Payment Date" name="paymentDate" id="paymentDate"  value="">
     <span class="text-danger"></span>
  </div>
 </li>
@@ -269,8 +269,8 @@ $outstanding =$outstanding+$row['amount_paid'];
 		echo "<td>".$row['uploaded_on']."</td>";
 		echo "<td>"; ?>
 		
-		<button type="button" onclick="docUpdate(<?php echo $row['rent_details_id']; ?>)" class="l-1 btn-ext-small btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
-		<button type="button" onclick="docDelete(<?php echo $row['rent_details_id']; ?>)" class="ml-1 btn-ext-small btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
+		<button type="button" onclick="docUpdate(<?php echo $row['rent_details_id']; ?>)" class="l-1 btn-ext-small btn btn-xs btn-primary"><i class="fas fa-edit"></i></button>
+		<button type="button" onclick="docDelete(<?php echo $row['rent_details_id']; ?>)" class="ml-1 btn-ext-small btn btn-xs btn-danger"><i class="fas fa-times"></i></button>
 <?php echo"</td>";
 
 }
@@ -294,7 +294,13 @@ $outstanding =$outstanding+$row['amount_paid'];
 
 
 <script type="text/javascript">
-	
+
+$(document).ready(function () {
+  $('input[class$=dates]').datepicker({
+    dateFormat: 'dd-mm-yy'			// Date Format "dd-mm-yy"
+  });
+});
+
 $(document).ready(function(){
 $('#fileToUpload').change(function(e){
 var fileName = e.target.files[0].name;
@@ -310,7 +316,7 @@ if(fileName!=null || fileName!=''){
 
 function docUpdate(id) {
 	let rent_details_id = id										
-console.log(rent_details_id);
+
 	$.ajax({
 		type:'POST',
 		url:'../ajaxData.php',

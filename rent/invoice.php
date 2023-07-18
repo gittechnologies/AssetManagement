@@ -359,7 +359,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
             <!-- /.invoice -->
           </div><!-- /.col -->
            <!-- this row will not appear when printing -->
-           <div class="row no-print">
+           <div class="row no-print p-3">
                 <div class="col-12">
                   <a href="invoice-print.php?id=<?php echo $v_rent_id;?>" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                   <button type="button" class="btn btn-success float-right" onclick="window.location='manage.php'"><i class="fa fa-window-close"></i> Cancel</button>

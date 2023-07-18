@@ -144,8 +144,8 @@ div class.content-wrapper
 		echo "<td>".$row['uploaded_on']."</td>";
 		echo "<td>"; ?>
 		<!-- <button type="button" onclick="docDelete(<?php echo $row['id']; ?>)" class="btn btn-danger">Delete</button> -->
-		<button type="button" onclick="docUpdate(<?php echo $row['id']; ?>)" class="l-1 btn-ext-small btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
-		<button type="button" onclick="docDelete(<?php echo $row['id']; ?>)" class="ml-1 btn-ext-small btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
+		<button type="button" onclick="docUpdate(<?php echo $row['id']; ?>)" class="l-1 btn-ext-small btn btn-xs btn-primary"><i class="fas fa-edit"></i></button>
+		<button type="button" onclick="docDelete(<?php echo $row['id']; ?>)" class="ml-1 btn-ext-small btn btn-xs btn-danger"><i class="fas fa-times"></i></button>
 <?php echo"</td>";
 
 }

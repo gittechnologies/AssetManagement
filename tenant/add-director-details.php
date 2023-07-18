@@ -78,7 +78,9 @@ if ($uploadOk == 0) {
       } else {
         echo "Sorry, there was an error uploading your file.";
       }
-    } 
+    } else {
+      echo "Data successfully added!";
+    }
   } elseif ($v_form_type == "update" && isset($v_director_id)) {
 
     $result = $dbConn->query("SELECT * FROM det_director where tenant_id = '$v_tenant_id' AND id ='$v_director_id'");

@@ -88,7 +88,7 @@
 <?php   
   $result = $dbConn->query("SELECT b.manager_id, b.manager_name, 
 (select c.name from cities c where c.id = b.city_id) as city, b.location, b.contact_number, b.email_id 
-FROM det_manager b where status = 'Active'");
+FROM det_manager b where status = 'Active' order by b.manager_id desc");
   $result->execute();
    while($row = $result->fetch(PDO::FETCH_ASSOC)) {    
 ?>
@@ -103,19 +103,19 @@ FROM det_manager b where status = 'Active'");
     echo '<td>
 <a data-toggle="modal" data-target="#display-tenant" href="javascript:void(0);" 
     onclick="viewAction('.$row['manager_id'].');" title="View Tenant" 
-    class="display-tenant ml-1 btn-ext-small btn btn-sm btn-info" data-tenantid="">
+    class="display-tenant ml-1 btn-ext-small btn btn-xs btn-info" data-tenantid="">
     <i class="fas fa-eye"></i>
 </a>
     
 <a data-toggle="modal" data-target="#update-tenant" href="javascript:;" 
     onclick="editAction('.$row['manager_id'].');" title="Update Tenant" 
-    class="update-tenant-details ml-1 btn-ext-small btn btn-sm btn-primary"  data-tenantid="">
+    class="update-tenant-details ml-1 btn-ext-small btn btn-xs btn-primary"  data-tenantid="">
     <i class="fas fa-edit"></i>
 </a>
 
 <a data-toggle="modal" data-target="#delete-tenant" href="javascript:void(0);" 
     onclick="deleteAction('.$row['manager_id'].');" title="Delete Tenant" 
-    class="delete-tenant-details ml-1 btn-ext-small btn btn-sm btn-danger"  data-tenantid="">
+    class="delete-tenant-details ml-1 btn-ext-small btn btn-xs btn-danger"  data-tenantid="">
     <i class="fas fa-times"></i>
 </a>
 </td>';

@@ -205,8 +205,8 @@ div class.content-wrapper
 		$count++;
 		echo "<tr>";
 		echo "<td>".$count."</td>"; 
-		echo "<td>".$row['file_desc']."</td>"; 
-		echo "<td>".$row['file_name']."</td>";
+		echo "<td class='text-wrap'>".$row['file_desc']."</td>"; 
+		echo "<td class='text-wrap'>".$row['file_name']."</td>";
 		echo "<td>"; ?>
 	 <a href="download.php?path=<?php echo $row['file_path']; ?>" >
 			download
@@ -217,8 +217,8 @@ div class.content-wrapper
 		echo "<td>".$row['registration_charges']."</td>"; 
 		echo "<td>".$row['legal_charges']."</td>"; 
 		echo "<td>"; ?>
-		<button type="button" onclick="docUpdate(<?php echo $row['doc_id']; ?>)" class="l-1 btn-ext-small btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
-		<button type="button" onclick="docDelete(<?php echo $row['doc_id']; ?>)" class="ml-1 btn-ext-small btn btn-sm btn-danger"><i class="fas fa-times"></i></button>
+		<button type="button" onclick="docUpdate(<?php echo $row['doc_id']; ?>)" class="l-1 btn-ext-small btn btn-xs btn-primary"><i class="fas fa-edit"></i></button>
+		<button type="button" onclick="docDelete(<?php echo $row['doc_id']; ?>)" class="ml-1 btn-ext-small btn btn-xs btn-danger"><i class="fas fa-times"></i></button>
 
 <?php echo"</td>";
 

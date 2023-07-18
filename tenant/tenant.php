@@ -99,7 +99,7 @@
 <li>
    <div class="form-group">
   <label>Date of Birth <span>*</span></label>
-   <input type="date" class="form-control form-control-sm" placeholder="date of birth" name="dob" value="" required>
+   <input type="text" class="form-control form-control-sm dates" placeholder="date of birth" name="dob" value="" required>
     <span class="text-danger"></span>
  </div>
 </li>
@@ -307,11 +307,18 @@
 
 
 <script>
+
+    $(document).ready(function () {
+        $('input[class$=dates]').datepicker({
+            dateFormat: 'dd-mm-yy'			// Date Format "dd-mm-yy"
+        });
+    });
+
 $(document).ready(function(){
 
 $('#prop_type').on('change', function(){
         var id = $(this).val();
-
+        
         if(id){
             $.ajax({
                 type:'POST',

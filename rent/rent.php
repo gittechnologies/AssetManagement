@@ -175,7 +175,7 @@ onsubmit="return myfunction()" >
 <li>
    <div class="form-group">
   <label>Rent Date <span>*</span></label>
-   <input type="date" class="form-control form-control-sm" placeholder="Rent Date" 
+   <input type="text" class="form-control form-control-sm dates" placeholder="Rent Date" 
    name="rentDate" value="" required>
     <span class="text-danger"></span>
  </div>
@@ -261,6 +261,11 @@ onsubmit="return myfunction()" >
 
  <script type="text/javascript">
 
+  $(document).ready(function () {
+    $('input[class$=dates]').datepicker({
+      dateFormat: 'dd-mm-yy'			// Date Format "dd-mm-yy"
+    });
+  });
 
   $(document).ready(function() {
 

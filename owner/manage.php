@@ -83,7 +83,7 @@
 <?php   
   $result = $dbConn->query("SELECT o.owner_id, o.owner_name, 
 (select c.name from cities c where c.id = o.city_id) as city, o.contact_number, o.email_id 
-FROM det_owner o where status = 'Active'");
+FROM det_owner o where status = 'Active' order by o.owner_id desc");
   $result->execute();
   while($row = $result->fetch(PDO::FETCH_ASSOC)) {    
 ?>
@@ -98,19 +98,19 @@ FROM det_owner o where status = 'Active'");
     echo '<td>
 <a data-toggle="modal" data-target="#display-owner" href="javascript:void(0);" 
     onclick="viewAction('.$row['owner_id'].');" title="View Owner" 
-    class="display-owner ml-1 btn-ext-small btn btn-sm btn-info" data-ownerid="">
+    class="display-owner ml-1 btn-ext-small btn btn-xs btn-info" data-ownerid="">
     <i class="fas fa-eye"></i>
 </a>
     
 <a data-toggle="modal" data-target="#update-owner" href="javascript:;" 
     onclick="editAction('.$row['owner_id'].');" title="Update Owner" 
-    class="update-owner-details ml-1 btn-ext-small btn btn-sm btn-primary"  data-ownerid="">
+    class="update-owner-details ml-1 btn-ext-small btn btn-xs btn-primary"  data-ownerid="">
     <i class="fas fa-edit"></i>
 </a>
 
 <a data-toggle="modal" data-target="#delete-owner" href="javascript:void(0);" 
     onclick="deleteAction('.$row['owner_id'].');" title="Delete Owner" 
-    class="delete-owner-details ml-1 btn-ext-small btn btn-sm btn-danger"  data-ownerid="">
+    class="delete-owner-details ml-1 btn-ext-small btn btn-xs btn-danger"  data-ownerid="">
     <i class="fas fa-times"></i>
 </a>
 </td>';

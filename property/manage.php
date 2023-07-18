@@ -89,7 +89,7 @@
 p.location, 
 (select c.name from cities c where c.id = p.city_id) as city,
 (select o.owner_name from det_owner o where o.owner_id = p.owner_id) as owner_name 
-FROM det_property p where status = 'Active'");
+FROM det_property p where status = 'Active' order by p.property_id  desc");
   $result->execute();
   while($row = $result->fetch(PDO::FETCH_ASSOC)) {    
 ?>
@@ -105,19 +105,19 @@ FROM det_property p where status = 'Active'");
         echo '<td>
     <a data-toggle="modal" data-target="#display-property" href="javascript:void(0);" 
         onclick="viewAction('.$row['property_id'].');" title="View Property" 
-        class="display-property ml-1 btn-ext-small btn btn-sm btn-info" data-propertyid="">
+        class="display-property ml-1 btn-ext-small btn btn-xs btn-info" data-propertyid="">
         <i class="fas fa-eye"></i>
     </a>
         
     <a data-toggle="modal" data-target="#update-property" href="javascript:;" 
         onclick="editAction('.$row['property_id'].');" title="Update Property" 
-        class="update-property-details ml-1 btn-ext-small btn btn-sm btn-primary"  data-propertyid="">
+        class="update-property-details ml-1 btn-ext-small btn btn-xs btn-primary"  data-propertyid="">
         <i class="fas fa-edit"></i>
     </a>
 
     <a data-toggle="modal" data-target="#delete-property" href="javascript:void(0);" 
         onclick="deleteAction('.$row['property_id'].');" title="Delete Property" 
-        class="delete-property-details ml-1 btn-ext-small btn btn-sm btn-danger"  data-propertyid="">
+        class="delete-property-details ml-1 btn-ext-small btn btn-xs btn-danger"  data-propertyid="">
         <i class="fas fa-times"></i>
     </a>
     </td>';

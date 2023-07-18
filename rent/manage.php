@@ -147,19 +147,19 @@ if (isset($_GET['id'])) {
         echo '<td>
     <a data-toggle="modal" data-target="#display-property" href="javascript:void(0);" 
         onclick="viewAction('.$row['rent_id'].');" title="View Property" 
-        class="display-property ml-1 btn-ext-small btn btn-sm btn-info" data-propertyid="">
+        class="display-property ml-1 btn-ext-small btn btn-xs btn-info" data-propertyid="">
         <i class="fas fa-eye"></i>
     </a>
         
     <a data-toggle="modal" data-target="#update-property" href="javascript:;" 
         onclick="editAction('.$row['rent_id'].');" title="Update Property" 
-        class="update-property-details ml-1 btn-ext-small btn btn-sm btn-primary"  data-propertyid="">
+        class="update-property-details ml-1 btn-ext-small btn btn-xs btn-primary"  data-propertyid="">
         <i class="fas fa-edit"></i>
     </a>
 
     <a data-toggle="modal" data-target="#delete-property" href="javascript:void(0);" 
         onclick="deleteAction('.$row['rent_id'].');" title="Delete Property" 
-        class="delete-property-details ml-1 btn-ext-small btn btn-sm btn-danger"  data-propertyid="">
+        class="delete-property-details ml-1 btn-ext-small btn btn-xs btn-danger"  data-propertyid="">
         <i class="fas fa-times"></i>
     </a>
     </td>';    

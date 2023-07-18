@@ -102,9 +102,9 @@
 (select c.name from cities c where c.id = (select p.city_id from det_property p where p.property_id = a.property_id)) as city,
 (select t.tenant_name from det_tenant t where t.tenant_id = a.tenant_id) as tenant_name,
 (select mc.param_value from mst_common_param mc where mc.param_code = (select p.property_type from det_property p where p.property_id = a.property_id)) as property_type,
-a.agreement_from, a.agreement_to, DATEDIFF(a.agreement_from, a.agreement_to) AS days, 
+DATE_FORMAT(agreement_from,'%d-%m-%Y') as agreement_from, DATE_FORMAT(agreement_to,'%d-%m-%Y') as agreement_to, DATEDIFF(a.agreement_from, a.agreement_to) AS days, 
 a.locking_period, a.status, '4' as rentCount, '5' as agreeCount
-FROM det_agreement a where status ='Active' ORDER BY agreement_id desc;
+FROM det_agreement a where status ='Active' ORDER BY a.agreement_id desc;
 ");
   $result->execute();
   while($row = $result->fetch(PDO::FETCH_ASSOC)) {    
@@ -126,8 +126,8 @@ FROM det_agreement a where status ='Active' ORDER BY agreement_id desc;
    
    <?php
         echo "<td><input type='radio' name='property' id=".$row['agreement_id']." value=".$row['agreement_id']." ' onclick='showCount()'/></td>";
-        echo "<td class='w-25'>".$row['property_name']."</td>";
-        echo "<td>".$row['tenant_name']."</td>";
+        echo "<td class='text-wrap'>".$row['property_name']."</td>";
+        echo "<td >".$row['tenant_name']."</td>";
         echo "<td>".$row['property_type']."</td>";
         //echo "<td>".$row['property_location'].", ".$row['city']."</td>";
         echo "<td>".$row['agreement_from']."</td>"; 
@@ -137,19 +137,19 @@ FROM det_agreement a where status ='Active' ORDER BY agreement_id desc;
         echo '<td>
     <a data-toggle="modal" data-target="#display-property" href="javascript:void(0);" 
         onclick="viewAction('.$row['agreement_id'].');" title="View Property" 
-        class="display-property ml-1 btn-ext-small btn btn-sm btn-info" data-propertyid="">
+        class="display-property ml-1 btn-ext-small btn btn-xs btn-info" data-propertyid="">
         <i class="fas fa-eye"></i>
     </a>
         
     <a data-toggle="modal" data-target="#update-property" href="javascript:;" 
         onclick="editAction('.$row['agreement_id'].');" title="Update Property" 
-        class="update-property-details ml-1 btn-ext-small btn btn-sm btn-primary"  data-propertyid="">
+        class="update-property-details ml-1 btn-ext-small btn btn-xs btn-primary"  data-propertyid="">
         <i class="fas fa-edit"></i>
     </a>
 
     <a data-toggle="modal" data-target="#delete-property" href="javascript:void(0);" 
         onclick="deleteAction('.$row['agreement_id'].');" title="Delete Property" 
-        class="delete-property-details ml-1 btn-ext-small btn btn-sm btn-danger"  data-propertyid="">
+        class="delete-property-details ml-1 btn-ext-small btn btn-xs btn-danger"  data-propertyid="">
         <i class="fas fa-times"></i>
     </a>
     </td>';

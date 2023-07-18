@@ -10,14 +10,14 @@ include_once ('../conn.php'); ?>
 	$v_owner_id=$_POST['ownerName'];
 
 
-	$v_agreementDate=$_POST['agreementDate'];
-	$v_agreementFrom=$_POST['agreementFrom'];
-	$v_agreementTo=$_POST['agreementTo'];
-	$v_possessionDate=$_POST['possessionDate'];
+	$v_agreementDate=date("Y-m-d", strtotime($_POST['agreementDate']));
+	$v_agreementFrom=date("Y-m-d", strtotime($_POST['agreementFrom']));
+	$v_agreementTo=date("Y-m-d", strtotime($_POST['agreementTo']));
+	$v_possessionDate=date("Y-m-d", strtotime($_POST['possessionDate']));
 
 	$v_lockingPeriod=$_POST['lockingPeriod'];
 	$v_depositAmount=$_POST['depositAmount'];
-	$v_depositDate=$_POST['depositDate'];
+	$v_depositDate=date("Y-m-d", strtotime($_POST['depositDate']));
 	$v_baseRent=$_POST['baseRent'];
 
 

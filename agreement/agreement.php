@@ -211,8 +211,8 @@ onsubmit="return myfunction()" >
 
 <li>
    <div class="form-group">
-  <label>Agreement Date <span>*</span></label>
-   <input type="date" class="form-control form-control-sm" placeholder="agreement Date" name="agreementDate" value="" required>
+  <label>Agreement Date<span>*</span></label>
+   <input type="text" class="form-control form-control-sm dates" placeholder="Select Agreement Date" name="agreementDate" id="agreementDate" value="" required>
     <span class="text-danger"></span>
  </div>
 </li>
@@ -223,7 +223,7 @@ onsubmit="return myfunction()" >
 <li>
  <div class="form-group">
   <label>Agreement Starting Date <span>*</span></label>
-   <input type="date" class="form-control form-control-sm" placeholder="Agreement From" name="agreementFrom" value="" required>
+   <input type="text" class="form-control form-control-sm dates" placeholder="Agreement From" name="agreementFrom" value="" required>
     <span class="text-danger"></span>
  </div>
 </li>
@@ -234,7 +234,7 @@ onsubmit="return myfunction()" >
 <li>
  <div class="form-group">
   <label>Agreement End Date <span>*</span></label>
-   <input type="date" class="form-control form-control-sm" placeholder="Agreement To" name="agreementTo" value="" required>
+   <input type="text" class="form-control form-control-sm dates" placeholder="Agreement To" name="agreementTo" value="" required>
     <span class="text-danger"></span>
  </div>
 </li>
@@ -246,7 +246,7 @@ onsubmit="return myfunction()" >
 <li>
  <div class="form-group">
   <label>Possession Date</label>
-   <input type="date" class="form-control form-control-sm" placeholder="Possession Date" 
+   <input type="text" class="form-control form-control-sm dates" placeholder="Possession Date" 
    name="possessionDate" value="" >
     <span class="text-danger"></span>
  </div>
@@ -294,7 +294,7 @@ onsubmit="return myfunction()" >
 <li>
  <div class="form-group">
   <label>Deposit Date<span>*</span></label>
-   <input type="date" class="form-control form-control-sm" placeholder="Deposit Date" 
+   <input type="text" class="form-control form-control-sm dates" placeholder="Deposit Date" 
    name="depositDate" value="" required>
     <span class="text-danger"></span>
  </div>
@@ -479,6 +479,13 @@ onsubmit="return myfunction()" >
 <?php include '../footer.php';?> 
 <script type="text/javascript">
 
+
+$(document).ready(function () {
+  $('input[class$=dates]').datepicker({
+    dateFormat: 'dd-mm-yy'			// Date Format "dd-mm-yy"
+  });
+});
+
   $(document).ready(function() {
 
       $('[id="docupload"]').click(function() { //ID begins with "del"
@@ -589,4 +596,6 @@ $("#propertyName").on('change', function(){
 
   // do whatever here
 });
+
+
 </script>

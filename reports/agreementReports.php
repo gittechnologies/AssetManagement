@@ -64,12 +64,12 @@ include '../menu.php';
                                 <li>
                                     <div class="form-group status_type" id="fromId">
                                         <label>From</label>
-   <input type="date" class="form-control form-control-sm" placeholder="agreement From" 
+   <input type="text" class="form-control form-control-sm dates" placeholder="agreement From" 
    name="agreementFrom" id="agreementFrom"></div>
 
                     <div class="form-group status_type" id="toId">
                         <label for="exampleInputEmail1">To </label>
-   <input type="date" class="form-control form-control-sm" placeholder="Agreement To" 
+   <input type="text" class="form-control form-control-sm dates" placeholder="Agreement To" 
    name="agreementTo" id="agreementTo">
                         
                     </div>
@@ -139,7 +139,7 @@ include '../menu.php';
                         $strsql = "SELECT agreement_id, 
 concat(p.property_name,',',p.location,',',(select c.name from cities c where c.id=p.city_id), ' - ',p.pincode, ', ',(select s.name from states s where s.id=p.state_id)) as property, 
 concat(t.tenant_name,'-',t.pan_no) as tenant, 
-agreement_from, agreement_to, deposit_amount, locking_period, rent_per_month, 
+DATE_FORMAT(a.agreement_from,'%d-%m-%Y') as agreement_from, DATE_FORMAT(a.agreement_to,'%d-%m-%Y') as agreement_to, deposit_amount, locking_period, rent_per_month, 
 (SELECT concat(m.manager_name,'-', m.pan_no) FROM det_manager m where m.manager_id = a.manager_id) as manager
 from det_agreement a, det_property p, det_tenant t
 where a.property_id = p.property_id and a.tenant_id = t.tenant_id";
@@ -166,21 +166,21 @@ where a.property_id = p.property_id and a.tenant_id = t.tenant_id";
                      <?php
                 }
               }else if($v_categories == "Date"){ 
-                $v_agreement_from = $_POST['agreementFrom'];
-                $v_agreement_to = $_POST['agreementTo'];
+                $v_agreement_from = date("Y-m-d", strtotime($_POST['agreementFrom']));
+                $v_agreement_to = date("Y-m-d", strtotime($_POST['agreementTo']));
                 if($v_agreement_to=="" && $v_agreement_from==""){
                     $strsql = "SELECT agreement_id, a.agreement_date, 
 concat(p.property_name,',',p.location,',',(select c.name from cities c where c.id=p.city_id), ' - ',p.pincode, ', ',(select s.name from states s where s.id=p.state_id)) as property, 
 concat(t.tenant_name,'-',t.pan_no) as tenant, 
-agreement_from, agreement_to, deposit_amount, locking_period, rent_per_month, 
+DATE_FORMAT(a.agreement_from,'%d-%m-%Y') as agreement_from, DATE_FORMAT(a.agreement_to,'%d-%m-%Y') as agreement_to, deposit_amount, locking_period, rent_per_month, 
 (SELECT concat(m.manager_name,'-', m.pan_no) FROM det_manager m where m.manager_id = a.manager_id) as manager
 from det_agreement a, det_property p, det_tenant t
 where a.property_id = p.property_id and a.tenant_id = t.tenant_id";
         }else{
-             $strsql = "SELECT a.agreement_id, a.agreement_date,
+             $strsql = "SELECT a.agreement_id,DATE_FORMAT(a.agreement_date,'%d-%m-%Y') as agreement_date ,
 concat(p.property_name,',',p.location,',',(select c.name from cities c where c.id=p.city_id), ' - ',p.pincode, ', ',(select s.name from states s where s.id=p.state_id)) as property, 
 concat(t.tenant_name,'-',t.pan_no) as tenant, 
-agreement_from, agreement_to, deposit_amount, locking_period, rent_per_month, 
+DATE_FORMAT(a.agreement_from,'%d-%m-%Y') as agreement_from, DATE_FORMAT(a.agreement_to,'%d-%m-%Y') as agreement_to, deposit_amount, locking_period, rent_per_month, 
 (SELECT concat(m.manager_name,'-', m.pan_no) FROM det_manager m where m.manager_id = a.manager_id) as manager
 from det_agreement a, det_property p, det_tenant t
 where a.property_id = p.property_id and a.tenant_id = t.tenant_id 
@@ -249,18 +249,23 @@ and a.agreement_date between '$v_agreement_from' and '$v_agreement_to'";
      
 
 <script>
+  $(document).ready(function () {
+    $('input[class$=dates]').datepicker({
+      dateFormat: 'dd-mm-yy'			// Date Format "dd-mm-yy"
+    });
+  });
 
-    $(document).ready(function () {
-     $('#categories').on('change', function () {
-       var id = $(this).val();
-        if (id == "Date") {
-            $("div.status_type").hide();
-            $("#fromId").show();
-            $("#toId").show();
-        } else {
-            $("div.status_type").hide();
-        }
-        });
-     });
+  $(document).ready(function () {
+    $('#categories').on('change', function () {
+      var id = $(this).val();
+      if (id == "Date") {
+          $("div.status_type").hide();
+          $("#fromId").show();
+          $("#toId").show();
+      } else {
+          $("div.status_type").hide();
+      }
+      });
+    });
  </script>
          <?php include '../footer.php'; ?> 

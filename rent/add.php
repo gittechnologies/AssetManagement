@@ -6,7 +6,7 @@ include_once ('../conn.php'); ?>
 	$v_gstStatus = 'N';
 	$v_gstAmt='0';
 	$v_agreement_id=$_POST['agreement'];
-	$v_rent_date=$_POST['rentDate'];
+	$v_rent_date= date("Y-m-d", strtotime($_POST['rentDate']));
 	$v_base_rent=$_POST['baseRent'];
 	// $v_otherChargesDesc=$_POST['otherChargesDesc'];
 	// $v_otherChargesAmt=$_POST['otherChargesAmt'];
