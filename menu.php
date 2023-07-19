@@ -282,21 +282,21 @@ echo ' '.$_SESSION["UserName"].'';
 <li class="nav-item menu-is-opening">
  <a href="#" class="nav-link active ">
 <i class="nav-icon fa fa-user-circle-o"> </i>  
- <p>Commission Agent<i class="fa fa-angle-left right"></i>
+ <p>Agent<i class="fa fa-angle-left right"></i>
    </p>
  </a>
  <ul class="nav nav-treeview">
  <li class="nav-item">
   <a href="/<?php echo FOLDER_NAME ?>/manager/manager.php" class="nav-link nav-tree active">
    <i class="fa fa-circle-o" aria-hidden="true"></i>
-    <p>Add Commission Agent</p>
+    <p>Add Agent</p>
    </a>
  </li>
 
 <li class="nav-item">
  <a href="/<?php echo FOLDER_NAME ?>/manager/manage.php" class="nav-link nav-tree">
   <i class="fa fa-circle-o" aria-hidden="true"></i>
-   <p>Commission Agent Details</p>
+   <p>Agent Details</p>
  </a>
 </li>
 </ul>

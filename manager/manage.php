@@ -37,10 +37,10 @@
     <div class="col-md-12">
      <div class="card card-primary mt-2">
       <div class="card-header">
-       <h3 class="card-title">Commission Agent</h3>
+       <h3 class="card-title">Agent</h3>
 	   <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active">Commission Agent</li>
+      <li class="breadcrumb-item active">Agent</li>
      </ol>
       </div>
 	 </div>
@@ -76,7 +76,7 @@
 <table id="manageManager" class="table table-bordered table-hover small">
  <thead>
   <tr>
-    <th>Commission Agent Name</th>
+    <th>Agent Name</th>
     <th>Location</th>
     <th>Contact Number</th>
     <th>Email</th>     
@@ -196,7 +196,7 @@ function editAction(id)
 function deleteAction(id)
 {
     let text;
-    if (confirm("Are you sure you want to delete this Commission Agent?") == true) {
+    if (confirm("Are you sure you want to delete this Agent?") == true) {
       var url = 'delete.php?id='+encodeURIComponent(id);
       window.location = url;
       //alert("Deleted Successfully !");

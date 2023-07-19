@@ -130,7 +130,7 @@ include '../menu.php';
                         <th>Locking Period (In Months)</th>
                         <th>Deposite (Rs)</th>
                         <th>Rent Per Month (Rs)</th>
-                        <th>Commission Agent</th>                   
+                        <th>Agent</th>                   
                   </tr>
                   </thead>
                   
@@ -226,7 +226,7 @@ and a.agreement_date between '$v_agreement_from' and '$v_agreement_to'";
                 <th>Locking Period (In Months)</th>
                 <th>Deposite (Rs)</th>
                 <th>Rent Per Month (Rs)</th>
-                <th>Commission Agent</th>
+                <th>Agent</th>
               </tr>
           </tfoot>   
         </table> 

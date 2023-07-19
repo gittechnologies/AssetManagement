@@ -11,10 +11,10 @@
     <div class="col-md-12">
      <div class="card card-primary mt-2">
       <div class="card-header">
-       <h3 class="card-title">Add Commission Agent</h3>
+       <h3 class="card-title">Add Agent</h3>
 	   <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active">Add Commission Agent</li>
+      <li class="breadcrumb-item active">Add Agent</li>
      </ol>
      </div>
 	  </div>
@@ -31,12 +31,12 @@
       
 <form action="add.php" name="forml" id="form1" method="POST" onsubmit="return myfunction()" >
 
-                  <!----------Commission Agent Details------------->
+                  <!----------Agent Details------------->
 
 <input type="hidden" name="_token" value="eEifbbuEEsdQtKP6KyzLrtGiJ0E7ZF8L41w0BdEr"> 
 <div class="card-primary2">
 <div class="card-header2"> 
-  <h3 class="card-title">Commission Agent Details</h3>
+  <h3 class="card-title">Agent Details</h3>
 </div>
 <ul class="add-lead-ul">
 
@@ -45,8 +45,8 @@
 
 <li>
    <div class="form-group">
-  <label>Commission Agent Name<span>*</span></label>
-   <input type="text" class="form-control form-control-sm" placeholder="Commission Agent Name" name="managerName" onkeyup="this.value= this.value.replace(/[^'a-zA-Z0-9]+$/, '')" required>
+  <label>Agent Name<span>*</span></label>
+   <input type="text" class="form-control form-control-sm" placeholder="Agent Name" name="managerName" onkeyup="this.value= this.value.replace(/[^'a-zA-Z0-9]+$/, '')" required>
     <span class="text-danger"></span>
  </div>
 </li>

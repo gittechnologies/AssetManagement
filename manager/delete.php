@@ -7,7 +7,7 @@ $sqlInv = $dbConn->query("SELECT agreement_id from det_agreement where manager_i
 $sqlInv->execute();
 if($row = $sqlInv->fetch(PDO::FETCH_ASSOC))
     {
-       echo "<script>alert('You can not delete this Commission Agent !')</script>";
+       echo "<script>alert('You can not delete this Agent !')</script>";
 
     }else{
 $v_status='InActive';

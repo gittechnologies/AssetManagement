@@ -106,10 +106,10 @@ div class.content-wrapper
     <div class="col-md-12">
      <div class="card card-primary mt-2">
       <div class="card-header">
-       <h3 class="card-title">Commission Agent Details</h3>
+       <h3 class="card-title">Agent Details</h3>
 	   <ol class="breadcrumb float-sm-right">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item active">Commission Agent Details</li>
+      <li class="breadcrumb-item active">Agent Details</li>
      </ol>
       </div>
 	 </div>
@@ -131,7 +131,7 @@ div class.content-wrapper
 <input type="hidden" name="_token" value="eEifbbuEEsdQtKP6KyzLrtGiJ0E7ZF8L41w0BdEr"> 
 <div class="card-primary2">
 <div class="card-header2"> 
-  <h3 class="card-title">Commission Agent Details</h3>
+  <h3 class="card-title">Agent Details</h3>
 </div>
 <ul class="add-lead-ul">
 
@@ -144,7 +144,7 @@ div class.content-wrapper
 
 <li>
    <div class="form-group">
-  <label>Commission Agent Name<span>*</span></label>
+  <label>Agent Name<span>*</span></label>
    <label class="form-control form-control-sm"><?php echo $v_manager_name;?></label>
  </div>
 </li>

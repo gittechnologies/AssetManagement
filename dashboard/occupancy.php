@@ -99,7 +99,7 @@ div class.content-wrapper
     <th>Tenant Name</th>
     <th>Owner</th>
     <th>Rent Per Month(Rs.)</th>
-    <th>Commission Agent</th>    
+    <th>Agent</th>    
     <th>Status</th>
   </tr>
   </thead>

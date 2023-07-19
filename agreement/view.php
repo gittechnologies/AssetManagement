@@ -346,7 +346,7 @@ onsubmit="return myfunction()" >
 <!----------Manager Name------------->
 <li>
  <div class="form-group">
-  <label>Commission Agent Name<span>*</span></label>
+  <label>Agent Name<span>*</span></label>
   <label class="form-control form-control-sm">
     <?php 
       $result = $dbConn->query("SELECT manager_id, concat(manager_name,' - ',pan_no) as manager_name FROM det_manager 
