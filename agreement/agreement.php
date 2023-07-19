@@ -338,9 +338,9 @@ onsubmit="return myfunction()" >
                         <!----------Manager Name------------->
 <li>
  <div class="form-group">
-  <label>Commission Agent Name<span>*</span></label>
+  <label>Agent Name<span>*</span></label>
   <select class="form-control form-control-sm" id = "managerName" name="managerName" required>
-    <option value="0"> Select Commission Agent </option>
+    <option value="0"> Select Agent </option>
      <?php 
       $result = $dbConn->query("SELECT manager_id, concat(manager_name,' - ',COALESCE(pan_no,'')) as manager_name FROM det_manager 
         where status='Active'");
