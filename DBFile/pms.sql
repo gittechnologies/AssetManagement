@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2023 at 02:26 PM
+-- Generation Time: Jul 22, 2023 at 08:21 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `asset_management`
+-- Database: `pms`
 --
 
 -- --------------------------------------------------------
@@ -48012,6 +48012,7 @@ INSERT INTO `cities` (`id`, `name`, `state_id`) VALUES
 CREATE TABLE `det_agreement` (
   `agreement_id` int(100) NOT NULL,
   `property_id` int(100) NOT NULL,
+  `owner_id` int(11) NOT NULL,
   `tenant_id` int(100) NOT NULL,
   `agreement_date` varchar(100) DEFAULT NULL,
   `agreement_from` varchar(100) NOT NULL,
@@ -48029,7 +48030,7 @@ CREATE TABLE `det_agreement` (
   `loading_charges` varchar(255) NOT NULL,
   `amc_tenant` varchar(255) NOT NULL,
   `remark` varchar(500) NOT NULL,
-  `charges_paidby_tenant` varchar(100) NOT NULL,
+  `charges_paidby_tenant` varchar(100) DEFAULT NULL,
   `status` varchar(100) NOT NULL,
   `creation_date` varchar(100) NOT NULL,
   `last_modification_date` varchar(100) NOT NULL,
@@ -48041,10 +48042,13 @@ CREATE TABLE `det_agreement` (
 -- Dumping data for table `det_agreement`
 --
 
-INSERT INTO `det_agreement` (`agreement_id`, `property_id`, `tenant_id`, `agreement_date`, `agreement_from`, `agreement_to`, `possession_date`, `locking_period`, `deposit_amount`, `deposit_date`, `rent_per_month`, `gst_applicable`, `gst_amount`, `maintainance_charges`, `manager_id`, `brokerage`, `loading_charges`, `amc_tenant`, `remark`, `charges_paidby_tenant`, `status`, `creation_date`, `last_modification_date`, `added_by`, `updated_by`) VALUES
-(16, 1, 1, '2023-01-20', '2023-01-20', '2024-01-25', '2023-01-28', '11', 120000, '2023-01-12', 12000, 'Y', 2160, 5000, 0, '', '', '', '', 'Water', 'Active', '2023-01-19 12:10:35', '2023-01-20 12:44:24', 'muskan@gmail.com', 'muskan@gmail.com'),
-(17, 2, 10, '2023-02-01', '2023-02-01', '2024-01-31', '2023-02-01', '1', 50000, '2023-01-21', 10000, 'N', 0, 5000, 4, '', '', '', '', 'Property', 'Active', '2023-01-20 13:48:54', '2023-01-20 13:59:12', 'muskan@gmail.com', 'muskan@gmail.com'),
-(18, 3, 10, '2023-01-11', '2023-01-25', '2027-04-29', '2023-01-25', '11', 100000, '2023-01-20', 10000, 'N', 0, 0, 3, '', '', '', '', 'Water', 'Active', '2023-01-20 13:51:29', '2023-01-20 13:51:29', 'muskan@gmail.com', '');
+INSERT INTO `det_agreement` (`agreement_id`, `property_id`, `owner_id`, `tenant_id`, `agreement_date`, `agreement_from`, `agreement_to`, `possession_date`, `locking_period`, `deposit_amount`, `deposit_date`, `rent_per_month`, `gst_applicable`, `gst_amount`, `maintainance_charges`, `manager_id`, `brokerage`, `loading_charges`, `amc_tenant`, `remark`, `charges_paidby_tenant`, `status`, `creation_date`, `last_modification_date`, `added_by`, `updated_by`) VALUES
+(16, 2, 1, 1, '2023-01-13', '2023-01-21', '2024-01-29', '2023-01-18', '12', 12000, '2023-01-20', 12000, 'Y', 2160, 5000, 0, '12', '12', '12', 'df', 'Water', 'Active', '2023-01-19 12:10:35', '2023-05-24 11:15:46', 'muskan@gmail.com', 'info@gittechnologies.com'),
+(17, 2, 0, 10, '2023-02-01', '2023-02-01', '2024-01-31', '2023-02-01', '1', 50000, '2023-01-21', 10000, 'N', 0, 5000, 4, '', '', '', '', 'Property', 'Active', '2023-01-20 13:48:54', '2023-01-20 13:59:12', 'muskan@gmail.com', 'muskan@gmail.com'),
+(18, 3, 0, 10, '2023-01-11', '2023-01-25', '2027-04-29', '2023-01-25', '11', 100000, '2023-01-20', 10000, 'N', 0, 0, 3, '', '', '', '', 'Water', 'Active', '2023-01-20 13:51:29', '2023-01-20 13:51:29', 'muskan@gmail.com', ''),
+(20, 4, 1, 10, '2023-05-17', '2023-05-23', '2023-05-23', '2023-05-23', '12', 1000, '2023-05-25', 14000, 'Y', 2520, 102, 3, '12', '12', '22', 'test', NULL, 'Active', '2023-05-24 11:14:32', '2023-05-24 11:14:32', 'info@gittechnologies.com', ''),
+(21, 0, 0, 0, '18-07-2023', '', '', '', '', 0, '', 0, 'N', 0, 0, 0, '', '', '', '', NULL, 'InActive', '2023-07-17 16:13:59', '2023-07-18 13:23:07', 'info@gittechnologies.com', ''),
+(22, 6, 1, 13, '20-07-2023', '21-07-2023', '24-07-2023', '21-07-2023', '1234', 1000, '2023-07-26', 20, 'Y', 4, 102, 4, '12', '12', '22', '', NULL, 'Active', '2023-07-17 16:17:06', '2023-07-18 14:33:27', 'info@gittechnologies.com', 'info@gittechnologies.com');
 
 -- --------------------------------------------------------
 
@@ -48076,7 +48080,15 @@ CREATE TABLE `det_director` (
 INSERT INTO `det_director` (`id`, `tenant_id`, `name`, `address`, `pan_no`, `cin_llp`, `file_name`, `file_path`, `uploaded_by`, `uploaded_on`, `file_desc`, `status`, `created_at`, `updated_at`) VALUES
 (1, 1, 'rohan', 'sanpada', 'AAAPZ1234C', 1234, 'ResumeSaurabhSale (3).pdf', '/uploadedDoc/GIT/ResumeSaurabhSale (3).pdf', 'GIT', '2023-05-09 15:20:58', 'test', 0, '2023-05-09 15:20:58', '2023-05-09 15:20:58'),
 (2, 1, 'rohini', 'test', 'AAAPZ1234C', 1234, 'ResumeSaurabhSale (3).pdf', '/uploadedDoc/GIT/ResumeSaurabhSale (3).pdf', 'GIT', '2023-05-09 15:28:34', 'test', 0, '2023-05-09 15:28:34', '2023-05-09 15:28:34'),
-(3, 1, 'rohan', 'test', 'AAAPZ1234C', 1234, 'ResumeSaurabhSale (3).pdf', '/uploadedDoc/GIT/ResumeSaurabhSale (3).pdf', 'GIT', '2023-05-10 16:54:16', 'test', 1, '2023-05-10 16:54:16', '2023-05-10 16:54:16');
+(3, 1, 'rohan', 'test', 'AAAPZ1234C', 1234, 'ResumeSaurabhSale (3).pdf', '/uploadedDoc/GIT/ResumeSaurabhSale (3).pdf', 'GIT', '2023-05-10 16:54:16', 'test', 1, '2023-05-10 16:54:16', '2023-05-10 16:54:16'),
+(4, 14, 'rohan', 'test', 'AAAPZ1234C', 1234, '', '', 'GIT', '2023-05-26 12:53:33', '', 1, '2023-05-26 12:53:33', '2023-05-26 12:53:33'),
+(5, 15, 'rushabh', 'test', 'AAAPZ1234C', 1234, 'ResumeSaurabhSale', 'ResumeSaurabhSale_1685179237.pdf', 'GIT', '2023-05-27 14:50:36', 'test', 1, '2023-05-27 14:50:36', '2023-05-27 14:50:36'),
+(6, 15, 'rushabh', '', 'AAAPZ1234C', 0, '', '_1685179318.pdf', 'GIT', '2023-05-27 14:51:58', 'test', 0, '2023-05-27 14:51:58', '2023-05-27 14:51:58'),
+(7, 15, 'rohan', '', 'AAAPZ1234C', 0, '1685097499 (2)', '1685097499 (2)_1685179420.pdf', 'GIT', '2023-05-27 14:53:39', 'test', 1, '2023-05-27 14:53:39', '2023-05-27 14:53:39'),
+(8, 15, 'rohan', 'test', 'AAAPZ1234C', 22, '1685097499 (2)', '1685097499 (2)_1685180253.pdf', 'GIT', '2023-05-27 14:54:03', 'test123', 1, '2023-05-27 14:54:03', '2023-05-27 14:54:03'),
+(9, 15, 'rohini', 'test', 'AAAPZ1234C', 0, 'ResumeSaurabhSale (3) (5)', 'ResumeSaurabhSale (3) (5)_1685180284.pdf', 'GIT', '2023-05-27 15:08:04', 'cge', 1, '2023-05-27 15:08:04', '2023-05-27 15:08:04'),
+(10, 14, 'rohini', '', 'AAAPZ1234C', 10, 'download', 'download_1689140430.pdf', 'GIT', '2023-05-30 13:28:51', 'test', 1, '2023-05-30 13:28:51', '2023-05-30 13:28:51'),
+(11, 19, 'rohan', 'test', 'AAAPZ1234C', 1234, '', '', 'GIT', '2023-07-18 13:01:27', '', 1, '2023-07-18 13:01:27', '2023-07-18 13:01:27');
 
 -- --------------------------------------------------------
 
@@ -48140,7 +48152,32 @@ INSERT INTO `det_file_upload` (`doc_id`, `agreement_id`, `file_name`, `file_path
 (34, 18, 'ResumeSaurabhSale (3).pdf', '/uploadedDoc/GIT/ResumeSaurabhSale (3).pdf', 'A', 'GIT', '2023-05-06 17:12:14', '0', 'test', 0, 0, 0),
 (35, 18, 'Asset Management (13).pdf', '/uploadedDoc/GIT/Asset Management (13).pdf', 'A', 'GIT', '2023-05-06 17:13:49', '1', 'test', 0, 0, 0),
 (36, 18, 'ResumeSaurabhSale (3).pdf', '/uploadedDoc/GIT/ResumeSaurabhSale (3).pdf', 'A', 'GIT', '2023-05-08 12:45:50', '1', '', 0, 0, 0),
-(37, 18, 'ResumeSaurabhSale (3).pdf', '/uploadedDoc/GIT/ResumeSaurabhSale (3).pdf', 'A', 'GIT', '2023-05-08 12:46:56', '1', '', 0, 0, 0);
+(37, 18, 'ResumeSaurabhSale (3).pdf', '/uploadedDoc/GIT/ResumeSaurabhSale (3).pdf', 'A', 'GIT', '2023-05-08 12:46:56', '1', '', 0, 0, 0),
+(38, 18, 'test.pdf', '/uploadedDoc/GIT/test.pdf', 'A', 'GIT', '2023-05-26 15:35:53', '1', 'test12', 1, 1, 1),
+(39, 18, 'test.pdf', '/uploadedDoc/GIT/test.pdf', 'A', 'GIT', '2023-05-26 15:40:17', '1', 'test', 0, 0, 0),
+(40, 18, 'test.pdf', '/uploadedDoc/GIT/test.pdf', 'A', 'GIT', '2023-05-26 15:42:48', '1', 'test', 0, 0, 0),
+(41, 18, '1685097499.pdf', '../uploadedDoc/GIT/1685164585.pdf', 'A', '2023-05-27 10:46:24', '2023-05-26 15:47:56', '1', 'test123', 10, 11, 12),
+(42, 18, 'test.pdf', '../uploadedDoc/GIT/test.pdf', 'A', 'GIT', '2023-05-26 15:48:08', '1', 'test', 0, 0, 0),
+(43, 18, 'test (1).pdf', '../uploadedDoc/GIT/1685096900.', 'A', 'GIT', '2023-05-26 15:58:20', '1', 'test', 0, 0, 0),
+(44, 18, 'test (1).pdf', '../uploadedDoc/GIT/1685097367.pdf', 'A', '2023-05-27 10:43:27', '2023-05-26 16:06:07', '', 'test123', 10, 11, 12),
+(45, 18, 'test (1).pdf', '../uploadedDoc/GIT/1685097499.pdf', 'A', 'GIT', '2023-05-26 16:08:18', '1', 'test', 0, 0, 0),
+(46, 18, '1685097499.pdf', '../uploadedDoc/GIT/1685165149.pdf', 'A', '2023-05-27 10:55:49', '2023-05-26 18:17:56', '0', 'testing', 11, 10, 0),
+(47, 18, 'test (1).pdf', '../uploadedDoc/GIT/1685165502.pdf', 'A', '2023-05-27 11:01:42', '2023-05-27 10:59:07', '1', 'cge', 12, 23, 21),
+(48, 18, '', '', 'A', '2023-05-27 14:20:39', '2023-05-27 12:26:24', '1', 'vwx', 11, 22, 33),
+(49, 18, 'test (1).', 'test (1)._1685171560.pdf', 'A', 'GIT', '2023-05-27 12:42:39', '1', 'we', 4, 4, 4),
+(50, 18, 'test (1)', 'test (1)_1685171657.pdf', 'A', 'GIT', '2023-05-27 12:44:17', '1', 'cge', 1, 1, 1),
+(51, 18, 'test (1)', 'test (1)_1685171806.pdf', 'A', 'GIT', '2023-05-27 12:46:45', '1', 'ree', 12, 1, 41),
+(52, 18, 'ResumeSaurabhSale', 'ResumeSaurabhSale_1685172330.pdf', 'A', 'GIT', '2023-05-27 12:55:29', '1', '', 0, 0, 0),
+(53, 18, 'ResumeSaurabhSale', 'ResumeSaurabhSale_1685172531.pdf', 'A', 'GIT', '2023-05-27 12:58:50', '1', 'dfs', 3, 2, 3),
+(54, 18, 'ResumeSaurabhSale', 'ResumeSaurabhSale_1685172991.pdf', 'A', 'GIT', '2023-05-27 13:06:31', '1', 'sdf', 0, 0, 0),
+(55, 18, 'ResumeSaurabhSale', 'ResumeSaurabhSale_1685173064.pdf', 'A', 'GIT', '2023-05-27 13:07:43', '1', 'cge', 0, 0, 0),
+(56, 18, 'ResumeSaurabhSale', 'ResumeSaurabhSale_1685177864.pdf', 'A', '2023-05-27 14:27:44', '2023-05-27 13:09:37', '1', 'qd', 122, 232, 2),
+(57, 18, 'ResumeSaurabhSale', 'ResumeSaurabhSale_1685177911.pdf', 'A', 'GIT', '2023-05-27 14:28:30', '1', 'wews', 0, 0, 0),
+(58, 18, 'test', 'test_1685178006.pdf', 'A', '2023-05-27 14:30:06', '2023-05-27 14:29:37', '1', 'cge', 0, 0, 0),
+(59, 18, 'test', 'test_1685178025.pdf', 'A', 'GIT', '2023-05-27 14:30:25', '1', '', 0, 0, 0),
+(60, 17, 'ResumeSaurabhSale_1685189058', 'ResumeSaurabhSale_1685189058_1685437994.pdf', 'A', 'GIT', '2023-05-30 14:43:14', '1', 'test', 11, 23, 0),
+(61, 20, 'ResumeSaurabhSale_1685182320', 'ResumeSaurabhSale_1685182320_1685439042.pdf', 'A', '2023-05-30 15:00:55', '2023-05-30 15:00:41', '1', 'test', 0, 10, 0),
+(62, 22, 'download', 'download_1689667029.pdf', 'A', 'GIT', '2023-07-18 13:27:09', '1', 'download', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -48153,10 +48190,10 @@ CREATE TABLE `det_manager` (
   `manager_name` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
   `location` varchar(100) NOT NULL,
-  `contact_number` int(100) NOT NULL,
+  `contact_number` varchar(100) DEFAULT NULL,
   `email_id` varchar(100) NOT NULL,
-  `brokerage` varchar(100) NOT NULL,
-  `pan_no` varchar(100) NOT NULL,
+  `brokerage` varchar(100) DEFAULT NULL,
+  `pan_no` varchar(100) DEFAULT NULL,
   `gst_status` varchar(100) NOT NULL,
   `gst_no` varchar(100) NOT NULL,
   `company_name` varchar(100) NOT NULL,
@@ -48175,9 +48212,10 @@ CREATE TABLE `det_manager` (
 --
 
 INSERT INTO `det_manager` (`manager_id`, `manager_name`, `address`, `location`, `contact_number`, `email_id`, `brokerage`, `pan_no`, `gst_status`, `gst_no`, `company_name`, `state_id`, `city_id`, `pincode`, `status`, `creation_date`, `last_modification_date`, `added_by`, `updated_by`) VALUES
-(1, 'Muskan Sarvade', '', 'Mumbai', 123, '', 'fbdfbdf', '', '', '', 'GIT ', 0, 0, 0, 'InActive', '2022-08-30 17:30:07', '2022-09-01 11:46:38', 'muskan@gmail.com', ''),
-(3, 'Siddhi ', 'siddhi', 'Navi Mumbai', 2147483647, 'siddhi@gmail.com', '50000', '', 'on', '27AFRTD1232H1ZY', 'fddfg', 22, 2725, 432102, 'Active', '2022-09-02 10:15:06', '2023-01-14 18:38:36', 'muskan@gmail.com', 'muskan@gmail.com'),
-(4, 'GIT', 'Thane-1', 'Mumbai', 1254789658, 'info@gittechnologies.com', '1200', '', '', '', 'GIT', 8, 703, 400705, 'Active', '2022-09-10 10:28:48', '2023-04-29 13:00:38', 'muskan@gmail.com', 'info@gittechnologies.com');
+(1, 'Muskan Sarvade', '', 'Mumbai', '123', '', 'fbdfbdf', '', '', '', 'GIT ', 0, 0, 0, 'InActive', '2022-08-30 17:30:07', '2022-09-01 11:46:38', 'muskan@gmail.com', ''),
+(3, 'Siddhi ', 'siddhi', 'Navi Mumbai', '2147483647', 'siddhi@gmail.com', '50000', '', 'on', '27AFRTD1232H1ZY', 'fddfg', 22, 2725, 432102, 'Active', '2022-09-02 10:15:06', '2023-01-14 18:38:36', 'muskan@gmail.com', 'muskan@gmail.com'),
+(4, 'GIT', 'Thane-1', 'Mumbai', '1254789658', 'info@gittechnologies.com', '1200', '', '', '', 'GIT', 8, 703, 400705, 'Active', '2022-09-10 10:28:48', '2023-04-29 13:00:38', 'muskan@gmail.com', 'info@gittechnologies.com'),
+(7, 'GITa', 'test', 'wewe', '9856321470', 'aciniri1382@saeoil.com', NULL, NULL, 'on', 'as', 'S', 2, 7, 400150, 'Active', '2023-07-18 13:07:05', '', 'info@gittechnologies.com', '');
 
 -- --------------------------------------------------------
 
@@ -48192,7 +48230,7 @@ CREATE TABLE `det_owner` (
   `state_id` int(100) NOT NULL,
   `city_id` int(100) NOT NULL,
   `pincode` int(100) NOT NULL,
-  `contact_number` int(100) NOT NULL,
+  `contact_number` bigint(100) NOT NULL,
   `email_id` varchar(100) NOT NULL,
   `pan_no` varchar(100) NOT NULL,
   `gst_status` varchar(100) NOT NULL,
@@ -48214,9 +48252,15 @@ CREATE TABLE `det_owner` (
 --
 
 INSERT INTO `det_owner` (`owner_id`, `owner_name`, `address`, `state_id`, `city_id`, `pincode`, `contact_number`, `email_id`, `pan_no`, `gst_status`, `gst_no`, `company_name`, `bank_name`, `branch_name`, `account_no`, `ifsc`, `status`, `creation_date`, `last_modification_date`, `added_by`, `updated_by`) VALUES
-(1, 'Amitesh Kumar', 'Hari Coloney, JB Nagar, Andheri', 22, 2707, 400079, 2147483647, 'amitesh@gmail.com', 'ACDSF1234K', 'on', '27ACDSF1234K1Z1', 'Kumar Enterprises', '', '', '', '', 'Active', '2023-01-19 16:25:04', '2023-01-19 17:10:22', 'muskan@gmail.com', 'muskan@gmail.com'),
-(2, 'Kumar', 'Hari Coloney, JB Nagar, Andheri', 22, 2707, 400079, 2147483647, 'k@gmail.com', 'ACDSF1234K', 'on', '27ACDSF1234K1Z1', 'Kumar Enterprises', '', '', '', '', 'Active', '2023-01-19 16:25:04', '2023-01-19 17:10:22', 'muskan@gmail.com', 'muskan@gmail.com'),
-(3, 'priya', 'Hari Coloney, JB Nagar, Andheri', 22, 2707, 400079, 2147483647, 'pd@gmail.com', 'ACDSF1234K', 'on', '27ACDSF1234K1Z1', 'peiy Enterprises', '', '', '', '', 'Active', '2023-01-19 16:25:04', '2023-01-19 17:10:22', 'muskan@gmail.com', 'muskan@gmail.com');
+(1, 'pranali', 'test', 4, 319, 400150, 9856321470, 'test@tefdst.com', 'AAAPZ1234C', '', '', '', 'test', 'vashi', '12566', 'd63de', 'Active', '2023-05-24 10:00:00', '2023-05-30 11:04:27', 'info@gittechnologies.com', 'info@gittechnologies.com'),
+(2, 'priya', 'sanpada', 4, 318, 400150, 7474836427, 'test@test.com', 'AAAPZ1234C', '', '', '', '55255245', 'test', '12566', 'd63de', 'Active', '2023-05-25 17:51:54', '2023-05-30 11:31:07', 'info@gittechnologies.com', 'info@gittechnologies.com'),
+(3, 'test', 'test', 2, 8, 400157, 9856321410, 'test@tefdSst.com', 'AAAPsdZ1234C', '', '', '', '55255245', 'testg', '12566', 'd63dehg', 'Active', '2023-05-25 17:52:48', '2023-05-30 11:26:54', 'info@gittechnologies.com', 'info@gittechnologies.com'),
+(4, 'sachin', 'test', 1, 2, 400157, 9856321470, 'test@tefdst.com', 'AAAPZ1234C', 'on', '2383', 'test', '552552', 'test', '12566', 'd63de', 'Active', '2023-05-27 14:11:59', '2023-05-30 11:31:16', 'info@gittechnologies.com', 'info@gittechnologies.com'),
+(5, 'pranalih', '', 2, 7, 400150, 9685741203, 'test@dds.com', 'AAAPZ1234C', '', '', '', '55255245', 'test', '12566', 'd63de', 'Active', '2023-05-29 17:55:48', '', 'info@gittechnologies.com', ''),
+(6, 'pranalih', '', 1, 1, 400150, 9856321470, 'test@tjhefdst.com', 'AAAPZ1234C', '', '', '', '552552', 'test', '12566', 'd63de', 'Active', '2023-05-30 11:31:45', '', 'info@gittechnologies.com', ''),
+(7, 'pranalih', '', 0, 0, 400150, 9856321470, 'test@tefdnst.com', 'AAAPZ1234C', '', '', '', '552552', 'test', '12566', 'd63dehg', 'Active', '2023-05-30 11:32:17', '', 'info@gittechnologies.com', ''),
+(8, 'pranalih', 'sanpada', 2, 6, 400152, 9856321470, 'test@tefdsst.com', 'AAAPZ1234C', '', '', '', 'idfc', 'vashi', '9685410', 'idfc0021', 'Active', '2023-07-14 15:29:12', '', 'info@gittechnologies.com', ''),
+(9, 'pranalias', 'sanpada', 2, 7, 400150, 9856321470, 'test@tefdsst.com', 'AAAPZ1234C', 'on', '238', 'testdd', 'sasa', 'test', '12566', 'd63de', 'Active', '2023-07-18 12:56:24', '', 'info@gittechnologies.com', '');
 
 -- --------------------------------------------------------
 
@@ -48248,7 +48292,14 @@ INSERT INTO `det_owner_property` (`id`, `property_id`, `owner_id`, `unitNo`, `pr
 (9, 4, 1, 1234, '12333', 10, 1, '2023-05-09 15:34:00', '2023-05-09 15:34:00'),
 (10, 4, 2, 1234, '1232', 10, 1, '2023-05-09 15:59:46', '2023-05-09 15:59:46'),
 (11, 6, 1, 123487, '1232', 10, 1, '2023-05-09 16:07:17', '2023-05-09 16:07:17'),
-(12, 4, 3, 123, '12333', 10, 1, '2023-05-09 16:22:49', '2023-05-09 16:22:49');
+(12, 4, 3, 123, '12333', 10, 1, '2023-05-09 16:22:49', '2023-05-09 16:22:49'),
+(13, 8, 2, 12, '1000', 100, 1, '2023-05-24 10:21:40', '2023-05-26 11:40:44'),
+(14, 1, 3, 22, '222', 122, 1, '2023-05-26 11:34:52', '2023-05-26 11:34:52'),
+(15, 1, 1, 10, '22', 1000, 1, '2023-05-26 11:35:48', '2023-05-26 11:47:28'),
+(16, 1, 2, 0, '', 10, 1, '2023-05-26 11:48:47', '2023-05-26 11:48:47'),
+(17, 1, 2, 0, '', 10, 1, '2023-05-26 12:07:35', '2023-05-26 12:07:35'),
+(18, 2, 2, 0, '1232', 10, 1, '2023-05-30 14:48:56', '2023-05-30 14:49:10'),
+(19, 10, 2, 0, '', 10, 1, '2023-07-18 12:53:25', '2023-07-18 12:53:25');
 
 -- --------------------------------------------------------
 
@@ -48287,12 +48338,15 @@ CREATE TABLE `det_property` (
 --
 
 INSERT INTO `det_property` (`property_id`, `property_name`, `property_type`, `property_sub_type`, `owner_id`, `flat_no`, `address`, `landmark`, `location`, `state_id`, `city_id`, `pincode`, `buildup_area`, `carpet_area`, `covered_parking`, `open_parking`, `age_of_property`, `elec_meter_no`, `status`, `creation_date`, `last_modification_date`, `added_by`, `update_by`) VALUES
-(1, 'Lodha', 'C', '3', 1, '402', 'Kolshet', 'Nearest', 'Dombivali', 22, 2672, 400607, 750, 5, 2, 3, 545, '21212121212', 'Active', '2022-08-13 16:46:50', '2023-02-12 05:39:28', '', 'muskan@gmail.com'),
+(1, 'Lodha', 'R', '7', 1, '402', 'Kolshet', 'Nearest', 'Dombivali', 22, 2672, 400607, 750, 5, 2, 2, 545, '21212121212', 'Active', '2022-08-13 16:46:50', '2023-05-24 09:50:23', '', 'info@gittechnologies.com'),
 (2, 'Hiranandani', 'C', '1', 1, '902', 'Kharghar', 'Near Station', 'Kharghar', 22, 2673, 400742, 750, 2, 3, 2, 54, NULL, 'Active', '2022-08-17 13:21:21', '2022-09-04 17:47:21', '', 'muskan@gmail.com'),
 (3, 'Godrej ', 'R', '6', 1, '802', 'Mulund', 'Mulund Station', 'Mulund', 22, 2674, 400098, 750, 2, 2, 1, 545, NULL, 'Active', '2022-08-22 12:55:27', '', '', ''),
 (4, 'Sachin', 'R', '6', NULL, '121212345', 'mAJIWADA', 'mAJIWADA', 'Majiwada', 22, 2672, 400601, 123, 12, 3, 4, 123, NULL, 'Active', '2022-08-27 15:21:04', '2022-08-27 15:52:19', '', 'muskan@gmail.com'),
 (6, 'Hiranandani Thane', 'R', '6', 1, '706', 'Thane-12', 'Thane', 'Thane', 22, 2672, 400601, 500, 10, 3, 4, 500, '2124214dsda', 'Active', '2022-09-10 16:20:31', '2023-01-19 16:44:12', 'muskan@gmail.com', 'muskan@gmail.com'),
-(7, 'Haware', 'C', '3', 1, '1301', 'Vashi', 'Vashi Station', 'Vashi', 22, 2726, 400705, 150, 2, 2, 2, 150, '2154', 'Active', '2023-01-08 15:53:25', '', 'muskan@gmail.com', '');
+(7, 'Haware', 'C', '3', 1, '1301', 'Vashi', 'Vashi Station', 'Vashi', 22, 2726, 400705, 150, 2, 2, 2, 150, '2154', 'Active', '2023-01-08 15:53:25', '', 'muskan@gmail.com', ''),
+(8, 'test', 'R', '6', NULL, '123', 'test', 'rew', 'wewe', 7, 602, 400150, 10, 32, 1, 1, 21, '23', 'InActive', '2023-05-23 14:30:26', '', 'info@gittechnologies.com', ''),
+(9, 'haware', 'C', '2', NULL, '1', 'vashi', 'near station', 'navi mumbai', 22, 2836, 400150, 10, 12, 0, 0, 500, '1234562', 'Active', '2023-05-24 09:44:34', '2023-05-24 09:50:03', 'info@gittechnologies.com', 'info@gittechnologies.com'),
+(10, 'test', 'R', '7', NULL, '123', 'test', 'rew', 'wewe', 2, 5, 400150, 100, 2, 1, 1, 21, '23', 'Active', '2023-07-18 12:44:40', '', 'info@gittechnologies.com', '');
 
 -- --------------------------------------------------------
 
@@ -48324,17 +48378,20 @@ CREATE TABLE `det_rent` (
 --
 
 INSERT INTO `det_rent` (`rent_id`, `agreement_id`, `rent_date`, `rent_amount`, `other_charges_desc`, `other_charges_amount`, `gst_status`, `gst_amount`, `total_amount`, `invoice_no`, `creation_date`, `last_modification_date`, `status`, `added_by`, `update_by`, `rent_status`) VALUES
-(1, 16, '2023-01-22', 1500, 'Test123', 100, 'N', 0, 1600, 'INV_0001', '2023-01-21 07:07:18', '2023-01-23 18:43:23', 'Active', 'muskan@gmail.com', 'muskan@gmail.com', 'PAID'),
+(1, 16, '2023-01-22', 1500, 'Test123', 100, 'Y', 272.16, 1784.16, 'INV_0001', '2023-01-21 07:07:18', '2023-05-20 09:35:21', 'Active', 'muskan@gmail.com', 'info@gittechnologies.com', 'PAID'),
 (2, 17, '2023-01-20', 3000, 'Test', 200, 'Y', 576, 3776, 'INV_0002', '2023-01-21 07:08:06', '2023-01-21 07:08:06', 'Active', 'muskan@gmail.com', '', 'PART_PAID'),
 (3, 18, '2023-01-23', 25000, 'tp', 2000, 'Y', 4860, 31860, 'INV_0003', '2023-01-22 14:12:32', '2023-01-22 14:12:32', 'Active', 'muskan@gmail.com', '', 'PART_PAID'),
-(4, 18, '2023-01-25', 10000, 'Renovation, Maintenance', 1200, 'Y', 2016, 13216, 'INV_0004', '2023-01-23 18:32:53', '2023-01-23 18:43:47', 'Active', 'muskan@gmail.com', 'muskan@gmail.com', 'UNPAID'),
+(4, 18, '2023-01-25', 10000, 'Renovation, Maintenance', 1200, 'Y', 2016, 13216, 'INV_0004', '2023-01-23 18:32:53', '2023-01-23 18:43:47', 'Active', 'muskan@gmail.com', 'muskan@gmail.com', 'PART_PAID'),
 (5, 17, '2023-04-29', 14000, 'Balance Rent', 6000, 'N', 0, 20000, 'INV_0005', '2023-04-29 14:51:21', '2023-04-29 14:51:21', 'Active', 'info@gittechnologies.com', '', 'UNPAID'),
 (6, 17, '2023-05-13', 14000, NULL, NULL, 'N', 0, 14012, 'INV_0006', '2023-05-13 11:15:00', '2023-05-13 11:15:00', 'Active', 'info@gittechnologies.com', '', 'UNPAID'),
 (7, 16, '2023-05-12', 20, NULL, NULL, 'Y', 5, 45, 'INV_0007', '2023-05-13 11:59:30', '2023-05-13 11:59:30', 'Active', 'info@gittechnologies.com', '', 'UNPAID'),
 (8, 18, '2023-05-13', 20, NULL, NULL, 'Y', 5, 45, 'INV_0008', '2023-05-13 12:17:03', '2023-05-13 12:17:03', 'Active', 'info@gittechnologies.com', '', 'UNPAID'),
 (9, 17, '2023-05-12', 20, NULL, NULL, 'Y', 11, 73, 'INV_0009', '2023-05-13 16:00:22', '2023-05-13 16:00:22', 'Active', 'info@gittechnologies.com', '', 'UNPAID'),
 (10, 17, '2023-05-14', 20, NULL, NULL, 'Y', 7, 47, 'INV_0010', '2023-05-13 16:45:18', '2023-05-13 17:43:50', 'Active', 'info@gittechnologies.com', 'info@gittechnologies.com', 'UNPAID'),
-(11, 17, '2023-05-13', 20, NULL, NULL, 'Y', 16.2, 106.2, 'INV_0011', '2023-05-13 17:02:05', '2023-05-13 17:30:45', 'Active', 'info@gittechnologies.com', 'info@gittechnologies.com', 'UNPAID');
+(11, 17, '2023-05-13', 20, NULL, NULL, 'Y', 16.2, 106.2, 'INV_0011', '2023-05-13 17:02:05', '2023-05-13 17:30:45', 'Active', 'info@gittechnologies.com', 'info@gittechnologies.com', 'UNPAID'),
+(12, 16, '2023-05-25', 14000, NULL, NULL, 'Y', 2523.96, 16545.96, 'INV_0012', '2023-05-24 11:16:29', '2023-05-24 11:16:29', 'Active', 'info@gittechnologies.com', '', 'UNPAID'),
+(13, 16, '2023-07-20', 20, NULL, NULL, 'Y', 7.56, 49.56, 'INV_0013', '2023-07-18 14:42:07', '2023-07-18 15:10:34', 'Active', 'info@gittechnologies.com', 'info@gittechnologies.com', 'UNPAID'),
+(14, 16, '2023-07-21', 15002, NULL, NULL, 'Y', 2886.3, 18921.3, 'INV_0014', '2023-07-18 15:06:16', '2023-07-18 15:11:00', 'Active', 'info@gittechnologies.com', 'info@gittechnologies.com', 'UNPAID');
 
 -- --------------------------------------------------------
 
@@ -48371,7 +48428,17 @@ INSERT INTO `det_rent_details` (`rent_details_id`, `rent_id`, `amount_paid`, `pa
 (8, 3, 200, '2023-02-12', '3', 'ResumeSaurabhSale (2).pdf', '/uploadedDoc/Muskan/ResumeSaurabhSale (2).pdf', 'ResumeSaurabhSale (2)', 'Muskan', '2023-02-12 06:00:17', '1'),
 (9, 3, 100, '2023-02-12', '2', 'ResumeSaurabhSale (2).pdf', '/uploadedDoc/Muskan/ResumeSaurabhSale (2).pdf', 'ResumeSaurabhSale (2)', 'Muskan', '2023-02-12 06:01:51', '1'),
 (10, 3, 200, '2023-02-12', '3', 'ResumeSaurabhSale (2).pdf', '/uploadedDoc/Muskan/ResumeSaurabhSale (2).pdf', 'ResumeSaurabhSale (2)', 'Muskan', '2023-02-12 06:03:06', '1'),
-(11, 3, 100, '2023-05-11', '0', 'ResumeSaurabhSale (2) (1).pdf', '/uploadedDoc/GIT/ResumeSaurabhSale (2) (1).pdf', 'ResumeSaurabhSale (2) (1)', 'GIT', '2023-05-11 12:40:25', '1');
+(11, 3, 100, '2023-05-11', '0', 'ResumeSaurabhSale (2) (1).pdf', '/uploadedDoc/GIT/ResumeSaurabhSale (2) (1).pdf', 'ResumeSaurabhSale (2) (1)', 'GIT', '2023-05-11 12:40:25', '1'),
+(12, 2, 100, '2023-05-26', '3', '', '_1685182239.pdf', '1685097499 (2)', 'GIT', '2023-05-27 15:40:39', '1'),
+(13, 2, 100, '', '3', 'ResumeSaurabhSale', 'ResumeSaurabhSale_1685182320.pdf', 'ResumeSaurabhSale_1685173178 (1)', 'GIT', '2023-05-27 15:41:59', '1'),
+(14, 2, 100, '', '3', '', '_1685182403.pdf', '1685097499 (1)', 'GIT', '2023-05-27 15:43:23', '1'),
+(15, 8, 45, '', '3', 'ResumeSaurabhSale', 'ResumeSaurabhSale_1685182575.pdf', 'ResumeSaurabhSale_1685173178', 'GIT', '2023-05-27 15:46:15', '1'),
+(16, 4, 100, '', '3', 'ResumeSaurabhSale', 'ResumeSaurabhSale_1685182911.pdf', 'ResumeSaurabhSale_1685179237', 'GIT', '2023-05-27 17:09:28', '1'),
+(17, 4, 1000, '2023-06-01', '2', '', '_1685187742.pdf', '1685097499 (1)', 'GIT', '2023-05-27 17:12:22', '1'),
+(18, 4, 200, '2023-05-24', '3', 'ResumeSaurabhSale', 'ResumeSaurabhSale_1685187983.pdf', 'ResumeSaurabhSale_1685173178 (1)', 'GIT', '2023-05-27 17:16:23', '1'),
+(19, 4, 10, '2023-05-28', '3', 'ResumeSaurabhSale', 'ResumeSaurabhSale_1685188135.pdf', 'ResumeSaurabhSale_1685173178', 'GIT', '2023-05-27 17:19:48', '1'),
+(20, 13, 10, '12-07-2023', '3', '', '', '', 'GIT', '2023-07-18 14:45:10', '1'),
+(21, 14, 100, '2023-07-19', '3', '', '', '', 'GIT', '2023-07-18 15:46:54', '1');
 
 -- --------------------------------------------------------
 
@@ -48403,7 +48470,12 @@ INSERT INTO `det_rent_other_charges` (`id`, `rent_id`, `charges_description`, `a
 (8, 9, 'test', 20, '2023-05-13 16:00:22', '2023-05-13 16:00:22'),
 (17, 11, 'Test3', 10, '2023-05-13 17:30:45', '2023-05-13 17:30:45'),
 (29, 10, 'Ac Charge', 12, '2023-05-13 17:43:50', '2023-05-13 17:43:50'),
-(30, 10, 'test1', 20, '2023-05-13 17:43:50', '2023-05-13 17:43:50');
+(30, 10, 'test1', 20, '2023-05-13 17:43:50', '2023-05-13 17:43:50'),
+(31, 1, 'test', 12, '2023-05-20 09:35:21', '2023-05-20 09:35:21'),
+(32, 12, 'test', 12, '2023-05-24 11:16:29', '2023-05-24 11:16:29'),
+(33, 12, 'ac charge', 10, '2023-05-24 11:16:29', '2023-05-24 11:16:29'),
+(37, 13, 'Test', 12, '2023-07-18 15:10:34', '2023-07-18 15:10:34'),
+(38, 14, 'Test', 1033, '2023-07-18 15:11:00', '2023-07-18 15:11:00');
 
 -- --------------------------------------------------------
 
@@ -48420,7 +48492,7 @@ CREATE TABLE `det_tenant` (
   `state_id` int(100) NOT NULL,
   `city_id` int(100) NOT NULL,
   `pincode` int(100) NOT NULL,
-  `contact_number` int(100) NOT NULL,
+  `contact_number` varchar(100) NOT NULL,
   `email_id` varchar(100) NOT NULL,
   `occupation` varchar(100) NOT NULL,
   `pan_no` varchar(100) NOT NULL,
@@ -48428,8 +48500,12 @@ CREATE TABLE `det_tenant` (
   `gst_no` varchar(100) NOT NULL,
   `company_name` varchar(100) NOT NULL,
   `company_email` varchar(100) NOT NULL,
-  `tenantType` varchar(100) NOT NULL,
-  `power_of_attorney` int(11) NOT NULL DEFAULT 0,
+  `tenantType` varchar(100) DEFAULT NULL,
+  `power_of_attorney` int(11) DEFAULT 0,
+  `partner_name` varchar(255) NOT NULL,
+  `partner_address` varchar(255) NOT NULL,
+  `partner_pan_no` varchar(255) NOT NULL,
+  `partner_aadhar_card_no` varchar(255) NOT NULL,
   `status` varchar(100) NOT NULL,
   `creation_date` varchar(100) NOT NULL,
   `last_modification_date` varchar(100) NOT NULL,
@@ -48441,20 +48517,52 @@ CREATE TABLE `det_tenant` (
 -- Dumping data for table `det_tenant`
 --
 
-INSERT INTO `det_tenant` (`tenant_id`, `tenant_name`, `gender`, `dob`, `address`, `state_id`, `city_id`, `pincode`, `contact_number`, `email_id`, `occupation`, `pan_no`, `gst_status`, `gst_no`, `company_name`, `company_email`, `tenantType`, `power_of_attorney`, `status`, `creation_date`, `last_modification_date`, `added_by`, `updated_by`) VALUES
-(1, 'Muskan Sarvade', '', '', 'test', 12, 794, 400150, 2147483647, 'test@test.com', 'PHP Developer', 'TRYU5874MO', '', '', '', '', '', 1, 'Active', '2022-08-13 13:42:59', '2023-05-09 15:03:43', '', 'info@gittechnologies.com'),
-(2, 'Muskan Sarvade', '', '', '', 0, 0, 0, 2147483647, '', 'PHP Developer', 'DERT1254PO', '', '', '', '', '', 0, 'InActive', '2022-08-13 13:44:36', '2022-08-13 14:48:35', '', ''),
-(3, 'Muskan ', '', '', '', 0, 0, 0, 0, '', 'PHP Developer', '400068', '', '', '', '', '', 0, 'InActive', '2022-08-13 13:45:06', '', '', ''),
-(4, 'Muskan ', '', '', '', 0, 0, 0, 0, '', 'PHP Developer', '400068', '', '', '', '', '', 0, 'InActive', '2022-08-13 13:45:29', '', '', ''),
-(5, 'Muskan ', '', '', '', 0, 0, 0, 2147483647, '', 'Engineer', 'NOPU1254TR', '', '', '', '', '', 0, 'InActive', '2022-08-13 13:46:05', '', '', ''),
-(6, 'Muskan ', '', '', '', 0, 0, 0, 2147483647, '', 'Engineer', 'NOPU1254TR', '', '', '', '', '', 0, 'InActive', '2022-08-13 13:46:16', '', '', ''),
-(7, 'Siddhi', '', '', 'Vashi', 22, 2479, 400705, 2147483647, 'info@gittechnologies.com', 'Engineer', 'TRYU5874MO', 'on', '123124214214214', 'Git', '', '', 0, 'InActive', '2022-08-17 13:23:32', '2023-01-14 12:43:20', '', 'muskan@gmail.com'),
-(8, 'Tamanna', '', '', '', 0, 0, 0, 2147483647, '', 'Engineer', 'GTRYJ1258D', '', '', '', '', '', 0, 'InActive', '2022-08-22 12:56:35', '', '', ''),
-(9, 'Party2', '', '', '', 0, 0, 0, 2147483647, '', 'TPasdsa', 'ATAPM8786A', '', '', '', '', '', 0, 'InActive', '2022-08-27 16:08:11', '2022-08-27 16:10:06', '', ''),
-(10, 'Krishna', 'M', '1991-11-11', 'Kumar Residency', 22, 2726, 456321, 2147483647, 'krishna@gmail.com', 'Engineer', 'ATAPM8786A', 'on', '24AEDRE12345S1ZE', 'Kumar Corp', 'corp@corp.com', '', 0, 'Active', '2022-09-10 16:24:07', '2023-01-14 11:56:43', '', 'muskan@gmail.com'),
-(11, 'Rahi', 'F', '1983-01-01', 'Abhiram Coloney, Vashi Naka', 22, 2726, 400706, 2147483647, 'amit@gmail.com', 'Service', 'ABCDE1234F', 'on', '27ABCDE1234F1ZR', 'Kumar Company', 'kumar@kumar.com', '', 0, 'Active', '2023-01-13 11:58:27', '2023-01-20 12:14:58', '', 'muskan@gmail.com'),
-(12, 'Rajesh Mahto', 'M', '1985-11-19', 'Raheja Corner, Arenja City, Vashi', 22, 2726, 400705, 2147483647, 'rajesh@gmail.com', 'Service', 'ASDFG1234H', 'on', '27ASDFG1234H1ZT', 'Mahto Group', 'mahto@mahto.com', '', 0, 'Active', '2023-01-13 12:04:58', '', '', ''),
-(13, 'Sachin', 'M', '1993-02-05', 'Thane', 22, 2836, 400601, 2147483647, 'sachinmishra@gmail.com', 'Business', '401', 'on', '123124214214214', 'Git', '', '', 0, 'Active', '2023-01-15 12:27:15', '2023-01-15 12:28:12', 'muskan@gmail.com', 'muskan@gmail.com');
+INSERT INTO `det_tenant` (`tenant_id`, `tenant_name`, `gender`, `dob`, `address`, `state_id`, `city_id`, `pincode`, `contact_number`, `email_id`, `occupation`, `pan_no`, `gst_status`, `gst_no`, `company_name`, `company_email`, `tenantType`, `power_of_attorney`, `partner_name`, `partner_address`, `partner_pan_no`, `partner_aadhar_card_no`, `status`, `creation_date`, `last_modification_date`, `added_by`, `updated_by`) VALUES
+(1, 'Muskan Sarvade', '', '', 'test', 12, 794, 400150, '2147483647', 'test@test.com', 'PHP Developer', 'TRYU5874MO', '', '', '', '', '', 1, '', '', '', '', 'Active', '2022-08-13 13:42:59', '2023-05-24 16:47:56', '', 'info@gittechnologies.com'),
+(2, 'Muskan Sarvade', '', '', '', 0, 0, 0, '2147483647', '', 'PHP Developer', 'DERT1254PO', '', '', '', '', '', 0, '', '', '', '', 'InActive', '2022-08-13 13:44:36', '2022-08-13 14:48:35', '', ''),
+(3, 'Muskan ', '', '', '', 0, 0, 0, '0', '', 'PHP Developer', '400068', '', '', '', '', '', 0, '', '', '', '', 'InActive', '2022-08-13 13:45:06', '', '', ''),
+(4, 'Muskan ', '', '', '', 0, 0, 0, '0', '', 'PHP Developer', '400068', '', '', '', '', '', 0, '', '', '', '', 'InActive', '2022-08-13 13:45:29', '', '', ''),
+(5, 'Muskan ', '', '', '', 0, 0, 0, '2147483647', '', 'Engineer', 'NOPU1254TR', '', '', '', '', '', 0, '', '', '', '', 'InActive', '2022-08-13 13:46:05', '', '', ''),
+(6, 'Muskan ', '', '', '', 0, 0, 0, '2147483647', '', 'Engineer', 'NOPU1254TR', '', '', '', '', '', 0, '', '', '', '', 'InActive', '2022-08-13 13:46:16', '', '', ''),
+(7, 'Siddhi', '', '', 'Vashi', 22, 2479, 400705, '2147483647', 'info@gittechnologies.com', 'Engineer', 'TRYU5874MO', 'on', '123124214214214', 'Git', '', '', 0, '', '', '', '', 'InActive', '2022-08-17 13:23:32', '2023-01-14 12:43:20', '', 'muskan@gmail.com'),
+(8, 'Tamanna', '', '', '', 0, 0, 0, '2147483647', '', 'Engineer', 'GTRYJ1258D', '', '', '', '', '', 0, '', '', '', '', 'InActive', '2022-08-22 12:56:35', '', '', ''),
+(9, 'Party2', '', '', '', 0, 0, 0, '2147483647', '', 'TPasdsa', 'ATAPM8786A', '', '', '', '', '', 0, '', '', '', '', 'InActive', '2022-08-27 16:08:11', '2022-08-27 16:10:06', '', ''),
+(10, 'Krishna', 'M', '1991-11-11', 'Kumar Residency', 22, 2726, 456321, '2147483647', 'krishna@gmail.com', 'Engineer', 'ATAPM8786A', 'on', '24AEDRE12345S1ZE', 'Kumar Corp', 'corp@corp.com', '', 0, '', '', '', '', 'Active', '2022-09-10 16:24:07', '2023-01-14 11:56:43', '', 'muskan@gmail.com'),
+(11, 'Rahi', 'F', '1983-01-01', 'Abhiram Coloney, Vashi Naka', 22, 2726, 400706, '2147483647', 'amit@gmail.com', 'Service', 'ABCDE1234F', 'on', '27ABCDE1234F1ZR', 'Kumar Company', 'kumar@kumar.com', '', 0, '', '', '', '', 'InActive', '2023-01-13 11:58:27', '2023-01-20 12:14:58', '', 'muskan@gmail.com'),
+(12, 'Rajesh Mahto', 'M', '1985-11-19', 'Raheja Corner, Arenja City, Vashi', 22, 2726, 400705, '2147483647', 'rajesh@gmail.com', 'Service', 'ASDFG1234H', 'on', '27ASDFG1234H1ZT', 'Mahto Group', 'mahto@mahto.com', '', 0, '', '', '', '', 'Active', '2023-01-13 12:04:58', '', '', ''),
+(13, 'Sachin', 'M', '1993-02-05', 'Thane', 22, 2836, 400601, '2147483647', 'sachinmishra@gmail.com', 'Business', '401', 'on', '123124214214214', 'Git', '', 'I', 0, '', '', '', '', 'Active', '2023-01-15 12:27:15', '2023-05-27 14:13:38', 'muskan@gmail.com', 'info@gittechnologies.com'),
+(14, 'soumy', 'F', '2023-01-01', 'vashih', 4, 318, 400151, '9685741230', 'tesklt@test.com', 'beco', 'AAAPZ1234a', 'on', '231', 'testing', 'dest@test.in', 'NI', 0, '', '', '', '', 'Active', '2023-05-24 10:12:53', '2023-05-26 12:53:19', 'info@gittechnologies.com', 'info@gittechnologies.com'),
+(15, 'REWS', 'F', '2023-05-18', 'testS', 5, 450, 400152, '9856321410', 'test@tefdSst.com', 're', 'AAAPZ1234C', 'on', 'SD', 'SS', 'test@dsdS.in', 'NI', 0, '', '', '', '', 'Active', '2023-05-24 16:32:00', '2023-05-24 16:57:46', 'info@gittechnologies.com', 'info@gittechnologies.com'),
+(16, 'REWsad', 'M', '2023-05-04', 'test', 3, 313, 400150, '9856321470', 'test@tefdstsa.com', 're', 'AAAPZ1234Cfg', 'on', '', '', '', 'NI', 0, 'rse', 'fgfg', 'AAAPZ1234C', '33321344', 'Active', '2023-05-24 17:07:31', '2023-07-11 14:49:47', 'info@gittechnologies.com', 'info@gittechnologies.com'),
+(17, 'rgr', 'F', '2023-07-12', 'test', 3, 309, 400150, '9856321470', 'test@tfdst.com', '', 'AAAPZ1234C', 'on', '', '', '', 'NI', 0, 'test', 'fddf', 'AAAPZ1234C', '234532222', 'Active', '2023-07-11 11:49:23', '2023-07-11 14:53:51', 'info@gittechnologies.com', 'info@gittechnologies.com'),
+(18, 'rgfgsda', 'M', '2023-07-05', 'testgh', 4, 318, 400150, '9856321470', 'test@tefwfgt.com', 're', 'AAAPZ1234Cw', 'on', 'SD', '', '', 'NI', 0, 'test', 'fddf', 'AAAPZ1234Cw', '33321344', 'Active', '2023-07-11 11:54:23', '2023-07-18 15:42:53', 'info@gittechnologies.com', 'info@gittechnologies.com'),
+(19, 'tefgst tennat', 'M', '19-07-2023', 'sanpada', 2, 17, 400150, '9856321470', 'trtest@tefdst.com', 're', 'AAAPZ1234C', 'on', '2112', 'test6452', 'test@dsd.in', 'NI', 0, 'testfd', 'dt', 'AAAPZ1234C', '33321344', 'Active', '2023-07-18 12:58:48', '2023-07-18 15:40:47', 'info@gittechnologies.com', 'info@gittechnologies.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `det_tenant_document`
+--
+
+CREATE TABLE `det_tenant_document` (
+  `id` int(11) NOT NULL,
+  `tenant_id` int(11) NOT NULL,
+  `file_name` varchar(255) NOT NULL,
+  `file_path` varchar(500) NOT NULL,
+  `uploaded_by` varchar(255) NOT NULL,
+  `uploaded_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `file_desc` varchar(500) NOT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `det_tenant_document`
+--
+
+INSERT INTO `det_tenant_document` (`id`, `tenant_id`, `file_name`, `file_path`, `uploaded_by`, `uploaded_on`, `file_desc`, `status`, `created_at`, `updated_at`) VALUES
+(1, 19, 'download_1689145037', 'download_1689145037_1689665680.pdf', 'GIT', '2023-07-18 13:04:39', 'test', 1, '2023-07-18 13:04:39', '2023-07-18 13:04:39');
 
 -- --------------------------------------------------------
 
@@ -48581,7 +48689,7 @@ CREATE TABLE `seq_invoice` (
 --
 
 INSERT INTO `seq_invoice` (`ID`, `PREFIX`, `SUFFIX`) VALUES
-(11, 'INV_', '');
+(14, 'INV_', '');
 
 -- --------------------------------------------------------
 
@@ -52791,6 +52899,12 @@ ALTER TABLE `det_tenant`
   ADD PRIMARY KEY (`tenant_id`);
 
 --
+-- Indexes for table `det_tenant_document`
+--
+ALTER TABLE `det_tenant_document`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `images`
 --
 ALTER TABLE `images`
@@ -52840,61 +52954,73 @@ ALTER TABLE `cities`
 -- AUTO_INCREMENT for table `det_agreement`
 --
 ALTER TABLE `det_agreement`
-  MODIFY `agreement_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `agreement_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `det_director`
 --
 ALTER TABLE `det_director`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `det_file_upload`
 --
 ALTER TABLE `det_file_upload`
-  MODIFY `doc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `doc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `det_manager`
 --
 ALTER TABLE `det_manager`
-  MODIFY `manager_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `manager_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `det_owner`
+--
+ALTER TABLE `det_owner`
+  MODIFY `owner_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `det_owner_property`
 --
 ALTER TABLE `det_owner_property`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `det_property`
 --
 ALTER TABLE `det_property`
-  MODIFY `property_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `property_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `det_rent`
 --
 ALTER TABLE `det_rent`
-  MODIFY `rent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `rent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `det_rent_details`
 --
 ALTER TABLE `det_rent_details`
-  MODIFY `rent_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `rent_details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `det_rent_other_charges`
 --
 ALTER TABLE `det_rent_other_charges`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `det_tenant`
 --
 ALTER TABLE `det_tenant`
-  MODIFY `tenant_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `tenant_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `det_tenant_document`
+--
+ALTER TABLE `det_tenant_document`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `images`
