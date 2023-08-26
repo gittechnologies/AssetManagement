@@ -14,7 +14,7 @@
   
 $id = $_GET['id'];
 $result = $dbConn->query("SELECT agreement_id,manager_id,brokerage,loading_charges,amc_tenant,remark,property_id,owner_id, tenant_id, agreement_date, agreement_from, agreement_to, possession_date, locking_period, deposit_amount, 
-  deposit_date, rent_per_month, gst_applicable, gst_amount, maintainance_charges, status FROM det_agreement 
+  deposit_date, rent_per_month, gst_applicable, gst_amount, maintainance_charges,yearly_appraisal, status FROM det_agreement 
   WHERE agreement_id='$id' ");
 $result->execute();
 while($row = $result->fetch(PDO::FETCH_ASSOC))
@@ -41,7 +41,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
     $v_loading_charges=$row['loading_charges'];
     $v_amc_tenant=$row['amc_tenant'];
     $v_remark=$row['remark'];
-
+    $v_yearly_appraisal = $row['yearly_appraisal'];
     $v_maintainance_charges=$row['maintainance_charges'];
     // $v_other_charges=$row['other_charges_desc'];
     // $v_charges=$row['oth_charges_amt'];
@@ -313,7 +313,13 @@ onsubmit="return myfunction()" >
     <span class="text-danger"></span>
  </div>
 </li>
-
+<li>
+ <div class="form-group">
+  <label>Yearly Appraisal (%) <span>*</span></label>
+  <label class="form-control form-control-sm"><?php echo $v_yearly_appraisal;?></label>
+    <span class="text-danger"></span>
+ </div>
+</li>
 <!-- <li>
  <div class="from-group">
  <label>Other Charges </label><br>
@@ -342,11 +348,11 @@ onsubmit="return myfunction()" >
    View/ Update Rents</button>
 </li>-->
 
-
+<li></li>
 <!----------Manager Name------------->
 <li>
  <div class="form-group">
-  <label>Agent Name<span>*</span></label>
+  <label>Agent Name</label>
   <label class="form-control form-control-sm">
     <?php 
       $result = $dbConn->query("SELECT manager_id, concat(manager_name,' - ',pan_no) as manager_name FROM det_manager 
@@ -368,7 +374,7 @@ onsubmit="return myfunction()" >
 
  <li>
  <div class="form-group">
-  <label>Commision <span>*</span></label>
+  <label>Commision </label>
   <label class="form-control form-control-sm"><?php echo $v_brokerage;?></label>
  </div>
 </li>

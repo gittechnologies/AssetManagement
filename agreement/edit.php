@@ -10,7 +10,7 @@
   
 $id = $_GET['id'];
 $result = $dbConn->query("SELECT agreement_id, property_id,owner_id,brokerage, tenant_id, agreement_date, agreement_from, agreement_to, possession_date, locking_period, deposit_amount, 
-  deposit_date, rent_per_month, gst_applicable, gst_amount, maintainance_charges, manager_id, charges_paidby_tenant,	loading_charges,amc_tenant,remark, status FROM det_agreement 
+  deposit_date, rent_per_month, gst_applicable, gst_amount, maintainance_charges, manager_id, charges_paidby_tenant,	loading_charges,amc_tenant,remark, status, yearly_appraisal FROM det_agreement 
   WHERE agreement_id='$id' ");
 $result->execute();
 while($row = $result->fetch(PDO::FETCH_ASSOC))
@@ -39,8 +39,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
     $v_loading_charges=$row['loading_charges'];
     $v_amc_tenant=$row['amc_tenant'];
     $v_remark=$row['remark'];
-
-
+    $v_yearly_appraisal=$row['yearly_appraisal'];
 
   //  $v_charges=$row['charges_paidby_tenant'];     
     //$v_other_charges=$row['other_charges_desc'];
@@ -139,7 +138,7 @@ onsubmit="return myfunction()" >
         {
      ?>
 
-    <option value="<?php echo  $row['owner_id']?>" <?php  echo ($v_owner_id == $row['owner_id'] )?" selected":'' ?>><?php echo $row['owner_name'].' - '.$row['unitNo']?>
+    <option value="<?php echo  $row['owner_id']?>#<?php echo  $row['unitNo']?>" <?php  echo ($v_owner_id == $row['owner_id'] )?" selected":'' ?>><?php echo $row['owner_name'].' - '.$row['unitNo']?>
     </option> 
      <?php  }
      ?>
@@ -271,6 +270,14 @@ onsubmit="return myfunction()" >
  </div>
 </li>
 
+<li>
+ <div class="form-group">
+  <label>Yearly Appraisal (%) <span>*</span></label>
+   <input type="text" class="form-control form-control-sm" placeholder="Yearly Appraisal (%)" name="yearlyAppraisal" value="<?php echo $v_yearly_appraisal;?>" required>
+    <span class="text-danger"></span>
+ </div>
+</li>
+
               <!----------GST No------------->
 
 <li>
@@ -294,8 +301,8 @@ onsubmit="return myfunction()" >
 <!----------Manager Name------------->
 <li>
  <div class="form-group">
-  <label>Agent Name<span>*</span></label>
-  <select class="form-control form-control-sm" id = "managerName" name="managerName" required>
+  <label>Agent Name</label>
+  <select class="form-control form-control-sm" id = "managerName" name="managerName" >
     <option value="0"> Select Agent </option>
     <?php 
       $result = $dbConn->query("SELECT manager_id, concat(manager_name,' - ',pan_no) as manager_name FROM det_manager 
@@ -326,8 +333,8 @@ onsubmit="return myfunction()" >
 
  <li>
  <div class="form-group">
-  <label>Commision <span>*</span></label>
-   <input type="text" class="form-control form-control-sm" placeholder="Commision" name="Brokerage" value="<?php echo $v_brokerage;?>" onkeypress="return /[0-9]/i.test(event.key)" required>
+  <label>Commision </label>
+   <input type="text" class="form-control form-control-sm" placeholder="Commision" name="Brokerage" value="<?php echo $v_brokerage;?>" onkeypress="return /[0-9]/i.test(event.key)" >
     <span class="text-danger"></span>
  </div>
 </li>

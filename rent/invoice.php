@@ -35,6 +35,7 @@ $result = $dbConn->query("SELECT r.rent_id, r.agreement_id, r.invoice_no, date_f
 (select o.owner_name from det_owner o where o.owner_id = 
 (select p.owner_id from det_property p where p.property_id = 
 (select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_name,
+(select a.owner_unit_detail from det_agreement a where a.agreement_id = r.agreement_id) as owner_unit_detail,
 (select concat(o.bank_name,'-',o.branch_name)  from det_owner o where o.owner_id = 
 (select p.owner_id from det_property p where p.property_id = 
 (select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_bank_details,
@@ -87,7 +88,7 @@ while($row = $result->fetch(PDO::FETCH_ASSOC))
     $v_property_address=$row['property_address'];
     $v_property_address1=$row['property_address1'];
 
-    $v_owner_name=$row['owner_name'];
+    $v_owner_name=$row['owner_name'] .' - '. $row['owner_unit_detail'];
 
     //echo "<script>alert(' $v_owner_name')</script>";
     $v_owner_company_name=$row['owner_company_name'];

@@ -222,8 +222,8 @@
                     <!----------director /partner Name------------->
                     <li>
  <div class="form-group">
-  <label>Partner Name<span>*</span></label>
-   <input type="text" class="form-control form-control-sm" placeholder="Director/ Partner Name" name="partnerName" required>
+  <label>Partner Name</label>
+   <input type="text" class="form-control form-control-sm" placeholder="Director/ Partner Name" name="partnerName" >
     <span class="text-danger"></span>
  </div>
 </li>
@@ -241,8 +241,8 @@
 
 <li>
  <div class="form-group">
-  <label>Partner Pan No.<span>*</span></label>
-   <input type="text" class="form-control form-control-sm" placeholder="Partner Pan No" name="partnerPanNo" onkeyup="this.value= this.value.replace(/[^'a-zA-Z0-9]+$/, '')" required>
+  <label>Partner Pan No.</label>
+   <input type="text" class="form-control form-control-sm" placeholder="Partner Pan No" name="partnerPanNo" onkeyup="this.value= this.value.replace(/[^'a-zA-Z0-9]+$/, '')" >
     <span class="text-danger"></span>
  </div>
 </li>
@@ -251,8 +251,8 @@
 
 <li>
  <div class="form-group">
-  <label>Partner Aadhar No.<span>*</span></label>
-   <input type="text" class="form-control form-control-sm" placeholder="Partner Aadhar No" name="partnerAadharNo" required>
+  <label>Partner Aadhar No.</label>
+   <input type="text" class="form-control form-control-sm" placeholder="Partner Aadhar No" name="partnerAadharNo" >
     <span class="text-danger"></span>
  </div>
 </li>

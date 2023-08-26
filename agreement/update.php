@@ -7,7 +7,10 @@
     $v_gstAmt='0';
     $v_agreementId=$_POST['agreementId'];
     $v_propertyName=$_POST['propertyName'];
-    $v_owner_id = $_POST['ownerName'];
+	$v_owner_unit_data =$_POST['ownerName'];
+	$v_owner_unit_ids = explode("#",$v_owner_unit_data);
+	$v_owner_id = $v_owner_unit_ids[0];
+	$v_owner_unit_detail = $v_owner_unit_ids[1];
     $v_tenanty_Id=$_POST['tenantyName'];
     $v_brokerage=$_POST['Brokerage'];
 
@@ -23,7 +26,7 @@
     $v_loading_charges=$_POST['loadingCharges'];
 	$v_amc_tenant=$_POST['AmcTenant'];
 	$v_remark=$_POST['remark'];
-
+	$v_yearly_appraisal = $_POST['yearlyAppraisal'];
 
 
     if(!isset($_POST['gstStatus'])) {
@@ -51,7 +54,7 @@
     agreement_from='$v_agreementFrom', agreement_to='$v_agreementTo', 
     possession_date='$v_possessionDate', locking_period='$v_lockingPeriod', 
     deposit_amount='$v_depositAmount', deposit_date='$v_depositDate', 
-    rent_per_month='$v_baseRent', gst_applicable='$v_gstStatus', gst_amount='$v_gstAmt', maintainance_charges='$v_maintainceCharges',brokerage='$v_brokerage', loading_charges = '$v_loading_charges',amc_tenant = '$v_amc_tenant', remark='$v_remark',last_modification_date=CURRENT_TIMESTAMP(), updated_by='$v_UpdatedBy' WHERE agreement_id='$v_agreementId' ";
+    rent_per_month='$v_baseRent', gst_applicable='$v_gstStatus', gst_amount='$v_gstAmt', maintainance_charges='$v_maintainceCharges',brokerage='$v_brokerage', loading_charges = '$v_loading_charges',amc_tenant = '$v_amc_tenant', remark='$v_remark',last_modification_date=CURRENT_TIMESTAMP(), updated_by='$v_UpdatedBy',yearly_appraisal='$v_yearly_appraisal',owner_unit_detail='$v_owner_unit_detail' WHERE agreement_id='$v_agreementId' ";
 
  $query = $dbConn->prepare($sql);
  $dbConn->exec($sql);

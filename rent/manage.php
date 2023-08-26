@@ -100,9 +100,9 @@ if (isset($_GET['id'])) {
     <th scope="col">#</th>
     <th scope="col">Invoice No.</th>
     <th scope="col">Invoice Date</th>
+    <th scope="col">Owner Name</th>
     <th scope="col">Tenant Name</th>
     <th scope="col">Property Name</th>
-    
     <!--<th scope="col">Property Location</th>-->
     <th scope="col">Period</th>    
     <th scope="col">Rent Amount</th>
@@ -121,6 +121,7 @@ if (isset($_GET['id'])) {
     $result = $dbConn->query("SELECT r.rent_id, r.agreement_id, r.invoice_no, r.creation_date as invoice_date,
   (select t.tenant_name from det_tenant t where t.tenant_id = 
   (select a.tenant_id from det_agreement a where a.agreement_id = r.agreement_id)) as tenant_name,
+  (select concat(o.owner_name,' - ',a.owner_unit_detail) from det_agreement a  join det_owner o where a.agreement_id = r.agreement_id AND o.owner_id =a.owner_id) as owner_name,
   (select concat(p.property_name,' - ',p.flat_no,', ', nvl(p.location,''), ',', nvl((select c.name from cities c where c.id = p.city_id),'')) 
   from det_property p where p.property_id = 
   (select a.property_id from det_agreement a where a.agreement_id = r.agreement_id)) as property_name,
@@ -140,6 +141,7 @@ if (isset($_GET['id'])) {
         value=".$row['rent_id']." '/></td>";
         echo "<td>".$row['invoice_no']."</td>";
         echo "<td>".$row['invoice_date']."</td>";
+        echo "<td>".$row['owner_name']."</td>";
         echo "<td>".$row['tenant_name']."</td>";
         echo "<td class='text-wrap'>".$row['property_name']."</td>"; 
         echo "<td>".$row['period']."</td>";      

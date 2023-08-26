@@ -82,6 +82,7 @@
   <tr>
     <th scope="col">#</th>
     <th scope="col">Property Name</th>
+    <th scope="col">Owner & Unit Details</th>
     <th scope="col">Tenant Name</th>
     <th scope="col">Property Type</th>
     <!--<th scope="col">Property Location</th>-->
@@ -96,9 +97,10 @@
 
 <tbody>
 <?php   
-  $result = $dbConn->query("SELECT a.agreement_id, a.property_id, a.tenant_id,
+  $result = $dbConn->query("SELECT a.agreement_id, a.property_id, a.tenant_id,a.owner_unit_detail,
 (select concat(p.property_name,' - ',p.flat_no,', ', nvl(p.location,''), ',', nvl((select c.name from cities c where c.id = p.city_id),''), ' - ',p.pincode) from det_property p where p.property_id = a.property_id) as property_name,
 (select p.location from det_property p where p.property_id = a.property_id) as property_location,
+(select concat(o.owner_name,'-',a.owner_unit_detail) from det_owner o where o.owner_id = a.owner_id) as owner_name,
 (select c.name from cities c where c.id = (select p.city_id from det_property p where p.property_id = a.property_id)) as city,
 (select t.tenant_name from det_tenant t where t.tenant_id = a.tenant_id) as tenant_name,
 (select mc.param_value from mst_common_param mc where mc.param_code = (select p.property_type from det_property p where p.property_id = a.property_id)) as property_type,
@@ -127,6 +129,7 @@ FROM det_agreement a where status ='Active' ORDER BY a.agreement_id desc;
    <?php
         echo "<td><input type='radio' name='property' id=".$row['agreement_id']." value=".$row['agreement_id']." ' onclick='showCount()'/></td>";
         echo "<td class='text-wrap'>".$row['property_name']."</td>";
+        echo "<td class='text-wrap'>".$row['owner_name']."</td>";
         echo "<td >".$row['tenant_name']."</td>";
         echo "<td>".$row['property_type']."</td>";
         //echo "<td>".$row['property_location'].", ".$row['city']."</td>";

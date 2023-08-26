@@ -102,7 +102,7 @@ if(!empty($_POST["owner_property_id"])){
         if($result->rowCount() > 0){ 
             echo '<option value="">Select Owner Name</option>'; 
             while($row = $result->fetch(PDO::FETCH_ASSOC)){  
-                echo '<option value="'.$row['owner_id'].'">'.$row['owner_name'].' - '.$row['unitNo'].'</option>'; 
+                echo '<option value="'.$row['owner_id'].'#'.$row['unitNo'].'">'.$row['owner_name'].' - '.$row['unitNo'].'</option>'; 
             } 
         }else{ 
             echo 'false';

@@ -321,6 +321,16 @@ onsubmit="return myfunction()" >
  </div>
 </li>
 
+                <!----------Yearly Appraisal------------->
+
+<li>
+ <div class="form-group">
+  <label>Yearly Appraisal (%) <span>*</span></label>
+   <input type="text" class="form-control form-control-sm" placeholder="Yearly Appraisal (%)" name="yearlyAppraisal" required>
+    <span class="text-danger"></span>
+ </div>
+</li>
+
                     <!----------GST No------------->
 
 <li>
@@ -333,13 +343,13 @@ onsubmit="return myfunction()" >
     <span class="text-danger"></span>
  </div>
 </li>                   
-
+<li></li>
 
                         <!----------Manager Name------------->
 <li>
  <div class="form-group">
-  <label>Agent Name<span>*</span></label>
-  <select class="form-control form-control-sm" id = "managerName" name="managerName" required>
+  <label>Agent Name</label>
+  <select class="form-control form-control-sm" id = "managerName" name="managerName">
     <option value="0"> Select Agent </option>
      <?php 
       $result = $dbConn->query("SELECT manager_id, concat(manager_name,' - ',COALESCE(pan_no,'')) as manager_name FROM det_manager 
@@ -362,8 +372,8 @@ onsubmit="return myfunction()" >
 
 <li>
  <div class="form-group">
-  <label>Commision <span>*</span></label>
-   <input type="text" class="form-control form-control-sm" placeholder="Commision" name="Brokerage" onkeypress="return /[0-9]/i.test(event.key)" required>
+  <label>Commision </label>
+   <input type="text" class="form-control form-control-sm" placeholder="Commision" name="Brokerage" onkeypress="return /[0-9]/i.test(event.key)" >
     <span class="text-danger"></span>
  </div>
 </li>
