@@ -33,37 +33,27 @@ $result = $dbConn->query("SELECT r.rent_id, r.agreement_id, r.invoice_no, date_f
 (select concat(nvl((select c.name from cities c where c.id = p.city_id),''),', ', nvl(p.pincode,''), ',', nvl((select s.name from states s where s.id = p.state_id),'')) from det_property p where p.property_id = 
 (select a.property_id from det_agreement a where a.agreement_id = r.agreement_id)) as property_address1,
 (select o.owner_name from det_owner o where o.owner_id = 
-(select p.owner_id from det_property p where p.property_id = 
-(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_name,
+(select a.owner_id from det_agreement a where a.agreement_id = r.agreement_id)) as owner_name,
 (select a.owner_unit_detail from det_agreement a where a.agreement_id = r.agreement_id) as owner_unit_detail,
 (select concat(o.bank_name,'-',o.branch_name)  from det_owner o where o.owner_id = 
-(select p.owner_id from det_property p where p.property_id = 
-(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_bank_details,
+(select a.owner_id from det_agreement a where a.agreement_id = r.agreement_id)) as owner_bank_details,
 (select o.account_no  from det_owner o where o.owner_id = 
-(select p.owner_id from det_property p where p.property_id = 
-(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_account_no,
+(select a.owner_id from det_agreement a where a.agreement_id = r.agreement_id)) as owner_account_no,
 (select o.ifsc  from det_owner o where o.owner_id = 
-(select p.owner_id from det_property p where p.property_id = 
-(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_ifsc_no,
+(select a.owner_id from det_agreement a where a.agreement_id = r.agreement_id)) as owner_ifsc_no,
 (select o.company_name from det_owner o where o.owner_id = 
-(select p.owner_id from det_property p where p.property_id = 
-(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_company_name,
+(select a.owner_id from det_agreement a where a.agreement_id = r.agreement_id)) as owner_company_name,
 (select o.address from det_owner o where o.owner_id = 
-(select p.owner_id from det_property p where p.property_id = 
-(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_address,
+(select a.owner_id from det_agreement a where a.agreement_id = r.agreement_id)) as owner_address,
 (select concat(nvl((select c.name from cities c where c.id = o.city_id),''),'-',nvl(o.pincode,''), ',', nvl((select s.name from states s where s.id = o.state_id),'')) 
 from det_owner o where o.owner_id = 
-(select p.owner_id from det_property p where p.property_id = 
-(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_address1,
+(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id)) as owner_address1,
 (select o.gst_no from det_owner o where o.owner_id = 
-(select p.owner_id from det_property p where p.property_id = 
-(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_gst,
+(select a.owner_id from det_agreement a where a.agreement_id = r.agreement_id)) as owner_gst,
 (select o.email_id from det_owner o where o.owner_id = 
-(select p.owner_id from det_property p where p.property_id = 
-(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_email,
+(select a.owner_id from det_agreement a where a.agreement_id = r.agreement_id)) as owner_email,
 (select o.contact_number from det_owner o where o.owner_id = 
-(select p.owner_id from det_property p where p.property_id = 
-(select a.property_id from det_agreement a where a.agreement_id = r.agreement_id))) as owner_contact,
+(select a.owner_id from det_agreement a where a.agreement_id = r.agreement_id)) as owner_contact,
  DATE_FORMAT(r.rent_date, '%b-%Y') AS period, r.rent_amount, r.other_charges_desc, r.other_charges_amount, 
  r.gst_status, r.gst_amount, r.total_amount
  FROM det_rent r where rent_id='$id'");
