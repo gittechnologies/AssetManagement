@@ -152,7 +152,7 @@ onsubmit="return myfunction()" >
    <select class="form-control form-control-sm" id = "propertyName" name="propertyName" required>
     <option value="0"> Select Property </option>
      <?php 
-      $result = $dbConn->query("SELECT p.property_id, p.property_name,p.flat_no, p.city_id,p.pincode, c.name FROM det_property p join cities c on p.city_id=c.id WHERE NOT EXISTS (SELECT property_id FROM det_agreement AS a WHERE a.property_id=p.property_id AND a.status='Active')");
+      $result = $dbConn->query("SELECT p.property_id, p.property_name,p.flat_no, p.city_id,p.pincode, c.name FROM det_property p join cities c on p.city_id=c.id WHERE p.status='Active'");
       $result->execute();
         while($row = $result->fetch(PDO::FETCH_ASSOC))
         {
